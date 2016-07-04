@@ -1,22 +1,15 @@
 package producthistory;
 
-import com.commercetools.sunrise.common.pages.SunrisePageData;
 import com.commercetools.sunrise.framework.ControllerComponent;
-import com.commercetools.sunrise.hooks.RequestHook;
-import com.commercetools.sunrise.hooks.SingleProductVariantHook;
-import com.commercetools.sunrise.hooks.SunrisePageDataHook;
-import com.commercetools.sunrise.productcatalog.common.ProductListBeanFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.search.PagedSearchResult;
 import play.libs.Json;
 import play.mvc.Http;
 
-import javax.inject.Inject;
 import java.io.UncheckedIOException;
 import java.util.*;
 import java.util.concurrent.CompletionStage;

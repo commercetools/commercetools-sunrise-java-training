@@ -2,9 +2,9 @@ package didemo;
 
 import com.commercetools.sunrise.common.contexts.RequestScoped;
 import com.commercetools.sunrise.common.controllers.SunriseFrameworkController;
-import com.commercetools.sunrise.common.pages.SunrisePageData;
+import com.commercetools.sunrise.common.pages.PageData;
 import com.commercetools.sunrise.framework.ControllerComponent;
-import com.commercetools.sunrise.hooks.SunrisePageDataHook;
+import com.commercetools.sunrise.hooks.PageDataHook;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -46,14 +46,14 @@ public final class DiDemoController extends SunriseFrameworkController {
         registerControllerComponent(component);
     }
 
-    private static final class DemoComponent implements ControllerComponent, SunrisePageDataHook {
+    private static final class DemoComponent implements ControllerComponent, PageDataHook {
         @Inject
         private InjectionSubject injectionSubject;
         @Inject
         private RequestScopedInjectionSubject requestScopedInjectionSubject;
 
         @Override
-        public void acceptSunrisePageData(final SunrisePageData sunrisePageData) {
+        public void acceptPageData(final PageData sunrisePageData) {
             if (sunrisePageData.getContent() instanceof DiDemoPage) {
                 final DiDemoPage diDemoPage = (DiDemoPage) sunrisePageData.getContent();
                 final List<String> subjects = diDemoPage.getSubjects();
