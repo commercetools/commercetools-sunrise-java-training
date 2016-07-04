@@ -31,7 +31,7 @@ public class BulkyGoodsComponent implements ControllerComponent {
         return cart.getLineItems().stream().mapToLong(item -> item.getQuantity()).sum() > 3;
     }
 
-    private Optional<CustomLineItem> containsBulkyGoodsFee(final Cart cart) {
+    private Optional<CustomLineItem> findBulkyGoodsFeeCustomObject(final Cart cart) {
         return cart.getCustomLineItems().stream().filter(item -> BULKY_FEE.equals(item.getSlug())).findFirst();
     }
 }
