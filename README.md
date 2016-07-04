@@ -1,2 +1,3 @@
-# commercetools-sunrise-java-demo
-Sunrise template shop using Sunrise Framework
+# commercetools-sunrise-java-training
+
+project for use in the Sunrise training (WIP)
