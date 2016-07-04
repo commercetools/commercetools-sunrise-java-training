@@ -1,4 +1,4 @@
-package producthistory;
+package lastviewedproducts;
 
 import com.commercetools.sunrise.framework.ControllerComponent;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 import static java.util.Collections.emptyList;
 
-public class ProductHistoryComponent implements ControllerComponent {
+public class LastViewedProductsComponent implements ControllerComponent {
     public static final String SESSION_KEY = "lastSeenProductSkus";
 
     private int capacity = 4;//TODO read from config

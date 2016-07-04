@@ -13,7 +13,7 @@ project for use in the Sunrise training (WIP)
 
 ## Creation exercises
 
-### last seen products component
+### last viewed products component
 
 * contains a controller which shows the 4 last seen products
-* ProductHistoryComponent and ProductHistoryController
+* LastViewedProductsComponent and LastViewedProductsController

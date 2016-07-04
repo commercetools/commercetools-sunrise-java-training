@@ -1,4 +1,4 @@
-package producthistory;
+package lastviewedproducts;
 
 import com.commercetools.sunrise.common.contexts.RequestScoped;
 import com.commercetools.sunrise.common.controllers.SunriseFrameworkController;
@@ -11,12 +11,12 @@ import java.util.concurrent.CompletionStage;
 import static java.util.Arrays.asList;
 
 @RequestScoped
-public final class ProductHistoryController extends SunriseFrameworkController {
+public final class LastViewedProductsController extends SunriseFrameworkController {
 
     public CompletionStage<Result> show() {
         return doRequest(() -> {
-            final ProductHistoryPageContent productHistoryPageContent = new ProductHistoryPageContent();
-            return asyncOk(renderPage(productHistoryPageContent, "producthistory/show"));
+            final LastViewedProductsPageContent lastViewedProductsPageContent = new LastViewedProductsPageContent();
+            return asyncOk(renderPage(lastViewedProductsPageContent, "lastviewedproducts/show"));
         });
     }
 
