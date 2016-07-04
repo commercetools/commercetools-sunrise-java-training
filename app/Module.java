@@ -8,6 +8,7 @@ import com.commercetools.sunrise.shoppingcart.MiniCartControllerComponent;
 import com.commercetools.sunrise.shoppingcart.common.CheckoutCommonComponent;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import producthistory.ProductHistoryComponent;
 import routing.ReverseRouterImpl;
 
 import javax.inject.Singleton;
@@ -43,6 +44,7 @@ public class Module extends AbstractModule {
                 .add(MiniCartControllerComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .add(DefaultPageNavMenuControllerComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .add(LocationSelectorControllerComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
+                .add(ProductHistoryComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .build();
     }
 }

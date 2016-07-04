@@ -4,6 +4,7 @@
 
 GET /exercise/didemo @didemo.DiDemoController.show
 GET /exercise/httpcontext @httpcontextexercise.HttpContextController.show(englishSlug: String = "cycle-jacke-wcs460-blue")
+GET /exercise/history @producthistory.ProductHistoryController.show
 
 GET / @controllers.HomeController.index()
 GET /:languageTag/home @controllers.HomeController.show(languageTag: String)

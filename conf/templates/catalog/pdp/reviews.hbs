@@ -1,0 +1,8 @@
+<div class="col-sm-12">
+    <p class="text-center text-uppercase may-like">Last viewed products</p>
+</div>
+{{#each content.dynamic.lastSeenProducts.list}}
+    <div class="col-xs-12 col-sm-6 col-md-3">
+        {{> catalog/product-thumbnail thumbnail=this index=@index}}
+    </div>
+{{/each}}
