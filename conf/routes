@@ -2,6 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET /exercise/didemo @didemo.DiDemoController.show
+GET /exercise/httpcontext @httpcontextexercise.HttpContextController.show(englishSlug: String = "cycle-jacke-wcs460-blue")
+
 GET / @controllers.HomeController.index()
 GET /:languageTag/home @controllers.HomeController.show(languageTag: String)
 GET /:languageTag/:productSlug-$sku<[^-]+>.html @controllers.ProductDetailController.showProductBySlugAndSku(languageTag: String, productSlug: String, sku: String)
