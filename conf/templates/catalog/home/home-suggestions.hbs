@@ -1,0 +1,20 @@
+<!-- start catalog/home/home-suggestions.hbs -->
+<h4 class="home-suggestions-title">{{{cms "banner:homeSuggestions.title"}}}</h4>
+<hr class="home-suggestions-hr"/>
+<p class="home-suggestions-description">{{{cms "banner:homeSuggestions.subtitle"}}}</p>
+<div class="row">
+    {{> catalog/suggestions}}
+</div>
+
+
+<ul>
+{{#each content.dynamic.gh}}
+    <li><a href="{{url}}">{{name}}</a></li>
+{{/each}}
+</ul>
+
+
+
+
+
+<!-- end catalog/home/home-suggestions.hbs -->
