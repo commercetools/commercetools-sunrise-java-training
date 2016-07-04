@@ -17,3 +17,7 @@ project for use in the Sunrise training (WIP)
 
 * contains a controller which shows the 4 last seen products
 * LastViewedProductsComponent and LastViewedProductsController
+
+### bulky goods
+
+* add a custom line item if there are more than 3 line items

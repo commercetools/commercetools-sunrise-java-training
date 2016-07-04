@@ -138,22 +138,22 @@ public class ReverseRouterImpl extends Base implements ReverseRouter, HomeRevers
 
     @Override
     public Call showCart(final String languageTag) {
-        return indexCall();
+        return controllers.routes.CartDetailController.show(languageTag);
     }
 
     @Override
     public Call processAddProductToCartForm(final String languageTag) {
-        return indexCall();
-    }
-
-    @Override
-    public Call processDeleteLineItemForm(final String languageTag) {
-        return indexCall();
+        return controllers.routes.AddProductToCartController.addProductToCart(languageTag);
     }
 
     @Override
     public Call processChangeLineItemQuantityForm(final String languageTag) {
-        return indexCall();
+        return controllers.routes.ChangeLineItemQuantityController.changeLineItemQuantity(languageTag);
+    }
+
+    @Override
+    public Call processDeleteLineItemForm(final String languageTag) {
+        return controllers.routes.RemoveLineItemController.removeLineItem(languageTag);
     }
 
     @Override

@@ -7,6 +7,15 @@ GET /exercise/httpcontext                              @httpcontextexercise.Http
 GET /exercise/history                                  @lastviewedproducts.LastViewedProductsController.show
 
 GET /                                                  @controllers.HomeController.index()
+
+GET         /:languageTag/cart                         @controllers.CartDetailController.show(languageTag: String)
+POST        /:languageTag/cart/add                     @controllers.AddProductToCartController.addProductToCart(languageTag: String)
+POST        /:languageTag/cart/quantity                @controllers.ChangeLineItemQuantityController.changeLineItemQuantity(languageTag: String)
+POST        /:languageTag/cart/remove                  @controllers.RemoveLineItemController.removeLineItem(languageTag: String)
+
+
+
+
 GET /:languageTag/home                                 @controllers.HomeController.show(languageTag: String)
 GET /:languageTag/:productSlug-$sku<[^-]+>.html        @controllers.ProductDetailController.showProductBySlugAndSku(languageTag: String, productSlug: String, sku: String)
 # Shows the search results page
