@@ -2,9 +2,6 @@
 
 project for use in the Sunrise training (WIP)
 
-## stuff to show
-* DiDemoController to illustrate the scope for request scoped objects
-
 ## Bug fixing exercises
 
 ### Http Context and CompletionStage
@@ -12,6 +9,10 @@ project for use in the Sunrise training (WIP)
 * see httpcontextexercise.HttpContextController
 
 ## Creation exercises
+
+### didemo
+* DiDemoController to illustrate the scope for request scoped objects
+* task use injectionSubject in singleton scope
 
 ### last viewed products component
 
