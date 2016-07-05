@@ -18,7 +18,7 @@ resolvers ++= Seq (
   Resolver.sonatypeRepo("snapshots")
 )
 
-val sunriseFrameworkVersion = "0.7.0-x2-SNAPSHOT"
+val sunriseFrameworkVersion = "0.7.0-x3-SNAPSHOT"
 libraryDependencies ++= Seq(
   cache,
   "com.commercetools.sunrise" %% "product-catalog" % sunriseFrameworkVersion,
