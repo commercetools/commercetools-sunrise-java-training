@@ -10,6 +10,12 @@ project for use in the Sunrise training (WIP)
 
 ## Creation exercises
 
+| Exercise        | Goal           | adding hook interfaces required| wiring to controller required  | 
+| ------------- |-------------| -----|-----|-----|
+| [GitHub Stream](app/githubstream/README.md) | request related hooks | yes | no |
+
+
+
 ### didemo
 * DiDemoController to illustrate the scope for request scoped objects
 * task use injectionSubject in singleton scope
@@ -23,6 +29,4 @@ project for use in the Sunrise training (WIP)
 
 * add a custom line item if there are more than 3 line items
 
-### GitHub Stream
 
-[exercise readme](app/githubstream/README.md)
