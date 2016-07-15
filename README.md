@@ -17,7 +17,7 @@ project for use in the Sunrise training (WIP)
 |adding hook interfaces required | no | ? |
 | wiring into controller required  | no |? |
 | configuration should be externalized  | no |? |
-| need to inject instances  | no |? |
+| need to inject instances  | no | yes |
 
 ### didemo
 * DiDemoController to illustrate the scope for request scoped objects
