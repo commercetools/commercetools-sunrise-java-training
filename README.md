@@ -10,11 +10,12 @@ project for use in the Sunrise training (WIP)
 
 ## Creation exercises
 
-| Exercise        | Goal           | adding hook interfaces required| wiring to controller required  | 
-| ------------- |-------------| -----|-----|-----|
-| [GitHub Stream](app/githubstream/README.md) | request related hooks | yes | no |
-
-
+| exercise  | [GitHub Stream](app/githubstream/README.md) 
+| ---| ---| 
+|request related hooks| yes | 
+|page data hooks| yes | 
+|adding hook interfaces required | no | 
+| wiring to controller required  | no |
 
 ### didemo
 * DiDemoController to illustrate the scope for request scoped objects
