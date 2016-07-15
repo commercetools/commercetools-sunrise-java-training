@@ -12,8 +12,9 @@ project for use in the Sunrise training (WIP)
 
 | exercise  | [GitHub Stream](app/githubstream/README.md) | last viewed products |
 | ----------| --------------------------------------------|----------------------| 
-|request related hooks| yes | ? |
-|page data hooks| yes | ? |
+|request related hooks| yes | yes |
+|page data hooks| yes | yes |
+|variant hooks|no|yes|
 |adding hook interfaces required | no | ? |
 | wiring into controller required  | no |? |
 | configuration should be externalized  | no |? |
