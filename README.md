@@ -15,7 +15,8 @@ project for use in the Sunrise training (WIP)
 |request related hooks| yes | 
 |page data hooks| yes | 
 |adding hook interfaces required | no | 
-| wiring to controller required  | no |
+| wiring into controller required  | no |
+| configuration should be externalized  | no |
 
 ### didemo
 * DiDemoController to illustrate the scope for request scoped objects
