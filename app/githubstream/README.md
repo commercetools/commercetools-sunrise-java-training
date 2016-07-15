@@ -19,4 +19,11 @@ public class HomeController extends SunriseHomeController {
 }
 ```
 
+And is already configured in application.conf
+
+```
+GitHubStreamComponent.url = "https://api.github.com/repos/commercetools/commercetools-jvm-sdk/issues"
+GitHubStreamComponent.templateName = "components/GitHub/issues"
+```
+
 Still missing is the implementation of the hooks in [GitHubStreamComponent](GitHubStreamComponent.java).
