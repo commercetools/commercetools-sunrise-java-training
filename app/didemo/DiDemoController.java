@@ -32,7 +32,7 @@ public final class DiDemoController extends SunriseFrameworkController {
             subjects.add("injectionSubject in controller " + injectionSubject.getId());
             subjects.add("requestScopedInjectionSubject in controller " + requestScopedInjectionSubject.getId());
             pageContent.setSubjects(subjects);
-            return asyncOk(renderPage(pageContent, "didemo/show"));
+            return asyncOk(renderPageWithTemplate(pageContent, "didemo/show"));
         });
     }
 

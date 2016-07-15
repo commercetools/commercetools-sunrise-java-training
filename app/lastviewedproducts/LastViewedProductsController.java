@@ -16,7 +16,7 @@ public final class LastViewedProductsController extends SunriseFrameworkControll
     public CompletionStage<Result> show() {
         return doRequest(() -> {
             final LastViewedProductsPageContent lastViewedProductsPageContent = new LastViewedProductsPageContent();
-            return asyncOk(renderPage(lastViewedProductsPageContent, "lastviewedproducts/show"));
+            return asyncOk(renderPageWithTemplate(lastViewedProductsPageContent, "lastviewedproducts/show"));
         });
     }
 
