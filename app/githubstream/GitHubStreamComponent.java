@@ -1,6 +1,6 @@
 package githubstream;
 
-import com.commercetools.sunrise.components.ComponentData;
+import com.commercetools.sunrise.components.ComponentBean;
 import com.commercetools.sunrise.framework.ControllerComponent;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -35,13 +35,13 @@ public class GitHubStreamComponent extends Base implements ControllerComponent {
                 .exceptionally(e -> Optional.empty());//recover by providing an empty Optional
     }
 
-    private ComponentData createComponentData() {
-        final ComponentData componentData = new ComponentData();
-        componentData.setTemplateName(templateName);
+    private ComponentBean createComponentBean() {
+        final ComponentBean componentBean = new ComponentBean();
+        componentBean.setTemplateName(templateName);
         final HashMap<String, Object> data = new HashMap<>();
         data.put("list", dataList);
-        componentData.setComponentData(data);
-        return componentData;
+        componentBean.setComponentData(data);
+        return componentBean;
     }
 
     private static List<GitHubIssueData> extractData(final WSResponse r) {

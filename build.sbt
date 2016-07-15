@@ -20,7 +20,7 @@ resolvers ++= Seq (
   Resolver.mavenLocal
 )
 
-val sunriseFrameworkVersion = "0.7.1-SNAPSHOT"
+val sunriseFrameworkVersion = "0.7.1-ms1-SNAPSHOT"
 libraryDependencies ++= Seq(
   cache,
   javaWs,
