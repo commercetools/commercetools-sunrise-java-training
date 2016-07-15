@@ -22,3 +22,7 @@ project for use in the Sunrise training (WIP)
 ### bulky goods
 
 * add a custom line item if there are more than 3 line items
+
+### GitHub Stream
+
+[exercise readme](app/githubstream/README.md)
