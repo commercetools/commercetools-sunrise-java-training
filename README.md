@@ -24,7 +24,7 @@ project for use in the Sunrise training (WIP)
 * add a custom line item if there are more than 3 line items
 
 
-## Links
+## Pre-training material
 
 #### Handlebars
 To learn how to write Handlebars templates, please check the [Handlebars.js](http://handlebarsjs.com/) documentation. In particular, the sections about [Expressions](http://handlebarsjs.com/expressions.html), [Built-In Helpers](http://handlebarsjs.com/builtin_helpers.html) and [@data Variables](http://handlebarsjs.com/reference.html#data).
