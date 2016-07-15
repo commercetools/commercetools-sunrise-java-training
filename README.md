@@ -15,9 +15,9 @@ project for use in the Sunrise training (WIP)
 |request related hooks| yes | yes |
 |page data hooks| yes | yes |
 |variant hooks|no|yes|
-|adding hook interfaces required | no | ? |
-| wiring into controller required  | no |? |
-| configuration should be externalized  | no |? |
+|adding hook interfaces required | no | yes |
+| wiring into controller required  | no |no |
+| configuration should be externalized  | no |yes |
 | need to inject instances  | no | yes |
 
 ### didemo
