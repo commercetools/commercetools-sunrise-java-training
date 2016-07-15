@@ -10,7 +10,7 @@ project for use in the Sunrise training (WIP)
 
 ## Creation exercises
 
-| exercise  | [GitHub Stream](app/githubstream/README.md) | last viewed products |
+| exercise  | [GitHub Stream](app/githubstream/README.md) | [last viewed products](/app/lastviewedproducts/README.md) |
 | ----------| --------------------------------------------|----------------------| 
 |request related hooks| yes | yes |
 |page data hooks| yes | yes |
