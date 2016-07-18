@@ -18,7 +18,7 @@ public class BetterTitlesComponent extends Base implements ControllerComponent, 
         pageData.getHeader().setTitle(newTitle);
     }
 
-    private String deduceNewTitle(final PageData pageData) {
+    private static String deduceNewTitle(final PageData pageData) {
         final String title = defaultIfNull(pageData.getHeader().getTitle(), "");
         final String newTitle1;
         if (pageData.getContent() instanceof HomePageContent) {
