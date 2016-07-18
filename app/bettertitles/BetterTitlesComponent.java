@@ -20,15 +20,15 @@ public class BetterTitlesComponent extends Base implements ControllerComponent, 
 
     private static String deduceNewTitle(final PageData pageData) {
         final String title = defaultIfNull(pageData.getHeader().getTitle(), "");
-        final String newTitle1;
+        final String newTitle;
         if (pageData.getContent() instanceof HomePageContent) {
-            newTitle1 = SUNRISE_DEMO_SHOP + " Home";
+            newTitle = SUNRISE_DEMO_SHOP + " Home";
         } else if (!isEmpty(title)){
-            newTitle1 = title + " ~ " + SUNRISE_DEMO_SHOP;
+            newTitle = title + " ~ " + SUNRISE_DEMO_SHOP;
         } else {
-            newTitle1 = SUNRISE_DEMO_SHOP;
+            newTitle = SUNRISE_DEMO_SHOP;
         }
-        return newTitle1;
+        return newTitle;
     }
 
     //TODO need to wire it als multi controller component
