@@ -23,4 +23,4 @@ alter finishing the component on a product detail page:
 
 There is no template change required.
 
-Still missing is to wire the component for the use in multiple controllers in [Module.java](../../app/Module.java) and also changing the PageData header title field by using a hook
+Still missing is to wire the [BetterTitlesComponent](BetterTitlesComponent.java) for the use in multiple controllers in [Module.java](../../app/Module.java) and also changing the PageData header title field by using a hook
