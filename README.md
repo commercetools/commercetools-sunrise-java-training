@@ -10,14 +10,19 @@ project for use in the Sunrise training (WIP)
 
 ## Creation exercises
 
+| exercise  | [GitHub Stream](app/githubstream/README.md) | [last viewed products](app/lastviewedproducts/README.md) |[better titles](app/bettertitles/README.md) |[bulky goods](app/bulkygoods/README.md) |
+| ----------| --------------------------------------------|----------------------| ----------------------| ----------------------|
+|request related hooks| yes | yes |no | no |
+|page data hooks| yes | yes |yes |no |
+|variant hooks|no|yes|no | no |
+|adding hook interfaces required | no | yes |yes |yes |
+| wiring into controller required  | no |no |multi|no |
+| configuration should be externalized  | no |yes |no|no |
+| need to inject instances  | no | yes |no|no |
+
 ### didemo
 * DiDemoController to illustrate the scope for request scoped objects
 * task use injectionSubject in singleton scope
-
-### last viewed products component
-
-* contains a controller which shows the 4 last seen products
-* LastViewedProductsComponent and LastViewedProductsController
 
 ### bulky goods
 

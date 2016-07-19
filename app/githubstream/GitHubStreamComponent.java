@@ -1,25 +1,51 @@
 package githubstream;
 
+import com.commercetools.sunrise.components.ComponentBean;
 import com.commercetools.sunrise.framework.ControllerComponent;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.sphere.sdk.models.Base;
+import play.Configuration;
 import play.libs.ws.WSAPI;
 import play.libs.ws.WSResponse;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletionStage;
 
 public class GitHubStreamComponent extends Base implements ControllerComponent {
-    public static final String URL = "https://api.github.com/repos/commercetools/commercetools-jvm-sdk/issues";
+    private String url;
+    private String templateName;
     @Inject
     private WSAPI ws;
     private List<GitHubIssueData> dataList = new LinkedList<>();
 
-    //task as a workaround the template is in conf/templates/catalog/home/home-suggestions.hbs
+    @Inject
+    private void setConfig(final Configuration configuration) {
+        url = configuration.getString("GitHubStreamComponent.url");
+        templateName = configuration.getString("GitHubStreamComponent.templateName");
+    }
 
-    private void storeData(final WSResponse r) {
+    private CompletionStage<Optional<WSResponse>> performWebserviceCall() {
+        return ws.url(url).get()//Play stuff
+                .thenApply(res -> Optional.ofNullable(res).filter(r -> r.getStatus() == 200))//ignore responses other than 200
+                .exceptionally(e -> Optional.empty());//recover by providing an empty Optional
+    }
+
+    private ComponentBean createComponentBean() {
+        final ComponentBean componentBean = new ComponentBean();
+        componentBean.setTemplateName(templateName);
+        final HashMap<String, Object> data = new HashMap<>();
+        data.put("list", dataList);
+        componentBean.setComponentData(data);
+        return componentBean;
+    }
+
+    private static List<GitHubIssueData> extractData(final WSResponse r) {
+        final List<GitHubIssueData> result = new LinkedList<>();
         final JsonNode jsonNode = r.asJson();
         if (jsonNode instanceof ArrayNode) {
             final ArrayNode arrayNode = (ArrayNode) jsonNode;
@@ -27,32 +53,9 @@ public class GitHubStreamComponent extends Base implements ControllerComponent {
                 final GitHubIssueData bean = new GitHubIssueData();
                 bean.setName(element.get("title").asText());
                 bean.setUrl(element.get("html_url").asText());
-                dataList.add(bean);
+                result.add(bean);
             });
         }
-    }
-
-    private static final class GitHubIssueData extends Base {
-        private String name;
-        private String url;
-
-        public GitHubIssueData() {
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(final String name) {
-            this.name = name;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(final String url) {
-            this.url = url;
-        }
+        return result;
     }
 }

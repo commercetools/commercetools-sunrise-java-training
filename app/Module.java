@@ -1,3 +1,4 @@
+import bettertitles.BetterTitlesComponent;
 import bulkygoods.BulkyGoodsComponent;
 import com.commercetools.sunrise.common.controllers.ReverseRouter;
 import com.commercetools.sunrise.common.localization.LocationSelectorControllerComponent;
@@ -5,12 +6,14 @@ import com.commercetools.sunrise.common.pages.DefaultPageNavMenuControllerCompon
 import com.commercetools.sunrise.common.reverserouter.*;
 import com.commercetools.sunrise.framework.MultiControllerComponentResolver;
 import com.commercetools.sunrise.framework.MultiControllerComponentResolverBuilder;
+import com.commercetools.sunrise.shoppingcart.CartLikeBeanFactory;
 import com.commercetools.sunrise.shoppingcart.MiniCartControllerComponent;
 import com.commercetools.sunrise.shoppingcart.common.CheckoutCommonComponent;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import io.sphere.sdk.utils.MoneyImpl;
 import lastviewedproducts.LastViewedProductsComponent;
+import models.ShopCartLikeBeanFactory;
 import routing.ReverseRouterImpl;
 
 import javax.inject.Singleton;
@@ -38,10 +41,11 @@ public class Module extends AbstractModule {
         bind(CartReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(MyOrdersReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(MyPersonalDetailsReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
+        bind(CartLikeBeanFactory.class).to(ShopCartLikeBeanFactory.class);//used by bulky goods component
     }
 
     @Provides
-    public MultiControllerComponentResolver foo() {
+    public MultiControllerComponentResolver multiControllerComponentResolver() {
         //here are also instanceof checks possible
         return new MultiControllerComponentResolverBuilder()
                 .add(CheckoutCommonComponent.class, controller -> controller.getFrameworkTags().contains("checkout"))
@@ -49,6 +53,7 @@ public class Module extends AbstractModule {
                 .add(DefaultPageNavMenuControllerComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .add(LocationSelectorControllerComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .add(LastViewedProductsComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
+                .add(BulkyGoodsComponent.class, controller -> true)
                 .build();
     }
 }
