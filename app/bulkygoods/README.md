@@ -14,10 +14,4 @@ The component is already registered for all controllers in.
 
 the `CartLikeBeanFactory` has been overridden in [ShopCartLikeBeanFactory](../../app/models/ShopCartLikeBeanFactory.java) and registered in [Module.java](../../app/Module.java) in to support the bulky goods data as [ShopCartLikeBean.java](../../app/models/ShopCartLikeBean.java).
 
-Still missing is the implementation of the 3 hooks and getting the required helper objects via dependency injection in [LastViewedProductsComponent](LastViewedProductsComponent.java).
-
-The first hook is specifically called when a product variant (not just a product!) is loaded and stores the SKU in the session.
-
-The second hook is called on every request and triggers to load the products from the commercetools platform belonging to the SKUs in the session.
-
-The third hook is called for the page data and adds the ComponentBean to the PageContent which is part of the PageData.
+Still missing is the implementation of the hook to get the cart updated in [BulkyGoodsComponent](BulkyGoodsComponent.java).
