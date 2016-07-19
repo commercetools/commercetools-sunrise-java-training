@@ -50,6 +50,7 @@ public class Module extends AbstractModule {
                 .add(DefaultPageNavMenuControllerComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .add(LocationSelectorControllerComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .add(LastViewedProductsComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
+                .add(BulkyGoodsComponent.class, controller -> true)
                 .build();
     }
 }
