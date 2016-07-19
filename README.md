@@ -10,15 +10,15 @@ project for use in the Sunrise training (WIP)
 
 ## Creation exercises
 
-| exercise  | [GitHub Stream](app/githubstream/README.md) | [last viewed products](app/lastviewedproducts/README.md) |[better titles](app/bettertitles/README.md) |
-| ----------| --------------------------------------------|----------------------| ----------------------| 
-|request related hooks| yes | yes |no | 
-|page data hooks| yes | yes |yes |
-|variant hooks|no|yes|no | 
-|adding hook interfaces required | no | yes |yes |
-| wiring into controller required  | no |no |multi|
-| configuration should be externalized  | no |yes |no|
-| need to inject instances  | no | yes |no|
+| exercise  | [GitHub Stream](app/githubstream/README.md) | [last viewed products](app/lastviewedproducts/README.md) |[better titles](app/bettertitles/README.md) |[bulky goods](app/bulkygoods/README.md) |
+| ----------| --------------------------------------------|----------------------| ----------------------| ----------------------| 
+|request related hooks| yes | yes |no | no | 
+|page data hooks| yes | yes |yes |no | 
+|variant hooks|no|yes|no | no | 
+|adding hook interfaces required | no | yes |yes |yes |
+| wiring into controller required  | no |no |multi|no |
+| configuration should be externalized  | no |yes |no|no |
+| need to inject instances  | no | yes |no|no |
 
 ### didemo
 * DiDemoController to illustrate the scope for request scoped objects
