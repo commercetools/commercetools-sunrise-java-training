@@ -3,7 +3,7 @@
 # ~~~~
 
 GET /exercise/didemo                                   @didemo.DiDemoController.show
-GET /exercise/httpcontext                              @httpcontextexercise.HttpContextController.show(englishSlug: String = "cycle-jacke-wcs460-blue")
+GET /exercise/httpcontext                              @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")
 
 GET /                                                  @controllers.HomeController.index()
 
