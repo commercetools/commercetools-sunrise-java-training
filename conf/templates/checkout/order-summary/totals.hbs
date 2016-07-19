@@ -12,6 +12,11 @@
         <div class="text-right delivery-info">
             <span class="delivery-info-title">{{i18n "checkout:shipping"}}</span>
         </div>
+        {{#if cart.bulkyGoods}}
+            <div class="text-right delivery-info">
+                <span class="">bulky goods fee</span>
+            </div>
+        {{/if}}
         <hr class="total-divider">
         <div class="text-right">
             <span>{{i18n "main:common.salesTax"}}</span>
@@ -32,6 +37,11 @@
         <div>
             <span>{{cart.shippingMethod.price}}</span>
         </div>
+        {{#if cart.bulkyGoods}}
+            <div>
+                <span class="">{{cart.bulkyGoods.price}}</span>
+            </div>
+        {{/if}}
         <hr>
         <div>
             <span>{{cart.salesTax}}</span>

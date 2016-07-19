@@ -27,7 +27,7 @@ import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 
 public class BulkyGoodsComponent implements ControllerComponent, PrimaryCartUpdateAsyncFilter {
     public static final MonetaryAmount MONETARY_AMOUNT = MoneyImpl.ofCents(321, "EUR");
-    public static final String BULKY_FEE = "bulkyFee";
+    public static final String BULKY_FEE_SLUG = "bulkyFee";
     public static final LocalizedString NAME = LocalizedString.of(Locale.GERMAN, "Sperrgutzuschlag", Locale.ENGLISH, "bulky goods fee");
     public static final String TAX_CATEGORY_NAME = "standard";
 
@@ -67,7 +67,7 @@ public class BulkyGoodsComponent implements ControllerComponent, PrimaryCartUpda
     }
 
     private AddCustomLineItem createLineItemDraft(final Referenceable<TaxCategory> taxCategory) {
-        return AddCustomLineItem.of(NAME, BULKY_FEE, MONETARY_AMOUNT, taxCategory, 1);
+        return AddCustomLineItem.of(NAME, BULKY_FEE_SLUG, MONETARY_AMOUNT, taxCategory, 1);
     }
 
     private boolean containsBulkyGoods(final Cart cart) {
@@ -75,6 +75,6 @@ public class BulkyGoodsComponent implements ControllerComponent, PrimaryCartUpda
     }
 
     private Optional<CustomLineItem> findBulkyGoodsFee(final Cart cart) {
-        return cart.getCustomLineItems().stream().filter(item -> BULKY_FEE.equals(item.getSlug())).findFirst();
+        return cart.getCustomLineItems().stream().filter(item -> BULKY_FEE_SLUG.equals(item.getSlug())).findFirst();
     }
 }
