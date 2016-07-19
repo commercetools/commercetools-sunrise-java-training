@@ -2,28 +2,61 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET /exercise/didemo                                   @didemo.DiDemoController.show
-GET /exercise/httpcontext                              @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")
-
-GET /                                                  @controllers.HomeController.index()
-
-GET         /:languageTag/cart                         @controllers.CartDetailController.show(languageTag: String)
-POST        /:languageTag/cart/add                     @controllers.AddProductToCartController.addProductToCart(languageTag: String)
-POST        /:languageTag/cart/quantity                @controllers.ChangeLineItemQuantityController.changeLineItemQuantity(languageTag: String)
-POST        /:languageTag/cart/remove                  @controllers.RemoveLineItemController.removeLineItem(languageTag: String)
+GET         /exercise/didemo                                   @didemo.DiDemoController.show
+GET         /exercise/httpcontext                              @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")
 
 
+# WEB ASSETS
+# ~~~~~
 
-
-GET /:languageTag/home                                 @controllers.HomeController.show(languageTag: String)
-#GET /:languageTag/test/:productId-$variantId<[^-]+>.html   @controllers.ProductDetailController.showProductByProductIdAndVariantId(languageTag: String, productId: String, variantId: Int)
-GET /:languageTag/:productSlug-$sku<[^-]+>.html        @controllers.ProductDetailController.showProductBySlugAndSku(languageTag: String, productSlug: String, sku: String)
-# Shows the search results page
-GET /:languageTag/search                               @controllers.ProductOverviewController.searchProductsBySearchTerm(languageTag: String)
-# Shows the product overview page for this category
-GET /:languageTag/:categorySlug @controllers.ProductOverviewController.searchProductsByCategorySlug(languageTag: String, categorySlug: String)
-
-# Map static resources from the /public folder to the /assets URL path
-GET /assets/public/*file controllers.Assets.versioned(path="/public", file: Asset)
+# Map static resources from the /public folder to the /assets/public URL path
+GET         /assets/public/*file                               controllers.Assets.at(path="/public", file)
 # Map static resources from WebJars (only CSS, JS, fonts and images) to the /assets URL path
-GET /assets/$file<(css|js|fonts|img)/.*> controllers.WebJarAssets.at(file)
+GET         /assets/$file<(css|js|fonts|img)/.*>               controllers.WebJarAssets.at(file)
+
+
+# HOME
+# ~~~~~
+
+# Home page
+GET         /                                                  @controllers.HomeController.index()
+GET         /:languageTag/home                                 @controllers.HomeController.show(languageTag: String)
+
+
+# CART
+# ~~~~~
+
+# Shows the details of the cart belonging to the current session
+GET         /:languageTag/cart                                 @controllers.CartDetailController.show(languageTag: String)
+# Adds the selected product to the cart
+POST        /:languageTag/cart/add                             @controllers.AddProductToCartController.addProductToCart(languageTag: String)
+# Changes the quantity of a selected line item from the cart of the current session
+POST        /:languageTag/cart/quantity                        @controllers.ChangeLineItemQuantityController.changeLineItemQuantity(languageTag: String)
+# Removes a selected line item from the cart of the current session
+POST        /:languageTag/cart/remove                          @controllers.RemoveLineItemController.removeLineItem(languageTag: String)
+
+
+# CHECKOUT
+# ~~~~~
+
+# Shows the form to enter shipping address and billing address
+GET         /:languageTag/checkout/address                     @controllers.CheckoutAddressController.show(languageTag: String)
+# Processes the form of the shipping address and billing address
+POST        /:languageTag/checkout/address                     @controllers.CheckoutAddressController.process(languageTag: String)
+
+
+# PRODUCT DETAIL
+# ~~~~~
+
+# Shows the product detail page
+GET         /:languageTag/:productSlug-$sku<[^-]+>.html        @controllers.ProductDetailController.showProductBySlugAndSku(languageTag: String, productSlug: String, sku: String)
+#GET         /:languageTag/:productId/:variantId.html           @controllers.ProductDetailController.showProductByProductIdAndVariantId(languageTag: String, productId: String, variantId: Int)
+
+
+# PRODUCT OVERVIEW
+# ~~~~~
+
+# Shows the search results page
+GET         /:languageTag/search                               @controllers.ProductOverviewController.searchProductsBySearchTerm(languageTag: String)
+# Shows the product overview page for this category
+GET         /:languageTag/:categorySlug                        @controllers.ProductOverviewController.searchProductsByCategorySlug(languageTag: String, categorySlug: String)

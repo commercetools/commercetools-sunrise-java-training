@@ -63,12 +63,12 @@ public class ReverseRouterImpl extends Base implements ReverseRouter, HomeRevers
 
     @Override
     public Call checkoutAddressesPageCall(final String languageTag) {
-        return indexCall();
+        return controllers.routes.CheckoutAddressController.show(languageTag);
     }
 
     @Override
     public Call checkoutAddressesProcessFormCall(final String languageTag) {
-        return indexCall();
+        return controllers.routes.CheckoutAddressController.process(languageTag);
     }
 
     @Override
