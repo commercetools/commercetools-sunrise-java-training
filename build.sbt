@@ -7,6 +7,8 @@ version := "0.1.0-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
+val sunriseFrameworkVersion = "0.7.1-ms1-SNAPSHOT"
+
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
   .configs(IntegrationTest, PlayTest)
@@ -20,14 +22,13 @@ resolvers ++= Seq (
   Resolver.mavenLocal
 )
 
-val sunriseFrameworkVersion = "0.7.1-ms1-SNAPSHOT"
 libraryDependencies ++= Seq(
   cache,
   javaWs,
   "com.commercetools.sunrise" %% "product-catalog" % sunriseFrameworkVersion,
   "com.commercetools.sunrise" %% "shopping-cart" % sunriseFrameworkVersion,
   "com.commercetools.sunrise" %% "sbt-tasks" % sunriseFrameworkVersion,
-  "com.commercetools.sunrise" % "commercetools-sunrise-theme" % "0.60.0-SNAPSHOT",
+  "com.commercetools.sunrise" % "commercetools-sunrise-theme" % "0.60.0",
   "org.webjars" %% "webjars-play" % "2.5.0-2"
 )
 
