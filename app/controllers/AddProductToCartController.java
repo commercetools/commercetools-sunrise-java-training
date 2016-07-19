@@ -6,11 +6,16 @@ import com.commercetools.sunrise.shoppingcart.cart.addtocart.SunriseAddProductTo
 import play.mvc.Result;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
 @RequestScoped
 public final class AddProductToCartController extends SunriseAddProductToCartController {
+
+    public CompletionStage<Result> addProductToCart(final String languageTag) {
+        return super.addProductToCart(languageTag);
+    }
 
     @Override
     protected CompletableFuture<Result> successfulResult() {
