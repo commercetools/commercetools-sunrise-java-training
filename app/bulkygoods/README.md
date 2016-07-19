@@ -1,18 +1,12 @@
-The learning goal is to transport small values with the session and use it to display or fetch data.
-Also dependency injection is required for utils like the SphereClient.
+The learning goal is to add hooks to the cart updates to include extra fees or discounts which can only expressed in the shop application.
 
-In this exercise a LastViewedProductsComponent should be used to show the last 4 products which have been visited with the product detail page.
-The images will be shown in the home page, the products detail page and also on the product overview page.
+In this example an imaginary fee has to be added to the cart if the total count of line items is greater than 3. Normally this would be based on product attributes with a flag or an actual sum of the weight of the items but for simplicity we use the line item count.
 
-The result should look like this:
+Normally with 3 line items or less, no extra fee is applied:
+![result](bulky-goods-off.png)
 
-Home page:
-
-![result](last-viewed-products-home.png "so it should look like on the home page")
-
-Product overview page:
-
-![result](last-viewed-products-pop.png "so it should look like on the product detail page")
+But adding a fourth item will add the fee:
+![result](bulky-goods-on.png)
 
 The [template](../../conf/templates/components/LastViewedProducts/productsView.hbs) is already implemented.
 
