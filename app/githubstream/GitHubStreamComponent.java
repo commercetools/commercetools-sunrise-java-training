@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
+/**
+ * 1. do the webservice call and save the feed data to be used later
+ * 2. add the data to the page as a component
+ */
 public class GitHubStreamComponent extends Base implements ControllerComponent {
     private String url;
     private String templateName;
@@ -35,15 +39,6 @@ public class GitHubStreamComponent extends Base implements ControllerComponent {
                 .exceptionally(e -> Optional.empty());//recover by providing an empty Optional
     }
 
-    private ComponentBean createComponentBean() {
-        final ComponentBean componentBean = new ComponentBean();
-        componentBean.setTemplateName(templateName);
-        final HashMap<String, Object> data = new HashMap<>();
-        data.put("list", dataList);
-        componentBean.setComponentData(data);
-        return componentBean;
-    }
-
     private static List<GitHubIssueData> extractData(final WSResponse r) {
         final List<GitHubIssueData> result = new LinkedList<>();
         final JsonNode jsonNode = r.asJson();
@@ -57,5 +52,14 @@ public class GitHubStreamComponent extends Base implements ControllerComponent {
             });
         }
         return result;
+    }
+
+    private ComponentBean createComponentBean() {
+        final ComponentBean componentBean = new ComponentBean();
+        componentBean.setTemplateName(templateName);
+        final HashMap<String, Object> data = new HashMap<>();
+        data.put("list", dataList);
+        componentBean.setComponentData(data);
+        return componentBean;
     }
 }
