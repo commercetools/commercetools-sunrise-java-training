@@ -24,6 +24,9 @@ import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 
+/**
+ * 1. every time the cart has been updated, update it with bulky goods
+ */
 public class BulkyGoodsComponent implements ControllerComponent {
     public static final MonetaryAmount MONETARY_AMOUNT = MoneyImpl.ofCents(321, "EUR");
     public static final String BULKY_FEE_SLUG = "bulkyFee";
@@ -33,7 +36,7 @@ public class BulkyGoodsComponent implements ControllerComponent {
     @Inject
     private SphereClient sphereClient;
 
-    private CompletionStage<Cart> filterCart(final Cart cart, final ExpansionPathContainer<Cart> expansionPathContainer) {
+    private CompletionStage<Cart> updateCartWithBulkyGoods(final Cart cart, final ExpansionPathContainer<Cart> expansionPathContainer) {
         final boolean containsBulkyGoods = containsBulkyGoods(cart);
         final Optional<CustomLineItem> customLineItemOptional = findBulkyGoodsFee(cart);
         if (containsBulkyGoods && !customLineItemOptional.isPresent()) {
