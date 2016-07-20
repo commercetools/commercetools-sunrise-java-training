@@ -8,6 +8,10 @@ import io.sphere.sdk.models.Base;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+/**
+ * 1. put new title into the page
+ * 2. wire in the component to all controllers
+ */
 public class BetterTitlesComponent extends Base implements ControllerComponent {
     public static final String SUNRISE_DEMO_SHOP = "Sunrise Demo Shop";
 
