@@ -9,6 +9,7 @@ import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.search.PagedSearchResult;
+import play.Logger;
 import play.libs.Json;
 import play.mvc.Http;
 
@@ -21,6 +22,11 @@ import java.util.stream.Collectors;
 import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 import static java.util.Collections.emptyList;
 
+/**
+ * 1. save loaded variant SKU in session
+ * 2. fetch products in session and save them to be used later
+ * 3. add the data to the page as a component
+ */
 public class LastViewedProductsComponent implements ControllerComponent {
     public static final String SESSION_KEY = "lastSeenProductSkus";
 
@@ -34,13 +40,6 @@ public class LastViewedProductsComponent implements ControllerComponent {
     }
 
 
-    private static ComponentBean createComponentBean(final ProductListBeanFactory productListBeanFactory, final List<ProductProjection> productProjections) {
-        final ComponentBean componentBean = new ComponentBean();
-        componentBean.setTemplateName("components/LastViewedProducts/productsView");
-        componentBean.setComponentData(productListBeanFactory.create(productProjections));
-        return componentBean;
-    }
-
     private static void writeSkuToSession(@Nullable final String sku, final Http.Session session, final int capacity) {
         if (sku != null) {
             final List<String> skusFromSession = getSkusFromSession(session);
@@ -53,10 +52,18 @@ public class LastViewedProductsComponent implements ControllerComponent {
             try {
                 final String sessionValue = Json.mapper().writeValueAsString(skus);
                 session.put(SESSION_KEY, sessionValue);
+                Logger.debug("Saving product {} to session {}", sku, session.get(SESSION_KEY));
             } catch (JsonProcessingException e) {
                 throw new UncheckedIOException(e);
             }
         }
+    }
+
+    private static ComponentBean createComponentBean(final ProductListBeanFactory productListBeanFactory, final List<ProductProjection> productProjections) {
+        final ComponentBean componentBean = new ComponentBean();
+        componentBean.setTemplateName("components/LastViewedProducts/productsView");
+        componentBean.setComponentData(productListBeanFactory.create(productProjections));
+        return componentBean;
     }
 
     private static List<String> getSkusFromSession(final Http.Session session) {
