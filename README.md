@@ -41,7 +41,7 @@ A general guide on the highlights of Java 8 can be found in this [Java 8 Tutoria
 
 A bigger topic is `CompletionStage`, which is constantly used by Sunrise and Play 2.5. Read the [Guide to Java 8 CompletionStage](http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html) and take a look at the [CompletableFutureUtils.java](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/utils/CompletableFutureUtils.html) utils class provided by JVM SDK, which contains some useful methods used in Sunrise, such as `recoverWith`.
 
-[Java 8 Cheatsheet](https://drive.google.com/a/commercetools.de/file/d/0B6I3hlPXzkVhUlJKLXZoTTZKaDQ/view)
+Links: [Java 8 Cheatsheet](https://drive.google.com/a/commercetools.de/file/d/0B6I3hlPXzkVhUlJKLXZoTTZKaDQ/view)
 
 #### Play 2.5.x
 Play 2.5 switched some of its classes to the Java 8 counterpart, for example now `F.Promise` is replaced by `CompletionStage`. To see all changes in detail, check the [Migration Guide to 2.5](https://www.playframework.com/documentation/2.5.x/JavaMigration25).
