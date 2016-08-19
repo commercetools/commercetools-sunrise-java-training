@@ -49,7 +49,7 @@ Our [Java 8 Cheatsheet](https://we.tl/lmnvCPmqTT) is a helpful one-pager to put 
 
 ### Play Framework
 
-* The official [Play 2.5.x Documentation](https://www.playframework.com/documentation/2.5.x/Home). You can skip the “advanced topics” and everything concerning persistence and databases.
+* The official [Play 2.5.x Documentation](https://www.playframework.com/documentation/2.5.x/Home). You can skip the "advanced topics" and everything concerning persistence and databases.
 * The ["Play for Java" Book](http://www.manning.com/leroux/)
 * JSR-330 based Dependency Injection (default is Google Guice):
   * [In the Play Documentation](https://www.playframework.com/documentation/2.5.x/JavaDependencyInjection) 
