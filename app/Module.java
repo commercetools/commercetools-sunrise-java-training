@@ -1,4 +1,3 @@
-import bettertitles.BetterTitlesComponent;
 import bulkygoods.BulkyGoodsComponent;
 import com.commercetools.sunrise.common.controllers.ReverseRouter;
 import com.commercetools.sunrise.common.localization.LocationSelectorControllerComponent;
@@ -13,7 +12,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import io.sphere.sdk.utils.MoneyImpl;
 import lastviewedproducts.LastViewedProductsComponent;
-import models.ShopCartLikeBeanFactory;
+import models.ShopCartBeanFactory;
 import routing.ReverseRouterImpl;
 
 import javax.inject.Singleton;
@@ -41,7 +40,7 @@ public class Module extends AbstractModule {
         bind(CartReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(MyOrdersReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(MyPersonalDetailsReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
-        bind(CartLikeBeanFactory.class).to(ShopCartLikeBeanFactory.class);//used by bulky goods component
+        bind(CartLikeBeanFactory.class).to(ShopCartBeanFactory.class);//used by bulky goods component
     }
 
     @Provides
