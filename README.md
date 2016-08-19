@@ -41,7 +41,7 @@ Try it out interactively: [tryhandlebarsjs.com](http://tryhandlebarsjs.com/)
 
 A general guide on the highlights of Java 8 can be found in this [Java 8 Tutorial](http://winterbe.com/posts/2014/03/16/java-8-tutorial/). Lamdba Expressions, Streams and Optionals are especially useful for Sunrise.
 
-Another good overview is ["Java SE 8 for the Really Impatient"](http://www.horstmann.com/java8/index.html)
+Another good overview is ["Java SE 8 for the Really Impatient"](http://www.horstmann.com/java8/index.html).
 
 A feature we use a lot is `CompletionStage`, which is constantly used by Sunrise and Play 2.5. Read the [Guide to Java 8 CompletionStage](http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html) and take a look at the [CompletableFutureUtils.java](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/utils/CompletableFutureUtils.html) utils class provided by JVM SDK, which contains some useful methods used in Sunrise, such as `recoverWith`.
 
@@ -56,7 +56,7 @@ Our [Java 8 Cheatsheet](https://we.tl/lmnvCPmqTT) is a helpful one-pager to put 
   * [Getting Started on Guice](https://github.com/google/guice/wiki/GettingStarted) 
   * [Guice Bindings](https://github.com/google/guice/wiki/Bindings)
 
-If you're interested in the Ideas behind the Play Framework it's worth checking [this presentation by the creator](http://www.slideshare.net/jboner/going-reactive-eventdriven-scalable-resilient-systems)
+If you're interested in the ideas behind the Play Framework it's worth checking [this presentation by the creator](http://www.slideshare.net/jboner/going-reactive-eventdriven-scalable-resilient-systems).
 
 ### SBT (Simple Build Tool)
 
