@@ -16,6 +16,7 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 
+.cache-main
 
 logs
 target
@@ -28,3 +29,4 @@ target
 .sbtserver*
 
 dev.conf
+/bin/
