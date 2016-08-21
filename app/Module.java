@@ -17,6 +17,7 @@ import routing.ReverseRouterImpl;
 
 import javax.inject.Singleton;
 import javax.money.Monetary;
+import javax.money.format.MonetaryFormats;
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -31,7 +32,7 @@ import javax.money.Monetary;
 public class Module extends AbstractModule {
     @Override
     protected void configure() {
-        Monetary.getDefaultRounding().apply(MoneyImpl.ofCents(123, "EUR"));//workaround see https://github.com/commercetools/commercetools-sunrise-java/issues/404
+        applyJavaMoneyHack();
         bind(ReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(ProductReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(CheckoutReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
@@ -54,5 +55,15 @@ public class Module extends AbstractModule {
                 .add(LastViewedProductsComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
                 .add(BulkyGoodsComponent.class, controller -> true)
                 .build();
+    }
+
+    private void applyJavaMoneyHack() {
+        //fixes https://github.com/commercetools/commercetools-sunrise-java/issues/404
+        //exception play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[CompletionException: java.lang.IllegalArgumentException: java.util.concurrent.CompletionException: io.sphere.sdk.json.JsonException: detailMessage: com.fasterxml.jackson.databind.JsonMappingException: Operator failed: javax.money.DefaultMonetaryRoundingsSingletonSpi$DefaultCurrencyRounding@1655879e (through reference chain: io.sphere.sdk.payments.PaymentDraftImpl["amountPlanned"])
+        Monetary.getDefaultRounding();
+        Monetary.getDefaultRounding().apply(MoneyImpl.ofCents(123, "EUR"));
+        Monetary.getDefaultAmountType();
+        MonetaryFormats.getDefaultFormatProviderChain();
+        Monetary.getDefaultCurrencyProviderChain();
     }
 }
