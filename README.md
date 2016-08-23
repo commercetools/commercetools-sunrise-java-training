@@ -39,24 +39,28 @@ Try it out interactively: [tryhandlebarsjs.com](http://tryhandlebarsjs.com/)
 
 ### Java 8
 
-A general guide on the highlights of Java 8 can be found in this [Java 8 Tutorial](http://winterbe.com/posts/2014/03/16/java-8-tutorial/). Lamdba Expressions, Streams and Optionals are especially useful for Sunrise.
+[Lamdba Expressions](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html), [Streams](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html) and [Optional](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) are recurring Java 8 features in Sunrise.
 
-Another good overview is ["Java SE 8 for the Really Impatient"](http://www.horstmann.com/java8/index.html).
+[CompletionStage](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletionStage.html) is heavily used in Sunrise to enable asynchronous computation. Read the [Guide to Java 8 CompletionStage](http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html) to learn how to work with it and take a look at the [CompletableFutureUtils.java](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/utils/CompletableFutureUtils.html) class provided by the [JVM SDK](https://github.com/commercetools/commercetools-jvm-sdk), which contains some useful methods such as `recoverWith` and `exceptionallyCompleted`.
 
-A feature we use a lot is `CompletionStage`, which is constantly used by Sunrise and Play 2.5. Read the [Guide to Java 8 CompletionStage](http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html) and take a look at the [CompletableFutureUtils.java](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/utils/CompletableFutureUtils.html) utils class provided by JVM SDK, which contains some useful methods used in Sunrise, such as `recoverWith`.
-
-Our [Java 8 Cheatsheet](https://we.tl/lmnvCPmqTT) is a helpful one-pager to put on your desk.
+* A general guide on the highlights of Java 8 can be found in this [Java 8 Tutorial](http://winterbe.com/posts/2014/03/16/java-8-tutorial/).
+* Another good overview is ["Java SE 8 for the Really Impatient"](http://www.horstmann.com/java8/index.html).
+* Our [Java 8 Cheatsheet](https://we.tl/lmnvCPmqTT) is a helpful one-pager to put on your desk.
 
 ### Play Framework
 
+Sunrise is built on top of [Play Web Framework](https://www.playframework.com/). If you're interested in the ideas behind the Play Framework it's worth checking [this presentation by the creator](http://www.slideshare.net/jboner/going-reactive-eventdriven-scalable-resilient-systems).
+
+Play offers Dependency Injection using [Guice](https://github.com/google/guice), which is the main way to override the default behaviour of Sunrise. Read further information on how to use [Java Dependency Injection](https://www.playframework.com/documentation/2.5.x/JavaDependencyInjection) and [how to test](https://www.playframework.com/documentation/2.5.x/JavaFunctionalTest#Injecting-tests) with it.
+
+Since Play 2.5, `CompletionStage` may arise sometimes a `No HTTP Context available` error. To understand why and learn how to fix it, check the [Java Thread Locals](https://www.playframework.com/documentation/2.5.x/ThreadPools#Java-thread-locals) documentation.
+
 * The official [Play 2.5.x Documentation](https://www.playframework.com/documentation/2.5.x/Home). You can skip the "advanced topics" and everything concerning persistence and databases.
-* The ["Play for Java" Book](http://www.manning.com/leroux/)
+* The ["Play for Java" Book](http://www.manning.com/leroux/).
 * JSR-330 based Dependency Injection (default is Google Guice):
   * [In the Play Documentation](https://www.playframework.com/documentation/2.5.x/JavaDependencyInjection) 
   * [Getting Started on Guice](https://github.com/google/guice/wiki/GettingStarted) 
   * [Guice Bindings](https://github.com/google/guice/wiki/Bindings)
-
-If you're interested in the ideas behind the Play Framework it's worth checking [this presentation by the creator](http://www.slideshare.net/jboner/going-reactive-eventdriven-scalable-resilient-systems).
 
 ### SBT (Simple Build Tool)
 
@@ -65,7 +69,3 @@ If you're interested in the ideas behind the Play Framework it's worth checking 
 ### Play 2.5.x migration (in case that is relevant to your project) 
 
 Play 2.5 switched some of its classes to the Java 8 counterpart, for example now `F.Promise` is replaced by `CompletionStage`. To see all changes in detail, check the [Migration Guide to 2.5](https://www.playframework.com/documentation/2.5.x/JavaMigration25).
-
-Migrating to Play 2.5 `CompletionStage` may arise sometimes a `No HTTP Context available` error. To understand why and learn how to fix it, check the [Java Thread Locals](https://www.playframework.com/documentation/2.5.x/ThreadPools#Java-thread-locals) documentation.
-
-Play 2.4 offered Dependency Injection using Guice by default, which is heavily used in Sunrise. Check what is affected by this change in the [Migration Guide to 2.4](https://www.playframework.com/documentation/2.5.x/Migration24#Dependency-Injection). Read further information on how to use [Java Dependency Injection](https://www.playframework.com/documentation/2.5.x/JavaDependencyInjection) and [how to test](https://www.playframework.com/documentation/2.5.x/JavaFunctionalTest#Injecting-tests) with it.
