@@ -4,7 +4,7 @@ import com.commercetools.sunrise.common.contexts.RequestScoped;
 import com.commercetools.sunrise.common.controllers.SunriseFrameworkController;
 import com.commercetools.sunrise.common.pages.PageData;
 import com.commercetools.sunrise.framework.ControllerComponent;
-import com.commercetools.sunrise.hooks.PageDataHook;
+import com.commercetools.sunrise.hooks.consumers.PageDataReadyHook;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -44,16 +44,16 @@ public final class DiDemoController extends SunriseFrameworkController {
         });
     }
 
-    private static final class DemoComponent implements ControllerComponent, PageDataHook {
+    private static final class DemoComponent implements ControllerComponent, PageDataReadyHook {
         @Inject
         private InjectionSubject injectionSubject;
         @Inject
         private SubclassInjectionSubject subclassInjectionSubject;
 
         @Override
-        public void acceptPageData(final PageData sunrisePageData) {
-            if (sunrisePageData.getContent() instanceof DiDemoPage) {
-                final DiDemoPage diDemoPage = (DiDemoPage) sunrisePageData.getContent();
+        public void onPageDataReady(final PageData pageData) {
+            if (pageData.getContent() instanceof DiDemoPage) {
+                final DiDemoPage diDemoPage = (DiDemoPage) pageData.getContent();
                 final List<String> subjects = diDemoPage.getSubjects();
                 subjects.add("COMPONENT");
                 subjects.add("Class instance ID: " + injectionSubject.getId());
