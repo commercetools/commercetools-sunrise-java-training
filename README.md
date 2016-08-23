@@ -57,7 +57,7 @@ Since Play 2.5, `CompletionStage` may arise sometimes a `No HTTP Context availab
 
 * The official [Play 2.5.x Documentation](https://www.playframework.com/documentation/2.5.x/Home). You can skip the "advanced topics" and everything concerning persistence and databases.
 * The ["Play for Java" Book](http://www.manning.com/leroux/).
-* JSR-330 based Dependency Injection:
+* Dependency Injection:
   * [In the Play Documentation](https://www.playframework.com/documentation/2.5.x/JavaDependencyInjection) 
   * [Getting Started on Guice](https://github.com/google/guice/wiki/GettingStarted) 
   * [Guice Bindings](https://github.com/google/guice/wiki/Bindings)
