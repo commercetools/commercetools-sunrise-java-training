@@ -5,7 +5,7 @@ import com.commercetools.sunrise.common.pages.DefaultPageNavMenuControllerCompon
 import com.commercetools.sunrise.common.reverserouter.*;
 import com.commercetools.sunrise.framework.MultiControllerComponentResolver;
 import com.commercetools.sunrise.framework.MultiControllerComponentResolverBuilder;
-import com.commercetools.sunrise.shoppingcart.CartLikeBeanFactory;
+import com.commercetools.sunrise.shoppingcart.CartBeanFactory;
 import com.commercetools.sunrise.shoppingcart.MiniCartControllerComponent;
 import com.commercetools.sunrise.shoppingcart.common.CheckoutCommonComponent;
 import com.google.inject.AbstractModule;
@@ -41,7 +41,7 @@ public class Module extends AbstractModule {
         bind(CartReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(MyOrdersReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
         bind(MyPersonalDetailsReverseRouter.class).to(ReverseRouterImpl.class).in(Singleton.class);
-        bind(CartLikeBeanFactory.class).to(ShopCartBeanFactory.class);//used by bulky goods component
+        bind(CartBeanFactory.class).to(ShopCartBeanFactory.class);//used by bulky goods component
     }
 
     @Provides
