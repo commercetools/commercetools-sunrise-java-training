@@ -5,20 +5,19 @@ import com.commercetools.sunrise.common.reverserouter.CartReverseRouter;
 import com.commercetools.sunrise.shoppingcart.cart.addtocart.SunriseAddProductToCartController;
 import play.mvc.Result;
 
+import javax.inject.Inject;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
 @RequestScoped
 public final class AddProductToCartController extends SunriseAddProductToCartController {
 
-    public CompletionStage<Result> addProductToCart(final String languageTag) {
-        return super.addProductToCart(languageTag);
-    }
+    @Inject
+    private CartReverseRouter cartReverseRouter;
 
     @Override
     protected CompletableFuture<Result> successfulResult() {
-        return completedFuture(redirect(injector().getInstance(CartReverseRouter.class).showCart(userContext().languageTag())));
+        return completedFuture(redirect(cartReverseRouter.showCart(userContext().languageTag())));
     }
 }

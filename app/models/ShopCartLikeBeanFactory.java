@@ -2,26 +2,29 @@ package models;
 
 import bulkygoods.BulkyGoodsComponent;
 import com.commercetools.sunrise.common.utils.MoneyContext;
-import com.commercetools.sunrise.shoppingcart.CartLikeBean;
-import com.commercetools.sunrise.shoppingcart.CartLikeBeanFactory;
-import io.sphere.sdk.carts.CartLike;
+import com.commercetools.sunrise.shoppingcart.CartBean;
+import com.commercetools.sunrise.shoppingcart.CartBeanFactory;
+import io.sphere.sdk.carts.Cart;
 
-public class ShopCartLikeBeanFactory extends CartLikeBeanFactory {
+import javax.annotation.Nullable;
+
+public class ShopCartLikeBeanFactory extends CartBeanFactory {
+
     @Override
-    public CartLikeBean create(final CartLike<?> cartLike) {
+    public CartBean create(@Nullable final Cart cart) {
         final ShopCartLikeBean bean = new ShopCartLikeBean();
-        initialize(bean, cartLike);
+        initialize(bean, cart);
         return bean;
     }
 
-    protected void initialize(final ShopCartLikeBean bean, final CartLike<?> cartLike) {
-        super.initialize(bean, cartLike);
-        cartLike.getCustomLineItems().stream()
+    protected void initialize(final ShopCartLikeBean bean, final Cart cart) {
+        super.initialize(bean, cart);
+        cart.getCustomLineItems().stream()
                 .filter(cl -> BulkyGoodsComponent.BULKY_FEE_SLUG.equals(cl.getSlug()))
                 .findAny()
                 .ifPresent(bulkyGoodCustomLineItem -> {
                     final BulkyGoodsBean bulkyGoodsBean = new BulkyGoodsBean();
-                    final MoneyContext moneyContext = MoneyContext.of(cartLike.getCurrency(), userContext.locale());
+                    final MoneyContext moneyContext = MoneyContext.of(cart.getCurrency(), userContext.locale());
                     bulkyGoodsBean.setPrice(moneyContext.formatOrNull(bulkyGoodCustomLineItem.getTotalPrice()));
                     bean.setBulkyGoods(bulkyGoodsBean);
                 });

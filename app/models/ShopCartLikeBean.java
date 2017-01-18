@@ -1,8 +1,9 @@
 package models;
 
-import com.commercetools.sunrise.shoppingcart.CartLikeBean;
+import com.commercetools.sunrise.shoppingcart.CartBean;
 
-public class ShopCartLikeBean extends CartLikeBean {
+public class ShopCartLikeBean extends CartBean {
+
     private BulkyGoodsBean bulkyGoods;
 
     public BulkyGoodsBean getBulkyGoods() {
