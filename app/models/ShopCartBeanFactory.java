@@ -8,16 +8,16 @@ import io.sphere.sdk.carts.Cart;
 
 import javax.annotation.Nullable;
 
-public class ShopCartLikeBeanFactory extends CartBeanFactory {
+public class ShopCartBeanFactory extends CartBeanFactory {
 
     @Override
     public CartBean create(@Nullable final Cart cart) {
-        final ShopCartLikeBean bean = new ShopCartLikeBean();
+        final ShopCartBean bean = new ShopCartBean();
         initialize(bean, cart);
         return bean;
     }
 
-    protected void initialize(final ShopCartLikeBean bean, final Cart cart) {
+    protected void initialize(final ShopCartBean bean, final Cart cart) {
         super.initialize(bean, cart);
         cart.getCustomLineItems().stream()
                 .filter(cl -> BulkyGoodsComponent.BULKY_FEE_SLUG.equals(cl.getSlug()))

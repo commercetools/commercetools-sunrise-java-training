@@ -80,7 +80,6 @@ def configCommonTestSettings(scopes: String) = Seq(
   * TEMPLATE SETTINGS
   */
 
-
 val copyTemplateFiles = inputKey[Unit]("Copies the provided template files into the project to enable editing, e.g.: 'copyTemplateFiles common/logo.hbs cart.hbs'")
 
 copyTemplateFiles := Def.inputTaskDyn {
@@ -102,4 +101,3 @@ copyI18nFiles := Def.inputTaskDyn {
 def runMainInCompile(dest: String, args: Seq[String]) = Def.taskDyn {
   (runMain in Compile).toTask(s" com.commercetools.sunrise.theme.WebjarsFilesCopier $dest ${args.mkString(" ")}")
 }
-
