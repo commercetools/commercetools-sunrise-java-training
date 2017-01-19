@@ -1,7 +1,10 @@
 package httpcontextexercise;
 
 import io.sphere.sdk.client.SphereClient;
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
+import io.sphere.sdk.queries.PagedResult;
+import io.sphere.sdk.search.PagedSearchResult;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -26,18 +29,26 @@ public class HttpContextController extends Controller {
     More info: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
      */
     public CompletionStage<Result> show(final String englishSlug) {
+        return searchProduct(englishSlug)
+                .thenApply(PagedResult::head) // one possible solution here (A)
+                .thenApply(productOptional -> productOptional //one possible solution here (B)
+                        .map(this::handleFoundProduct)
+                        .orElseGet(this::handleNotFoundResult));
+    }
+
+    private CompletionStage<PagedSearchResult<ProductProjection>> searchProduct(final String englishSlug) {
         final ProductProjectionSearch request = ProductProjectionSearch.ofCurrent()
                 .withLimit(1)
                 .withQueryFilters(product -> product.slug().locale(ENGLISH).is(englishSlug));
-        return sphereClient.execute(request)
-                .thenApply(result -> result.head())//one possible solution here (A)
-                .thenApply(productProjectionOptional -> {//one possible solution here (B)
-                    productProjectionOptional.ifPresent(prod -> {
-                        session("lastSeenProduct", prod.getId());
-                    });
-                    return productProjectionOptional
-                            .map(product -> ok(product.getName().get(ENGLISH)))
-                            .orElse(notFound("product not found"));
-                });
+        return sphereClient.execute(request);
+    }
+
+    private Result handleFoundProduct(final ProductProjection product) {
+        session("lastSeenProduct", product.getId());
+        return ok(product.getName().get(ENGLISH));
+    }
+
+    private Result handleNotFoundResult() {
+        return notFound("product not found");
     }
 }
