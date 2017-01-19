@@ -45,7 +45,7 @@ public class HttpContextController extends Controller {
 
     private Result handleFoundProduct(final ProductProjection product) {
         session("lastSeenProduct", product.getId());
-        return ok(product.getName().get(ENGLISH));
+        return ok(product.getName().find(ENGLISH).orElse(""));
     }
 
     private Result handleNotFoundResult() {
