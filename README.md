@@ -1,6 +1,6 @@
 # commercetools-sunrise-java-training
 
-project for use in the Sunrise training (WIP)
+Project for use in the Sunrise training (WIP)
 
 ## Bug fixing exercises
 
