@@ -1,20 +1,19 @@
 package didemo;
 
-import com.commercetools.sunrise.common.contexts.RequestScoped;
-import com.commercetools.sunrise.common.controllers.SunriseFrameworkController;
 import com.commercetools.sunrise.common.pages.PageData;
-import com.commercetools.sunrise.framework.ControllerComponent;
-import com.commercetools.sunrise.hooks.consumers.PageDataReadyHook;
+import com.commercetools.sunrise.framework.components.ControllerComponent;
+import com.commercetools.sunrise.framework.controllers.SunriseTemplateController;
+import com.commercetools.sunrise.framework.controllers.WithTemplate;
+import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
+import com.commercetools.sunrise.framework.hooks.RunRequestStartedHook;
+import com.commercetools.sunrise.framework.hooks.consumers.PageDataReadyHook;
+import com.commercetools.sunrise.framework.template.engine.TemplateRenderer;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CompletionStage;
-
-import static java.util.Arrays.asList;
 
 /**
  * InjectionSubject contains kind of a ticket system: each instance that is created from this class (or any subclass)
@@ -23,33 +22,50 @@ import static java.util.Arrays.asList;
  * Trying different combinations of Singleton, RequestScoped or no scope (instantiate each time) one can observe
  * how the ticket system reflects the number of instances created within the controller and a component.
  */
-@RequestScoped
-public final class DiDemoController extends SunriseFrameworkController {
+@RegisteredComponents(DiDemoController.DemoComponent.class)
+public final class DiDemoController extends SunriseTemplateController implements WithTemplate {
+
+    private final InjectionSubject injectionSubject;
+    private final SubclassInjectionSubject subclassInjectionSubject;
 
     @Inject
-    private InjectionSubject injectionSubject;
-    @Inject
-    private SubclassInjectionSubject subclassInjectionSubject;
-
-    //also demo with reload
-    public CompletionStage<Result> show() {
-        return doRequest(() -> {
-            final DiDemoPage pageContent = new DiDemoPage();
-            final List<String> subjects = new LinkedList<>();
-            subjects.add("CONTROLLER");
-            subjects.add("Class instance ID: " + injectionSubject.getId());
-            subjects.add("Subclass instance ID: " + subclassInjectionSubject.getId());
-            pageContent.setSubjects(subjects);
-            return asyncOk(renderPageWithTemplate(pageContent, "didemo/show"));
-        });
+    public DiDemoController(final TemplateRenderer templateRenderer,
+                            final InjectionSubject injectionSubject,
+                            final SubclassInjectionSubject subclassInjectionSubject) {
+        super(templateRenderer);
+        this.injectionSubject = injectionSubject;
+        this.subclassInjectionSubject = subclassInjectionSubject;
     }
 
-    private static final class DemoComponent implements ControllerComponent, PageDataReadyHook {
-        @Inject
-        private InjectionSubject injectionSubject;
-        @Inject
-        private SubclassInjectionSubject subclassInjectionSubject;
+    //also demo with reload
+    @RunRequestStartedHook
+    public CompletionStage<Result> show() {
+        final DiDemoPage pageContent = new DiDemoPage();
+        final List<String> subjects = new LinkedList<>();
+        subjects.add("CONTROLLER");
+        subjects.add("Class instance ID: " + injectionSubject.getId());
+        subjects.add("Subclass instance ID: " + subclassInjectionSubject.getId());
+        pageContent.setSubjects(subjects);
+        return okResultWithPageContent(pageContent);
+    }
 
+    @Override
+    public String getTemplateName() {
+        return "didemo/show";
+    }
+
+
+    public static final class DemoComponent implements ControllerComponent, PageDataReadyHook {
+
+        private final InjectionSubject injectionSubject;
+        private final SubclassInjectionSubject subclassInjectionSubject;
+
+        @Inject
+        public DemoComponent(final InjectionSubject injectionSubject,
+                             final SubclassInjectionSubject subclassInjectionSubject) {
+            this.injectionSubject = injectionSubject;
+            this.subclassInjectionSubject = subclassInjectionSubject;
+        }
 
         @Override
         public void onPageDataReady(final PageData pageData) {
@@ -61,15 +77,5 @@ public final class DiDemoController extends SunriseFrameworkController {
                 subjects.add("Subclass instance ID: " + subclassInjectionSubject.getId());
             }
         }
-    }
-
-    @Inject
-    public void setDemoComponent(final DemoComponent component) {
-        registerControllerComponent(component);
-    }
-
-    @Override
-    public Set<String> getFrameworkTags() {
-        return new HashSet<>(asList("whatever"));
     }
 }

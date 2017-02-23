@@ -1,12 +1,12 @@
 package httpcontextexercise;
 
+import com.commercetools.sunrise.framework.controllers.SunriseController;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.queries.PagedResult;
 import io.sphere.sdk.search.PagedSearchResult;
 import play.libs.concurrent.HttpExecutionContext;
-import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -14,7 +14,7 @@ import java.util.concurrent.CompletionStage;
 
 import static java.util.Locale.ENGLISH;
 
-public class HttpContextController extends Controller {
+public class HttpContextController extends SunriseController {
     @Inject
     private SphereClient sphereClient;
     @Inject

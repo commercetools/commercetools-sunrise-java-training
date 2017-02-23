@@ -1,8 +1,8 @@
 package lastviewedproducts;
 
-import com.commercetools.sunrise.components.ComponentBean;
-import com.commercetools.sunrise.framework.ControllerComponent;
-import com.commercetools.sunrise.productcatalog.common.ProductListBeanFactory;
+import com.commercetools.sunrise.components.ComponentViewModel;
+import com.commercetools.sunrise.framework.components.ControllerComponent;
+import com.commercetools.sunrise.productcatalog.productoverview.viewmodels.ProductListViewModelFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.sphere.sdk.client.SphereClient;
@@ -59,10 +59,11 @@ public class LastViewedProductsComponent implements ControllerComponent {
         }
     }
 
-    private static ComponentBean createComponentBean(final ProductListBeanFactory productListBeanFactory, final List<ProductProjection> productProjections) {
-        final ComponentBean componentBean = new ComponentBean();
+    private static ComponentViewModel createComponentBean(final ProductListViewModelFactory productListViewModelFactory,
+                                                          final List<ProductProjection> productProjections) {
+        final ComponentViewModel componentBean = new ComponentViewModel();
         componentBean.setTemplateName("components/LastViewedProducts/productsView");
-        componentBean.setComponentData(productListBeanFactory.create(productProjections));
+        componentBean.setComponentData(productListViewModelFactory.create(productProjections));
         return componentBean;
     }
 

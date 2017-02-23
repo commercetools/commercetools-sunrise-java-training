@@ -1,6 +1,11 @@
 <!-- start checkout/order-summary/totals.hbs -->
 <div class="row">
     <div class="col-sm-10 col-xs-7">
+        {{#if cart.creditCardFee}}
+            <div class="text-right delivery-info">
+                <span class="">Credit card fee</span>
+            </div>
+        {{/if}}
         <div class="text-right subtotal">
             <span class="subtotal-title">{{i18n "checkout:subtotal"}}</span>
         </div>
@@ -12,11 +17,6 @@
         <div class="text-right delivery-info">
             <span class="delivery-info-title">{{i18n "checkout:shipping"}}</span>
         </div>
-        {{#if cart.bulkyGoods}}
-            <div class="text-right delivery-info">
-                <span class="">bulky goods fee</span>
-            </div>
-        {{/if}}
         <hr class="total-divider">
         <div class="text-right">
             <span>{{i18n "main:common.salesTax"}}</span>
@@ -26,6 +26,11 @@
         </div>
     </div>
     <div class="col-sm-2 col-xs-5 text-right">
+        {{#if cart.creditCardFee}}
+            <div>
+                <span class="">{{cart.creditCardFee}}</span>
+            </div>
+        {{/if}}
         <div>
             <span>{{cart.subtotalPrice}}</span>
         </div>
@@ -37,11 +42,6 @@
         <div>
             <span>{{cart.shippingMethod.price}}</span>
         </div>
-        {{#if cart.bulkyGoods}}
-            <div>
-                <span class="">{{cart.bulkyGoods.price}}</span>
-            </div>
-        {{/if}}
         <hr>
         <div>
             <span>{{cart.salesTax}}</span>

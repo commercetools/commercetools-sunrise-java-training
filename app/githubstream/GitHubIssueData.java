@@ -1,8 +1,9 @@
 package githubstream;
 
-import io.sphere.sdk.models.Base;
+import com.commercetools.sunrise.common.models.ViewModel;
 
-final class GitHubIssueData extends Base {
+final class GitHubIssueData extends ViewModel {
+
     private String name;
     private String url;
 

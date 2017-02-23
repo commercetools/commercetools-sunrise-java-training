@@ -1,7 +1,7 @@
 package githubstream;
 
-import com.commercetools.sunrise.components.ComponentBean;
-import com.commercetools.sunrise.framework.ControllerComponent;
+import com.commercetools.sunrise.components.ComponentViewModel;
+import com.commercetools.sunrise.framework.components.ControllerComponent;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.sphere.sdk.models.Base;
@@ -54,8 +54,8 @@ public class GitHubStreamComponent extends Base implements ControllerComponent {
         return result;
     }
 
-    private ComponentBean createComponentBean() {
-        final ComponentBean componentBean = new ComponentBean();
+    private ComponentViewModel createComponentViewModel() {
+        final ComponentViewModel componentBean = new ComponentViewModel();
         componentBean.setTemplateName(templateName);
         final HashMap<String, Object> data = new HashMap<>();
         data.put("list", dataList);

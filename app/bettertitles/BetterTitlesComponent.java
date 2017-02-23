@@ -1,8 +1,8 @@
 package bettertitles;
 
 import com.commercetools.sunrise.common.pages.PageData;
-import com.commercetools.sunrise.framework.ControllerComponent;
-import com.commercetools.sunrise.productcatalog.home.HomePageContent;
+import com.commercetools.sunrise.framework.components.ControllerComponent;
+import com.commercetools.sunrise.productcatalog.home.viewmodels.HomePageContent;
 import io.sphere.sdk.models.Base;
 
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;

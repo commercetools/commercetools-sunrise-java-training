@@ -7,7 +7,7 @@ version := "0.1.0-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
-val sunriseFrameworkVersion = "0.16.0"
+val sunriseFrameworkVersion = "1.0.0-RC1-220217-SNAPSHOT"
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
@@ -27,20 +27,21 @@ libraryDependencies ++= Seq(
   javaWs,
   "com.commercetools.sunrise" %% "product-catalog" % sunriseFrameworkVersion,
   "com.commercetools.sunrise" %% "shopping-cart" % sunriseFrameworkVersion,
+  "com.commercetools.sunrise" %% "my-account" % sunriseFrameworkVersion,
   "com.commercetools.sunrise" %% "sbt-tasks" % sunriseFrameworkVersion,
   "com.commercetools.sunrise" % "commercetools-sunrise-theme" % "0.64.0",
   "org.webjars" %% "webjars-play" % "2.5.0-2"
 )
 
 //important otherwise we get linked hash maps
-val jacksonVersion = "2.7.5"
-dependencyOverrides ++= Set (
-  "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,
-  "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
-  "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
-  "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % jacksonVersion,
-  "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion
-)
+//val jacksonVersion = "2.7.5"
+//dependencyOverrides ++= Set (
+//  "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,
+//  "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
+//  "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
+//  "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % jacksonVersion,
+//  "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion
+//)
 
 /**
  * TEST SETTINGS

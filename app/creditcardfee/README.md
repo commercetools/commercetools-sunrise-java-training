@@ -12,6 +12,6 @@ The [template totals.hbs](../../conf/templates/checkout/order-summary/totals.hbs
 
 The component is already registered for all controllers in.
 
-the `CartLikeBeanFactory` has been overridden in [ShopCartLikeBeanFactory](../../app/models/ShopCartLikeBeanFactory.java) and registered in [Module.java](../../app/Module.java) in to support the bulky goods data as [ShopCartLikeBean.java](../../app/models/ShopCartLikeBean.java).
+the `CartLikeBeanFactory` has been overridden in [ShopCartLikeBeanFactory](/ShopCartLikeBeanFactory.java) and registered in [Module.java](../../app/Module.java) in to support the bulky goods data as [ShopCartLikeBean.java](/ShopCartLikeBean.java).
 
 Still missing is the implementation of the hook to get the cart updated in [BulkyGoodsComponent](BulkyGoodsComponent.java).
