@@ -22,7 +22,7 @@ Project for use in the Sunrise training (WIP)
 
 ### didemo
 * DiDemoController to illustrate the scope for request scoped objects
-* Task use injectionSubject in singleton scope
+* Task use injectedClass in singleton scope
 
 ### bulky goods
 

@@ -2,12 +2,9 @@ package creditcardfee;
 
 import com.commercetools.sunrise.framework.components.ControllerComponent;
 import com.commercetools.sunrise.framework.hooks.actions.CartUpdatedActionHook;
-import com.commercetools.sunrise.framework.hooks.events.CartUpdatedHook;
-import com.commercetools.sunrise.framework.hooks.requests.CartQueryHook;
 import com.commercetools.sunrise.framework.hooks.requests.CartUpdateCommandHook;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
-import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
@@ -19,9 +16,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
-import java.util.stream.Collectors;
 
 import static creditcardfee.CreditCardFeeUtils.buildApplicableUpdateActions;
+import static creditcardfee.CreditCardFeeUtils.printableUpdateActions;
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
 /**
@@ -43,13 +40,11 @@ public class CreditCardFeeControllerComponent implements ControllerComponent, Ca
 
     @Override
     public CartUpdateCommand onCartUpdateCommand(final CartUpdateCommand cartUpdateCommand) {
-        LOGGER.debug("Adding expansion paths");
         return cartUpdateCommand.plusExpansionPaths(cart -> cart.paymentInfo().payments());
     }
 
     @Override
     public CompletionStage<Cart> onCartUpdatedAction(final Cart cart, final ExpansionPathContainer<Cart> expansionPathContainer) {
-        LOGGER.debug("WTF WTF WTF WTF %%%%%%%%%%%% {} ", cart.getVersion());
         return updateCartWithCreditCardFee(cart, expansionPathContainer);
     }
 
@@ -66,7 +61,7 @@ public class CreditCardFeeControllerComponent implements ControllerComponent, Ca
     private CompletionStage<Cart> updateCartWithCreditCardFee(final Cart cart, final ExpansionPathContainer<Cart> expansionPathContainer) {
         final List<UpdateAction<Cart>> updateActions = buildApplicableUpdateActions(cart, taxCategory);
         if (!updateActions.isEmpty()) {
-            LOGGER.debug("Applying {} update actions for credit card fee", updateActions.stream().map(UpdateAction::getAction).collect(Collectors.joining(", ")));
+            LOGGER.debug("Applying {} update actions for credit card fee", printableUpdateActions(updateActions));
             final CartUpdateCommand command = CartUpdateCommand.of(cart, updateActions);
             return sphereClient.execute(command.withExpansionPaths(expansionPathContainer));
         } else {

@@ -2,17 +2,17 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET         /exercise/didemo                                   @didemo.DiDemoController.show
-GET         /exercise/httpcontext                              @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")
+GET         /dependencyinjection                                @dependencyinjection.DependencyInjectionController.show
+GET         /exercise/httpcontext        @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")
 
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
 # Untrail url
-GET         /*path/                                            @controllers.common.ApplicationController.untrail(path: String)
+GET         /*path/                      @controllers.common.ApplicationController.untrail(path: String)
 
 # Main entry point that redirects to home page
-GET         /                                                  @controllers.productcatalog.HomeController.index()
+GET         /                            @controllers.productcatalog.HomeController.index()
 
 
 # ADMIN
