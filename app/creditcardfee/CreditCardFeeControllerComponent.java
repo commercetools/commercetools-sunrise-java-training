@@ -22,6 +22,9 @@ import static creditcardfee.CreditCardFeeUtils.printableUpdateActions;
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
 /**
+ * In this exercise we are going to see how to manipulate a CTP resource right after it has been updated.
+ * We are going to include in the cart a fee when the customer has selected credit card as payment method.
+ *
  * Hook 1: On every {@link CartUpdateCommand}, expand the reference {@code cart.paymentInfo.payments}
  * Hook 2: Every time the cart has been updated, call {@link #updateCartWithCreditCardFee(Cart, ExpansionPathContainer)} to update the credit card fee
  */

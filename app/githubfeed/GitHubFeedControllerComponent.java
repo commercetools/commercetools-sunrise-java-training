@@ -12,25 +12,26 @@ import play.libs.ws.WSAPI;
 import play.mvc.Http;
 
 import javax.inject.Inject;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
-import static githubfeed.GitHubFeedUtils.extractGitHubIssues;
+import static githubfeed.GitHubFeedUtils.extractGitHubFeed;
 
 /**
- * 1. do the webservice call and save the feed data to be used later
- * 2. add the data to the page as a component
+ * In this exercise we are going to see how to implement a {@link ControllerComponent} that is not dependent on CTP data.
+ * We are going to fetch a simulated GitHub feed and display it on the page, on those controllers where it is registered.
+ *
+ * Hook 1: When the request starts, fetch the GitHub feed and save it by calling {@link #fetchAndSaveGitHubFeed()}
+ * Hook 2: Once the {@link PageData} is built and ready, add the GitHub feed to it by calling {@link #addGitHubFeedToPageData(PageData)}
  */
 public class GitHubFeedControllerComponent extends Base implements ControllerComponent, RequestStartedHook, PageDataReadyHook {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GitHubFeedControllerComponent.class);
-    private static final String GITHUB_URL = "https://api.github.com/repos/lauraluiz/issue-provider/issues";
-    private static final String TEMPLATE_NAME = "githubfeed/issues";
+    private static final String GITHUB_URL = "https://api.github.com/repos/lauraluiz/issue-provider/issues?sort=updated";
 
     private final WSAPI wsApi;
-    private List<Map> gitHubIssues;
+    private List<Map> gitHubFeed;
 
     @Inject
     public GitHubFeedControllerComponent(final WSAPI wsApi) {
@@ -39,37 +40,42 @@ public class GitHubFeedControllerComponent extends Base implements ControllerCom
 
     @Override
     public CompletionStage<?> onRequestStarted(final Http.Context httpContext) {
-        return fetchGitHubIssues();
+        return fetchAndSaveGitHubFeed();
     }
 
     @Override
     public void onPageDataReady(final PageData pageData) {
-        if (gitHubIssues != null) {
-            pageData.getContent().addComponent(createComponentViewModel());
-        }
+        addGitHubFeedToPageData(pageData);
     }
 
     /**
-     * Fetches the GitHub issues and saves the ....
+     * Fetches the GitHub issues and saves them in {@code gitHubFeed} class field
      */
-    private CompletionStage<Void> fetchGitHubIssues() {
-         return wsApi.url(GITHUB_URL).get()
-                 .thenApply(result -> {
-                    if (result.getStatus() == 200) {
-                        this.gitHubIssues = extractGitHubIssues(result.asJson());
+    private CompletionStage<Void> fetchAndSaveGitHubFeed() {
+        return wsApi.url(GITHUB_URL).get()
+                .thenApply(result -> {
+                    if (result.getStatus() == Http.Status.OK) {
+                        this.gitHubFeed = extractGitHubFeed(result.asJson());
                     } else {
                         LOGGER.error("GitHub unexpectedly answered with status {} and body {}", result.getStatus(), result.getBody());
                     }
+                    return (Void) null;
+                }).exceptionally(throwable -> {
+                    LOGGER.error("Could not fetch GitHub feed", throwable);
                     return null;
-                 });
+                });
     }
 
-    private ComponentViewModel createComponentViewModel() {
-        final ComponentViewModel componentBean = new ComponentViewModel();
-        componentBean.setTemplateName(TEMPLATE_NAME);
-        final HashMap<String, Object> data = new HashMap<>();
-        data.put("list", gitHubIssues);
-        componentBean.setComponentData(data);
-        return componentBean;
+    /**
+     * Includes the required information to display the GitHub feed to the page data.
+     * @param pageData the data that is going to be used to render the page
+     */
+    private void addGitHubFeedToPageData(final PageData pageData) {
+        if (gitHubFeed != null) {
+            final ComponentViewModel componentViewModel = new ComponentViewModel();
+            componentViewModel.setTemplateName("githubfeed/issues");
+            componentViewModel.put("feed", gitHubFeed);
+            pageData.getContent().addComponent(componentViewModel);
+        }
     }
 }

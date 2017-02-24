@@ -20,7 +20,7 @@ final class GitHubFeedUtils {
     private GitHubFeedUtils() {
     }
 
-    static List<Map> extractGitHubIssues(final JsonNode jsonNode) {
+    static List<Map> extractGitHubFeed(final JsonNode jsonNode) {
         final ObjectMapper mapper = Json.mapper();
         final List<Map> result = new LinkedList<>();
         if (jsonNode instanceof ArrayNode) {

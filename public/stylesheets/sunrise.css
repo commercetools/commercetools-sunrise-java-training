@@ -30,3 +30,25 @@ form[name=add-to-wishlist] {
 .my-account-sidebar .my-account-sidebar-items:nth-child(6) {
     display: none;
 }
+
+
+#github-feed {
+    margin-bottom: 40px;
+}
+#github-feed .row {
+    background-color: #FFFFFF;
+    border:1px solid #D6D6D6;
+    width:600px;
+    margin:0 auto;
+    padding-bottom: 20px;
+}
+#github-feed li {
+    list-style-type:none;
+    padding: 10px 0;
+}
+#github-feed li img {
+    float:left;
+}
+#github-feed li .body {
+    padding-left: 45px;
+}

@@ -1,15 +1,15 @@
-{{#if componentData.list}}
-    <div class="container">
-        <div class="row" style="margin-bottom: 40px;">
-            <div style="background-color: #FFFFFF; border:1px solid #D6D6D6; width:600px; margin:0 auto; padding-bottom: 20px;">
+{{#if feed}}
+    <div class="container" id="github-feed">
+        <div class="row">
+            <div>
                 <p class="text-center home-suggestions-title">GitHub Feed</p>
                 <ul>
-                    {{#each componentData.list}}
-                        <li style="list-style-type:none; padding: 10px 0;">
+                    {{#each feed}}
+                        <li>
                             <div>
-                                <img style="float:left" height="38" src="{{user.avatar_url}}" />
+                                <img height="38" src="{{user.avatar_url}}" />
                             </div>
-                            <div style="padding-left: 45px;">
+                            <div class="body">
                                 <a href="{{html_url}}"><strong>{{title}}</strong></a>
                                 <br/>
                                 by <a href="{{user.html_url}}">{{user.login}}</a>
