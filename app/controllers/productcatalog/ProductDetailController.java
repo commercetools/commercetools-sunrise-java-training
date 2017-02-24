@@ -11,6 +11,7 @@ import com.commercetools.sunrise.productcatalog.productdetail.ProductRecommendat
 import com.commercetools.sunrise.productcatalog.productdetail.ProductVariantFinder;
 import com.commercetools.sunrise.productcatalog.productdetail.SunriseProductDetailController;
 import com.commercetools.sunrise.productcatalog.productdetail.viewmodels.ProductDetailPageContentFactory;
+import githubfeed.GitHubFeedControllerComponent;
 import io.sphere.sdk.products.ProductProjection;
 import play.mvc.Result;
 

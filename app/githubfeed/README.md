@@ -5,7 +5,7 @@ The result should look like this:
 
 ![result](GitHubStreamComponent.png "so it should look like")
 
-The [template](../../conf/templates/components/GitHub/issues.hbs) is already implemented.
+The [template](../../conf/templates/components/github/issues.hbs) is already implemented.
 
 The component is already registered for the home controller:
 

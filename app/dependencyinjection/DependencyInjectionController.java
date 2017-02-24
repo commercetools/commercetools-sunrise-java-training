@@ -9,12 +9,6 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
-/**
- * InjectedClass contains a ticketing system: each instance that is created from this class will receive a unique incremental identifier.
- *
- * Trying different combinations of {@link @Singleton}, {@link @RequestScoped} or defining no scope
- * one can observe when a new instance of this class is created.
- */
 public final class DependencyInjectionController extends SunriseTemplateController implements WithTemplate {
 
     private final ClassA classA;

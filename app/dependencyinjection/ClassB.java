@@ -2,7 +2,7 @@ package dependencyinjection;
 
 import javax.inject.Inject;
 
-public class ClassB {
+class ClassB {
 
     private final InjectedClass injectedClass;
 

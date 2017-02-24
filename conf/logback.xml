@@ -36,6 +36,8 @@
   <logger name="com.commercetools.sunrise.framework.controllers.metrics.MetricsLogger" level="DEBUG" />
   <logger name="com.commercetools.sunrise.framework.hooks.ComponentRegistry" level="OFF" />
   <logger name="creditcardfee.CreditCardFeeControllerComponent" level="DEBUG" />
+  <logger name="githubstream.GitHubStreamControllerComponent" level="DEBUG" />
+  <logger name="com.commercetools.sunrise.common.pages.PageDataJson" level="OFF" />
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />
