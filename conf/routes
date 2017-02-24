@@ -2,7 +2,13 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET         /dependencyinjection                                @dependencyinjection.DependencyInjectionController.show
+#GET         /playbasics                                       @playbasics.MyController.show1()
+#GET         /playbasics/:name                                 @playbasics.MyController.show2(name: String)
+#GET         /playbasics                                       @playbasics.MyController.show2(name: String)
+#GET         /playbasics                                       @playbasics.MyController.show3(name: String)
+GET         /playbasics                                       @playbasics.MyController.show4()
+
+GET         /dependencyinjection                              @dependencyinjection.DependencyInjectionController.show
 GET         /exercise/httpcontext        @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")
 
 # This file defines all application routes (Higher priority routes first)

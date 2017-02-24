@@ -6,6 +6,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.queries.PagedResult;
 import io.sphere.sdk.search.PagedSearchResult;
+import play.libs.concurrent.HttpExecution;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.Result;
 
@@ -31,9 +32,9 @@ public class HttpContextController extends SunriseController {
     public CompletionStage<Result> show(final String englishSlug) {
         return searchProduct(englishSlug)
                 .thenApply(PagedResult::head) // one possible solution here (A)
-                .thenApply(productOptional -> productOptional //one possible solution here (B)
+                .thenApplyAsync(productOptional -> productOptional //one possible solution here (B)
                         .map(this::handleFoundProduct)
-                        .orElseGet(this::handleNotFoundResult));
+                        .orElseGet(this::handleNotFoundResult), HttpExecution.defaultContext());
     }
 
     private CompletionStage<PagedSearchResult<ProductProjection>> searchProduct(final String englishSlug) {
