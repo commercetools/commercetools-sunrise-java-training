@@ -9,8 +9,8 @@
 #GET         /playbasics                                       @playbasics.MyController.show4(name: String)
 #GET         /playbasics                                       @playbasics.MyController.show5()
 
-GET         /dependencyinjection                              @dependencyinjection.DependencyInjectionController.show
-GET         /exercise/httpcontext        @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")
+GET         /dependencyinjection         @dependencyinjection.DependencyInjectionController.show
+GET         /httpcontext                 @httpcontext.HttpContextController.show()
 
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
@@ -26,7 +26,7 @@ GET         /                            @controllers.productcatalog.HomeControl
 # ~~~~~
 
 # Shows the deployed version, artifactId and GIT SHA
-GET         /version                                           @controllers.common.VersionController.show()
+GET         /version                     @controllers.common.VersionController.show()
 # Shows if the application is healthy
 GET         /health                                            @controllers.common.HealthCheckController.show()
 
