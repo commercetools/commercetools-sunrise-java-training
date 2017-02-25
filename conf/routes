@@ -6,7 +6,8 @@
 #GET         /playbasics/:name                                 @playbasics.MyController.show2(name: String)
 #GET         /playbasics                                       @playbasics.MyController.show2(name: String)
 #GET         /playbasics                                       @playbasics.MyController.show3(name: String)
-GET         /playbasics                                       @playbasics.MyController.show4()
+#GET         /playbasics                                       @playbasics.MyController.show4(name: String)
+#GET         /playbasics                                       @playbasics.MyController.show5()
 
 GET         /dependencyinjection                              @dependencyinjection.DependencyInjectionController.show
 GET         /exercise/httpcontext        @httpcontextexercise.HttpContextController.show(englishSlug: String = "pinko-tshirt-1G10XJZZS7X23-olive")

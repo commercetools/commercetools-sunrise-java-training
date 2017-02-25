@@ -3,6 +3,7 @@ package playbasics;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -25,13 +26,19 @@ public class MyController extends Controller {
     }
 
     public Result show3(final String name) {
-        final String oldName = session("name");
+        final String nameSession = session("name");
         session("name", name);
-        return ok("Hello " + name + "! Bye " + oldName);
+        return ok("Hello " + name + "! Bye " + (nameSession != null ? nameSession : "stranger"));
     }
 
-    public Result show4() {
-        final Form<MyFormData> form = formFactory.form(MyFormData.class);
+    public Result show4(final String name) {
+        final Http.Cookie nameCookie = request().cookie("name");
+        response().setCookie(Http.Cookie.builder("name", name).build());
+        return ok("Hello " + name + "! Bye " + (nameCookie != null ? nameCookie.value() : "stranger"));
+    }
+
+    public Result show5() {
+        final Form<MyFormData> form = formFactory.form(MyFormData.class).bindFromRequest();
         if (form.hasErrors()) {
             return badRequest("Form had errors: " + form.errorsAsJson());
         } else {
