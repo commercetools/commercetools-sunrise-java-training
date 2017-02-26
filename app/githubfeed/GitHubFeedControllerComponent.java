@@ -51,7 +51,7 @@ public class GitHubFeedControllerComponent extends Base implements ControllerCom
     /**
      * Fetches the GitHub issues and saves them in {@code gitHubFeed} class field
      */
-    private CompletionStage<Void> fetchAndSaveGitHubFeed() {
+    private CompletionStage<?> fetchAndSaveGitHubFeed() {
         return wsApi.url(GITHUB_URL).get()
                 .thenApply(result -> {
                     if (result.getStatus() == Http.Status.OK) {
@@ -59,7 +59,7 @@ public class GitHubFeedControllerComponent extends Base implements ControllerCom
                     } else {
                         LOGGER.error("GitHub unexpectedly answered with status {} and body {}", result.getStatus(), result.getBody());
                     }
-                    return (Void) null;
+                    return null;
                 }).exceptionally(throwable -> {
                     LOGGER.error("Could not fetch GitHub feed", throwable);
                     return null;
@@ -72,10 +72,10 @@ public class GitHubFeedControllerComponent extends Base implements ControllerCom
      */
     private void addGitHubFeedToPageData(final PageData pageData) {
         if (gitHubFeed != null) {
-            final ViewModelComponent componentViewModel = new ViewModelComponent();
-            componentViewModel.setTemplateName("githubfeed/issues");
-            componentViewModel.put("feed", gitHubFeed);
-            pageData.getContent().addComponent(componentViewModel);
+            final ViewModelComponent viewModelComponent = new ViewModelComponent();
+            viewModelComponent.setTemplateName("github-feed");
+            viewModelComponent.put("feed", gitHubFeed);
+            pageData.getContent().addComponent(viewModelComponent);
         }
     }
 }

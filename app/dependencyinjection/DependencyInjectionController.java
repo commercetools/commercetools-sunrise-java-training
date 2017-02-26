@@ -32,6 +32,6 @@ public final class DependencyInjectionController extends SunriseTemplateControll
 
     @Override
     public String getTemplateName() {
-        return "dependencyinjection/show";
+        return "dependency-injection";
     }
 }

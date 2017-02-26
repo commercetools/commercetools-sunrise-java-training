@@ -31,6 +31,12 @@ form[name=add-to-wishlist] {
     display: none;
 }
 
+/* Hide not yet implemented reviews */
+.pdp-page-review .reviews-title, .pdp-page-review .reviews-col,
+.pdp-page-review button.write-review-btn, .pdp-page-review button.showmore-reviews-btn {
+    display: none;
+}
+
 
 #github-feed {
     margin-bottom: 40px;

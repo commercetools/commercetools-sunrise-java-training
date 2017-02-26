@@ -1,4 +1,3 @@
-import sbt.complete.DefaultParsers._
 
 name := "commercetools-sunrise-java-training"
 

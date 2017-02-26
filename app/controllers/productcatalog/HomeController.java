@@ -24,7 +24,7 @@ import java.util.concurrent.CompletionStage;
         TemplateControllerComponentsSupplier.class,
         PageHeaderControllerComponentSupplier.class,
         HomeRecommendationsControllerComponent.class,
-        GitHubFeedControllerComponent.class
+        GitHubFeedControllerComponent.class,
 })
 public final class HomeController extends SunriseHomeController {
 

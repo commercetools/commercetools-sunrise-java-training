@@ -13,6 +13,7 @@ import com.commercetools.sunrise.productcatalog.productdetail.SunriseProductDeta
 import com.commercetools.sunrise.productcatalog.productdetail.viewmodels.ProductDetailPageContentFactory;
 import githubfeed.GitHubFeedControllerComponent;
 import io.sphere.sdk.products.ProductProjection;
+import lastviewedproducts.LastViewedProductsControllerComponent;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -24,7 +25,8 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
         PageHeaderControllerComponentSupplier.class,
-        ProductRecommendationsControllerComponent.class
+        ProductRecommendationsControllerComponent.class,
+        LastViewedProductsControllerComponent.class
 })
 public final class ProductDetailController extends SunriseProductDetailController {
 

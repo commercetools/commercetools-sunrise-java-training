@@ -1,22 +1,5 @@
 # commercetools-sunrise-java-training
 
-Project for use in the Sunrise training (WIP)
-
-## Bug fixing exercises
-
-### Http Context and CompletionStage
-* nothing to do with dependency injection
-* see httpcontextexercise.HttpContextController
-
-### didemo
-* DiDemoController to illustrate the scope for request scoped objects
-* Task use injectedClass in singleton scope
-
-### bulky goods
-
-* add a custom line item if there are more than 3 line items
-
-
 ## Pre-training material & reading
 
 ### Handlebars
