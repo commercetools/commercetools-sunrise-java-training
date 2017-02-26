@@ -116,6 +116,4 @@ public class Module extends AbstractModule {
                 .head()
                 .orElseThrow(() -> new RuntimeException("Tax category \"standard\" missing"));
     }
-
-//                   .add(LastViewedProductsComponent.class, controller -> !controller.getFrameworkTags().contains("checkout"))
 }

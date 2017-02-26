@@ -1,6 +1,6 @@
 package lastviewedproducts;
 
-import com.commercetools.sunrise.components.ComponentViewModel;
+import com.commercetools.sunrise.components.ViewModelComponent;
 import com.commercetools.sunrise.framework.components.ControllerComponent;
 import com.commercetools.sunrise.productcatalog.productoverview.viewmodels.ProductListViewModelFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,10 +27,10 @@ import static java.util.Collections.emptyList;
  * 2. fetch products in session and save them to be used later
  * 3. add the data to the page as a component
  */
-public class LastViewedProductsComponent implements ControllerComponent {
-    public static final String SESSION_KEY = "lastSeenProductSkus";
+public class LastViewedProductsControllerComponent implements ControllerComponent {
 
-    private int capacity = 4;//you could improve it by reading it from the configuration
+    private static final String SESSION_KEY = "lastSeenProductSkus";
+    private static final int MAX_CAPACITY = 4;
     private List<ProductProjection> productProjections;
 
     private CompletionStage<List<ProductProjection>> fetchProductsFromSkuInSession(final Http.Context context, final SphereClient sphereClient) {
@@ -59,11 +59,11 @@ public class LastViewedProductsComponent implements ControllerComponent {
         }
     }
 
-    private static ComponentViewModel createComponentBean(final ProductListViewModelFactory productListViewModelFactory,
+    private static ViewModelComponent createComponentBean(final ProductListViewModelFactory productListViewModelFactory,
                                                           final List<ProductProjection> productProjections) {
-        final ComponentViewModel componentBean = new ComponentViewModel();
+        final ViewModelComponent componentBean = new ViewModelComponent();
         componentBean.setTemplateName("components/LastViewedProducts/productsView");
-        componentBean.setComponentData(productListViewModelFactory.create(productProjections));
+        componentBean.put("list", productListViewModelFactory.create(productProjections));
         return componentBean;
     }
 

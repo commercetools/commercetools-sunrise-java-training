@@ -1,7 +1,7 @@
 package githubfeed;
 
 import com.commercetools.sunrise.common.pages.PageData;
-import com.commercetools.sunrise.components.ComponentViewModel;
+import com.commercetools.sunrise.components.ViewModelComponent;
 import com.commercetools.sunrise.framework.components.ControllerComponent;
 import com.commercetools.sunrise.framework.hooks.consumers.PageDataReadyHook;
 import com.commercetools.sunrise.framework.hooks.events.RequestStartedHook;
@@ -72,7 +72,7 @@ public class GitHubFeedControllerComponent extends Base implements ControllerCom
      */
     private void addGitHubFeedToPageData(final PageData pageData) {
         if (gitHubFeed != null) {
-            final ComponentViewModel componentViewModel = new ComponentViewModel();
+            final ViewModelComponent componentViewModel = new ViewModelComponent();
             componentViewModel.setTemplateName("githubfeed/issues");
             componentViewModel.put("feed", gitHubFeed);
             pageData.getContent().addComponent(componentViewModel);

@@ -25,17 +25,14 @@ public class CartWithCreditCardFeeViewModelFactory extends CartViewModelFactory 
     @Override
     protected CartViewModel newViewModelInstance(@Nullable final Cart cart) {
         final CartViewModel viewModel = super.newViewModelInstance(cart);
-        fillBulkyGoods(viewModel, cart);
+        fillCreditCardFee(viewModel, cart);
         return viewModel;
     }
 
-    private void fillBulkyGoods(final CartViewModel viewModel, @Nullable final Cart cart) {
+    private void fillCreditCardFee(final CartViewModel viewModel, @Nullable final Cart cart) {
         if (cart != null) {
             findAppliedCreditCardFee(cart)
-                    .ifPresent(creditCardFee -> {
-                        final String creditCardfee = getPriceFormatter().format(creditCardFee.getTotalPrice());
-                        viewModel.put("creditCardFee", creditCardfee);
-                    });
+                    .ifPresent(creditCardFee -> viewModel.put("creditCardFee", getPriceFormatter().format(creditCardFee.getTotalPrice())));
         }
     }
 }
