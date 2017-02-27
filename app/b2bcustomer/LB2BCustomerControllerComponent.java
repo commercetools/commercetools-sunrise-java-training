@@ -4,7 +4,10 @@ import com.commercetools.sunrise.framework.components.ControllerComponent;
 import com.commercetools.sunrise.framework.hooks.requests.CustomerQueryHook;
 import io.sphere.sdk.customers.queries.CustomerQuery;
 
-public class B2bCustomerControllerComponent implements ControllerComponent, CustomerQueryHook {
+/**
+ * In this exercise we are going
+ */
+public class LB2BCustomerControllerComponent implements ControllerComponent, CustomerQueryHook {
 
     @Override
     public CustomerQuery onCustomerQuery(final CustomerQuery customerQuery) {

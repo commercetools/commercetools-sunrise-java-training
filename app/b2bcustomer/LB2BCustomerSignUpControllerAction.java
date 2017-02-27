@@ -13,14 +13,14 @@ import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-public class B2bCustomerSignUpControllerAction extends DefaultSignUpControllerAction {
+public class LB2BCustomerSignUpControllerAction extends DefaultSignUpControllerAction {
 
     private final CustomerGroup b2bCustomerGroup;
 
     @Inject
-    public B2bCustomerSignUpControllerAction(final SphereClient sphereClient, final HookRunner hookRunner,
-                                             final CartInSession cartInSession,
-                                             @Named("b2b") final CustomerGroup b2bCustomerGroup) {
+    public LB2BCustomerSignUpControllerAction(final SphereClient sphereClient, final HookRunner hookRunner,
+                                              final CartInSession cartInSession,
+                                              @Named("b2b") final CustomerGroup b2bCustomerGroup) {
         super(sphereClient, hookRunner, cartInSession);
         this.b2bCustomerGroup = b2bCustomerGroup;
     }
@@ -28,8 +28,8 @@ public class B2bCustomerSignUpControllerAction extends DefaultSignUpControllerAc
     @Override
     protected CustomerCreateCommand buildRequest(final SignUpFormData formData) {
         final CustomerCreateCommand customerCreateCommand = super.buildRequest(formData);
-        if (formData instanceof B2bCustomerSignUpFormData) {
-            if (((B2bCustomerSignUpFormData) formData).isB2b()) {
+        if (formData instanceof LB2BCustomerSignUpFormData) {
+            if (((LB2BCustomerSignUpFormData) formData).isB2b()) {
                 return commandWithCustomerGroup(customerCreateCommand);
             }
         }
