@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MyControllerWithBrowserTest extends WithBrowser {
 
     @Test
-    public void processesFormByGet() throws Exception {
+    public void showsAndProcessesForm() throws Exception {
         browser.goTo("/playbasics/show5");
         browser.fill("form input[name=name]").with("John");
         browser.submit("button[type=submit]");
