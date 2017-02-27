@@ -17,7 +17,7 @@ import com.commercetools.sunrise.sessions.customer.CustomerOperationsControllerC
 import io.sphere.sdk.customers.Customer;
 import play.data.FormFactory;
 import play.mvc.Result;
-import b2bcustomer.B2bCustomerControllerComponent;
+import b2bcustomer.B2BCustomerControllerComponent;
 
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
@@ -28,7 +28,7 @@ import java.util.concurrent.CompletionStage;
         TemplateControllerComponentsSupplier.class,
         PageHeaderControllerComponentSupplier.class,
         CustomerOperationsControllerComponentSupplier.class,
-        B2bCustomerControllerComponent.class
+        B2BCustomerControllerComponent.class
 })
 public final class MyPersonalDetailsController extends SunriseMyPersonalDetailsController {
 

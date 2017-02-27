@@ -7,7 +7,7 @@ import io.sphere.sdk.customers.queries.CustomerQuery;
 /**
  * In this exercise we are going
  */
-public class LB2BCustomerControllerComponent implements ControllerComponent, CustomerQueryHook {
+public class B2BCustomerControllerComponent implements ControllerComponent, CustomerQueryHook {
 
     @Override
     public CustomerQuery onCustomerQuery(final CustomerQuery customerQuery) {

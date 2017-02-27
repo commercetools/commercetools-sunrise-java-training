@@ -1,5 +1,5 @@
-import b2bcustomer.B2bCustomerSignUpControllerAction;
-import b2bcustomer.B2bCustomerSignUpFormData;
+import b2bcustomer.B2BCustomerSignUpControllerAction;
+import b2bcustomer.B2BCustomerSignUpFormData;
 import com.commercetools.sunrise.cms.CmsService;
 import com.commercetools.sunrise.common.categorytree.CategoryTreeInNewProvider;
 import com.commercetools.sunrise.common.categorytree.RefreshableCategoryTree;
@@ -74,8 +74,8 @@ public class Module extends AbstractModule {
     }
 
     private void bindingsForB2bCustomerExample() {
-        bind(SignUpFormData.class).to(B2bCustomerSignUpFormData.class);
-        bind(SignUpControllerAction.class).to(B2bCustomerSignUpControllerAction.class);
+        bind(SignUpFormData.class).to(B2BCustomerSignUpFormData.class);
+        bind(SignUpControllerAction.class).to(B2BCustomerSignUpControllerAction.class);
     }
 
     private void bindingsForCreditCardFeeExample() {
