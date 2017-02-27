@@ -9,8 +9,6 @@ object TestCommon {
 
   lazy val defaultSettings: Def.SettingsDefinition = itBaseTestSettings ++ ptBaseTestSettings ++ configCommonTestSettings("test,it,pt")
 
-  lazy val settingsWithoutPlayTest: Def.SettingsDefinition = itBaseTestSettings ++ configCommonTestSettings("test,it")
-
   private val itBaseTestSettings = Defaults.itSettings ++ configTestDirs(IntegrationTest, "it")
 
   private val ptBaseTestSettings = inConfig(PlayTest)(Defaults.testSettings) ++ configTestDirs(PlayTest, "pt") ++ configJavaWsDependency("pt")

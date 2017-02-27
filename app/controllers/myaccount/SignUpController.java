@@ -2,6 +2,7 @@ package controllers.myaccount;
 
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
+import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
 import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
 import com.commercetools.sunrise.framework.reverserouters.myaccount.MyPersonalDetailsReverseRouter;
 import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
@@ -19,6 +20,7 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
+@LogMetrics
 @NoCache
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,

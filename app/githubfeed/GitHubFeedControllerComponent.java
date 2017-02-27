@@ -22,8 +22,10 @@ import static githubfeed.GitHubFeedUtils.extractGitHubFeed;
  * In this exercise we are going to see how to implement a {@link ControllerComponent} that is not dependent on CTP data.
  * We are going to fetch a GitHub feed and display it on the page, on those controllers where it is registered.
  *
- * Hook 1: When the request starts, fetch the GitHub feed and save it by calling {@link #fetchAndSaveGitHubFeed()}
- * Hook 2: Once the {@link PageData} is built and ready, add the GitHub feed to it by calling {@link #addGitHubFeedToPageData(PageData)}
+ * Step 1: Register this component to your favourite controller(s) :)
+ * Step 2: Implement the missing hooks
+ *   Hook 1: When the request starts, fetch the GitHub feed and save it by calling {@link #fetchAndSaveGitHubFeed()}
+ *   Hook 2: Once the {@link PageData} is built and ready, add the GitHub feed to it by calling {@link #addGitHubFeedToPageData(PageData)}
  */
 public class GitHubFeedControllerComponent extends Base implements ControllerComponent, RequestStartedHook, PageDataReadyHook {
 

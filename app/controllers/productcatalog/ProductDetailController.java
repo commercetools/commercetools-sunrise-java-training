@@ -2,6 +2,7 @@ package controllers.productcatalog;
 
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
+import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
 import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
 import com.commercetools.sunrise.framework.reverserouters.productcatalog.ProductReverseRouter;
 import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
@@ -11,7 +12,6 @@ import com.commercetools.sunrise.productcatalog.productdetail.ProductRecommendat
 import com.commercetools.sunrise.productcatalog.productdetail.ProductVariantFinder;
 import com.commercetools.sunrise.productcatalog.productdetail.SunriseProductDetailController;
 import com.commercetools.sunrise.productcatalog.productdetail.viewmodels.ProductDetailPageContentFactory;
-import githubfeed.GitHubFeedControllerComponent;
 import io.sphere.sdk.products.ProductProjection;
 import lastviewedproducts.LastViewedProductsControllerComponent;
 import play.mvc.Result;
@@ -21,6 +21,7 @@ import java.util.concurrent.CompletionStage;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
+@LogMetrics
 @NoCache
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,

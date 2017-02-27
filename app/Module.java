@@ -1,3 +1,5 @@
+import b2bcustomer.B2bCustomerSignUpControllerAction;
+import b2bcustomer.B2bCustomerSignUpFormData;
 import com.commercetools.sunrise.cms.CmsService;
 import com.commercetools.sunrise.common.categorytree.CategoryTreeInNewProvider;
 import com.commercetools.sunrise.common.categorytree.RefreshableCategoryTree;
@@ -17,6 +19,8 @@ import com.commercetools.sunrise.framework.template.i18n.ConfigurableI18nResolve
 import com.commercetools.sunrise.framework.template.i18n.I18nResolver;
 import com.commercetools.sunrise.httpauth.HttpAuthentication;
 import com.commercetools.sunrise.httpauth.basic.BasicAuthenticationProvider;
+import com.commercetools.sunrise.myaccount.authentication.signup.SignUpControllerAction;
+import com.commercetools.sunrise.myaccount.authentication.signup.SignUpFormData;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
 import com.commercetools.sunrise.sessions.cart.TruncatedMiniCartViewModelFactory;
 import com.google.inject.AbstractModule;
@@ -27,6 +31,8 @@ import creditcardfee.CartWithCreditCardFeeViewModelFactory;
 import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereClientUtils;
+import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.customergroups.queries.CustomerGroupQuery;
 import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
@@ -52,6 +58,7 @@ public class Module extends AbstractModule {
     protected void configure() {
         bindingsUserContext();
         bindingsForCreditCardFeeExample();
+        bindingsForB2bCustomerExample();
         bindingsControllerComponentSuppliers();
 
         bind(SphereClient.class).toProvider(SimpleMetricsSphereClientProvider.class).in(Singleton.class);
@@ -64,6 +71,11 @@ public class Module extends AbstractModule {
         bind(CategoryTree.class).annotatedWith(Names.named("new")).toProvider(CategoryTreeInNewProvider.class).in(Singleton.class);
         bind(FacetedSearchConfigList.class).toProvider(FacetedSearchConfigListProvider.class).in(Singleton.class);
         bind(MiniCartViewModelFactory.class).to(TruncatedMiniCartViewModelFactory.class);
+    }
+
+    private void bindingsForB2bCustomerExample() {
+        bind(SignUpFormData.class).to(B2bCustomerSignUpFormData.class);
+        bind(SignUpControllerAction.class).to(B2bCustomerSignUpControllerAction.class);
     }
 
     private void bindingsForCreditCardFeeExample() {
@@ -115,5 +127,15 @@ public class Module extends AbstractModule {
         return SphereClientUtils.blockingWait(sphereClient.execute(query), Duration.ofMinutes(1))
                 .head()
                 .orElseThrow(() -> new RuntimeException("Tax category \"standard\" missing"));
+    }
+
+    @Provides
+    @Singleton
+    @Named("b2b")
+    public CustomerGroup provideCustomerGroup(final SphereClient sphereClient) {
+        final CustomerGroupQuery query = CustomerGroupQuery.of().byName("B2B");
+        return SphereClientUtils.blockingWait(sphereClient.execute(query), Duration.ofMinutes(1))
+                .head()
+                .orElseThrow(() -> new RuntimeException("Customer group \"B2B\" missing"));
     }
 }

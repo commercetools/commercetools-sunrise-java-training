@@ -26,11 +26,14 @@ import static lastviewedproducts.LastViewedProductUtils.*;
 /**
  * In this exercise we are going to see how to implement a {@link ControllerComponent} that depends on a loaded CTP resource.
  * Whenever we are visiting a product we are going to save this product to a list in session for future requests.
- * For the current request, we are going to display the list of last viewed products as it was before this visit.
+ * For the current request, we are going to display the last viewed products as it was before this visit.
  *
- * Hook 1: Whenever a product with variant (we need the SKU!) is loaded, save it in session by calling {@link #saveProductToLastViewedList(ProductVariant)}
- * Hook 2: To display the last viewed products in the page, first fetch and save them by calling {@link #fetchAndSaveLastViewedProducts()}
- * Hook 3: And once the {@link PageData} is built and ready, add the last viewed products to it by calling {@link #addLastViewedProductsToPageData(PageData)}
+ * Step 1: Register this component to (at least) {@link controllers.productcatalog.ProductDetailController},
+ *         as it's the only available controller that loads a single product
+ * Step 2: Implement the missing hooks
+ *   Hook 1: Whenever a product with variant (we need the SKU!) is loaded, save it in session by calling {@link #saveProductToLastViewedList(ProductVariant)}
+ *   Hook 2: To display the last viewed products in the page, first fetch and save them by calling {@link #fetchAndSaveLastViewedProducts()}
+ *   Hook 3: And once the {@link PageData} is built and ready, add the last viewed products to it by calling {@link #addLastViewedProductsToPageData(PageData)}
  */
 public class LastViewedProductsControllerComponent implements ControllerComponent, RequestStartedHook, ProductVariantLoadedHook, PageDataReadyHook {
 

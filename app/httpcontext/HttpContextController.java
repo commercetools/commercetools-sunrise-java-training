@@ -3,6 +3,7 @@ package httpcontext;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
+import play.libs.concurrent.HttpExecution;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -27,7 +28,7 @@ public class HttpContextController extends Controller {
     public CompletionStage<Result> show() {
         return sphereClient.execute(ProjectGet.of())
                 .thenApply(Project::getKey)
-                .thenApply(this::okResponseWithProjectKey);
+                .thenApplyAsync(this::okResponseWithProjectKey, HttpExecution.defaultContext());
     }
 
     private Result okResponseWithProjectKey(final String projectKey) {

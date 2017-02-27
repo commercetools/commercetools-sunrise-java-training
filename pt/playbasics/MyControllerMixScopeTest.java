@@ -18,7 +18,7 @@ import static play.test.Helpers.*;
 public class MyControllerMixScopeTest {
 
     @Test
-    public void showsHelloWorld() throws Exception {
+    public void testsWithApplication() throws Exception {
         running(fakeApplication(), () -> {
             final Result result = route(new Http.RequestBuilder()
                     .uri("/playbasics/show1"));
@@ -28,7 +28,7 @@ public class MyControllerMixScopeTest {
     }
 
     @Test
-    public void processesFormByGet() throws Exception {
+    public void testsWithServer() throws Exception {
         final TestServer testServer = testServer(fakeApplication());
         running(testServer, () -> {
             try (final WSClient wsClient = WS.newClient(testServer.port())) {
@@ -45,7 +45,7 @@ public class MyControllerMixScopeTest {
     }
 
     @Test
-    public void showsAndProcessesForm() throws Exception {
+    public void testsWithBrowser() throws Exception {
         final TestServer testServer = testServer(fakeApplication());
         running(testServer, HTMLUNIT, browser -> {
             browser.goTo("/playbasics/show5");

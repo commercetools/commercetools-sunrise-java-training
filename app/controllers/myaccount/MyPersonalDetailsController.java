@@ -2,6 +2,7 @@ package controllers.myaccount;
 
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
+import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
 import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
 import com.commercetools.sunrise.framework.reverserouters.myaccount.AuthenticationReverseRouter;
 import com.commercetools.sunrise.framework.reverserouters.myaccount.MyPersonalDetailsReverseRouter;
@@ -16,15 +17,18 @@ import com.commercetools.sunrise.sessions.customer.CustomerOperationsControllerC
 import io.sphere.sdk.customers.Customer;
 import play.data.FormFactory;
 import play.mvc.Result;
+import b2bcustomer.B2bCustomerControllerComponent;
 
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
+@LogMetrics
 @NoCache
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
         PageHeaderControllerComponentSupplier.class,
-        CustomerOperationsControllerComponentSupplier.class
+        CustomerOperationsControllerComponentSupplier.class,
+        B2bCustomerControllerComponent.class
 })
 public final class MyPersonalDetailsController extends SunriseMyPersonalDetailsController {
 
