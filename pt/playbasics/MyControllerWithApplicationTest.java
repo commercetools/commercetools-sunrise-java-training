@@ -1,6 +1,8 @@
 package playbasics;
 
 import org.junit.Test;
+import play.Application;
+import play.inject.guice.GuiceApplicationBuilder;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.test.WithApplication;
@@ -9,11 +11,17 @@ import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 import static play.mvc.Http.Status.BAD_REQUEST;
 import static play.mvc.Http.Status.OK;
-import static play.test.Helpers.POST;
-import static play.test.Helpers.contentAsString;
-import static play.test.Helpers.route;
+import static play.mvc.Http.Status.SEE_OTHER;
+import static play.test.Helpers.*;
 
-public class PlayTest extends WithApplication {
+public class MyControllerWithApplicationTest extends WithApplication {
+
+    @Override
+    protected Application provideApplication() {
+        return new GuiceApplicationBuilder()
+                .configure(singletonMap("playbasics.pageTitle", "Another title"))
+                .build();
+    }
 
     @Test
     public void showsHelloWorld() throws Exception {
@@ -78,31 +86,55 @@ public class PlayTest extends WithApplication {
     }
 
     @Test
+    public void showsForm() throws Exception {
+        final Result result = route(new Http.RequestBuilder()
+                .uri("/playbasics/show5"));
+        assertThat(result.status()).isEqualTo(OK);
+        assertThat(contentAsString(result))
+                .contains("Type your name")
+                .contains("<form action=\"/playbasics/process5\" method=\"post\">")
+                .doesNotContain("Hello")
+                .contains("Another title");
+    }
+
+    @Test
+    public void showsFormWithSuccessMessage() throws Exception {
+        final Result result = route(new Http.RequestBuilder()
+                .uri("/playbasics/show5")
+                .flash("message", "Hello John!"));
+        assertThat(result.status()).isEqualTo(OK);
+        assertThat(contentAsString(result))
+                .contains("Type your name")
+                .contains("<form action=\"/playbasics/process5\" method=\"post\">")
+                .contains("Hello John!")
+                .contains("Another title");
+    }
+
+    @Test
     public void showsHelloNameFromFormByGet() throws Exception {
         final Result result = route(new Http.RequestBuilder()
-                .uri("/playbasics/show5?name=John"));
-        assertThat(result.status()).isEqualTo(OK);
-        assertThat(contentAsString(result)).isEqualTo("Hello John!");
+                .uri("/playbasics/process5?name=John"));
+        assertThat(result.status()).isEqualTo(SEE_OTHER);
+        assertThat(result.flash().get("message")).isEqualTo("Hello John!");
     }
 
     @Test
     public void showsHelloNameFromFormByPost() throws Exception {
         final Result result = route(new Http.RequestBuilder()
-                .uri("/playbasics/show5")
+                .uri("/playbasics/process5")
                 .method(POST)
                 .bodyForm(singletonMap("name", "John")));
-        assertThat(result.status()).isEqualTo(OK);
-        assertThat(contentAsString(result)).isEqualTo("Hello John!");
+        assertThat(result.status()).isEqualTo(SEE_OTHER);
+        assertThat(result.flash().get("message")).isEqualTo("Hello John!");
     }
 
     @Test
     public void showsFormErrorOnMissingRequiredField() throws Exception {
         final Result result = route(new Http.RequestBuilder()
-                .uri("/playbasics/show5"));
+                .uri("/playbasics/process5"));
         assertThat(result.status()).isEqualTo(BAD_REQUEST);
         assertThat(contentAsString(result))
-                .startsWith("Form had errors")
-                .containsOnlyOnce("name")
-                .containsOnlyOnce("field is required");
+                .contains("Form had errors")
+                .containsOnlyOnce("This field is required");
     }
 }

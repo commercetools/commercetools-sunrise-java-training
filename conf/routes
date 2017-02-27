@@ -11,7 +11,8 @@ GET         /playbasics/show2                                  @playbasics.MyCon
 GET         /playbasics/show3                                  @playbasics.MyController.show3(name: String)
 GET         /playbasics/show4                                  @playbasics.MyController.show4(name: String)
 GET         /playbasics/show5                                  @playbasics.MyController.show5()
-POST        /playbasics/show5                                  @playbasics.MyController.show5()
+GET         /playbasics/process5                               @playbasics.MyController.process5()
+POST        /playbasics/process5                               @playbasics.MyController.process5()
 
 GET         /dependencyinjection                               @dependencyinjection.DependencyInjectionController.show
 GET         /httpcontext                                       @httpcontext.HttpContextController.show()

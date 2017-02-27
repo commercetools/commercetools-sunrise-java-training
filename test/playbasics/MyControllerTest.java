@@ -1,13 +1,14 @@
 package playbasics;
 
 import org.junit.Test;
+import play.Configuration;
 import play.mvc.Result;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static play.test.Helpers.OK;
 import static play.test.Helpers.contentAsString;
 
-public class UnitTest {
+public class MyControllerTest {
 
     @Test
     public void showsHelloWorld() throws Exception {
@@ -24,6 +25,6 @@ public class UnitTest {
     }
 
     private static MyController myController() {
-        return new MyController(null);
+        return new MyController(null, Configuration.empty());
     }
 }

@@ -1,12 +1,16 @@
 package playbasics;
 
+import play.Configuration;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.twirl.api.Html;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
+import java.util.Optional;
 
 /**
  * Access http://localhost:9000/playbasics/show1 (or show2, show3, show4, show5)
@@ -14,10 +18,12 @@ import javax.inject.Inject;
 public class MyController extends Controller {
 
     private final FormFactory formFactory;
+    private final String pageTitle;
 
     @Inject
-    public MyController(final FormFactory formFactory) {
+    public MyController(final FormFactory formFactory, final Configuration configuration) {
         this.formFactory = formFactory;
+        this.pageTitle = configuration.getString("playbasics.pageTitle", "");
     }
 
     public Result show1() {
@@ -41,11 +47,31 @@ public class MyController extends Controller {
     }
 
     public Result show5() {
+        return ok(formWithMessage(flash("message")));
+    }
+
+    public Result process5() {
         final Form<MyFormData> form = formFactory.form(MyFormData.class).bindFromRequest();
         if (form.hasErrors()) {
-            return badRequest("Form had errors: " + form.errorsAsJson());
+            return badRequest(formWithMessage("Form had errors: " + form.errorsAsJson()));
         } else {
-            return ok("Hello " + form.get().getName() + "!");
+            flash("message", "Hello " + form.get().getName() + "!");
+            return redirect(playbasics.routes.MyController.show5());
         }
+    }
+
+    private Html formWithMessage(@Nullable final String message) {
+        return new Html(
+                "<html>"
+                + "  <head><title>" + pageTitle + "</title></head>"
+                + "  <body>"
+                + "    <p>Type your name</p>"
+                + "    <p class=\"message\">" + Optional.ofNullable(message).orElse("") + "</p>"
+                + "    <form action=\"" + playbasics.routes.MyController.process5().url() + "\" method=\"post\">"
+                + "      <input name=\"name\" type=\"text\" />"
+                + "      <button type=\"submit\">Submit</button>"
+                + "    </form>"
+                + "  </body>"
+                + "</html>");
     }
 }
