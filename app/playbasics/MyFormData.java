@@ -1,7 +1,10 @@
 package playbasics;
 
+import play.data.validation.Constraints;
+
 public class MyFormData {
 
+    @Constraints.Required
     private String name;
 
     public String getName() {

@@ -5,12 +5,13 @@
 # EXERCISES
 # ~~~~
 
-GET         /playbasics                                        @playbasics.MyController.show1()
-#GET         /playbasics/:name                                  @playbasics.MyController.show2(name: String)
-#GET         /playbasics                                        @playbasics.MyController.show2(name: String)
-#GET         /playbasics                                        @playbasics.MyController.show3(name: String)
-#GET         /playbasics                                        @playbasics.MyController.show4(name: String)
-#GET         /playbasics                                        @playbasics.MyController.show5()
+GET         /playbasics/show1                                  @playbasics.MyController.show1()
+GET         /playbasics/show2/:name                            @playbasics.MyController.show2(name: String)
+GET         /playbasics/show2                                  @playbasics.MyController.show2(name: String)
+GET         /playbasics/show3                                  @playbasics.MyController.show3(name: String)
+GET         /playbasics/show4                                  @playbasics.MyController.show4(name: String)
+GET         /playbasics/show5                                  @playbasics.MyController.show5()
+POST        /playbasics/show5                                  @playbasics.MyController.show5()
 
 GET         /dependencyinjection                               @dependencyinjection.DependencyInjectionController.show
 GET         /httpcontext                                       @httpcontext.HttpContextController.show()

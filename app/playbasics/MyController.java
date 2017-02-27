@@ -9,7 +9,7 @@ import play.mvc.Result;
 import javax.inject.Inject;
 
 /**
- * Access http://localhost:9000/playbasics
+ * Access http://localhost:9000/playbasics/show1 (or show2, show3, show4, show5)
  */
 public class MyController extends Controller {
 
