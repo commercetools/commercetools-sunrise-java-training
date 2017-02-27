@@ -1,5 +1,6 @@
 package controllers.myaccount;
 
+import b2bcustomer.B2BCustomerControllerComponent;
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
@@ -17,7 +18,6 @@ import com.commercetools.sunrise.sessions.customer.CustomerOperationsControllerC
 import io.sphere.sdk.customers.Customer;
 import play.data.FormFactory;
 import play.mvc.Result;
-import b2bcustomer.B2BCustomerControllerComponent;
 
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
