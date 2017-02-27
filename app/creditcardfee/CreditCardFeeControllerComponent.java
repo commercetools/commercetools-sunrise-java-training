@@ -24,6 +24,8 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
 /**
  * In this exercise we are going to see how to manipulate a CTP resource right after it has been updated.
  * We are going to include in the cart a fee when the customer has selected credit card as payment method.
+ * Notice that you don't need to register this component anywhere because it has already been registered to all
+ * controllers with cart operations involved by {@link CreditCardFeeCartOperationsControllerComponentSupplier}
  *
  * Hook 1: On every {@link CartUpdateCommand}, expand the reference {@code paymentInfo.payments}
  * Hook 2: Every time the cart has been updated, update the credit card fee by calling {@link #updateCartWithCreditCardFee(Cart, ExpansionPathContainer)}

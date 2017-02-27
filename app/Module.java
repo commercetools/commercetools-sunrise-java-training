@@ -28,6 +28,7 @@ import com.google.inject.Provides;
 import com.google.inject.name.Names;
 import com.neovisionaries.i18n.CountryCode;
 import creditcardfee.CartWithCreditCardFeeViewModelFactory;
+import creditcardfee.CreditCardFeeCartOperationsControllerComponentSupplier;
 import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereClientUtils;
@@ -83,7 +84,7 @@ public class Module extends AbstractModule {
     }
 
     private void bindingsControllerComponentSuppliers() {
-        bind(CartOperationsControllerComponentSupplier.class).to(TrainingCartOperationsControllerComponentSupplier.class);
+        bind(CartOperationsControllerComponentSupplier.class).to(CreditCardFeeCartOperationsControllerComponentSupplier.class);
     }
 
     private void bindingsUserContext() {

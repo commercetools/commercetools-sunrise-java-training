@@ -1,6 +1,7 @@
 package controllers.productcatalog;
 
 
+import changetitle.ChangeTitleControllerComponent;
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
@@ -25,6 +26,7 @@ import java.util.concurrent.CompletionStage;
         PageHeaderControllerComponentSupplier.class,
         HomeRecommendationsControllerComponent.class,
         GitHubFeedControllerComponent.class,
+        ChangeTitleControllerComponent.class
 })
 public final class HomeController extends SunriseHomeController {
 
