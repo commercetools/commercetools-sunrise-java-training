@@ -2,31 +2,34 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-#GET         /playbasics                                       @playbasics.MyController.show1()
-#GET         /playbasics/:name                                 @playbasics.MyController.show2(name: String)
-#GET         /playbasics                                       @playbasics.MyController.show2(name: String)
-#GET         /playbasics                                       @playbasics.MyController.show3(name: String)
-#GET         /playbasics                                       @playbasics.MyController.show4(name: String)
-#GET         /playbasics                                       @playbasics.MyController.show5()
+# EXERCISES
+# ~~~~
 
-GET         /dependencyinjection         @dependencyinjection.DependencyInjectionController.show
-GET         /httpcontext                 @httpcontext.HttpContextController.show()
+GET         /playbasics                                        @playbasics.MyController.show1()
+#GET         /playbasics/:name                                  @playbasics.MyController.show2(name: String)
+#GET         /playbasics                                        @playbasics.MyController.show2(name: String)
+#GET         /playbasics                                        @playbasics.MyController.show3(name: String)
+#GET         /playbasics                                        @playbasics.MyController.show4(name: String)
+#GET         /playbasics                                        @playbasics.MyController.show5()
+
+GET         /dependencyinjection                               @dependencyinjection.DependencyInjectionController.show
+GET         /httpcontext                                       @httpcontext.HttpContextController.show()
 
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
 # Untrail url
-GET         /*path/                      @controllers.common.ApplicationController.untrail(path: String)
+GET         /*path/                                            @controllers.common.ApplicationController.untrail(path: String)
 
 # Main entry point that redirects to home page
-GET         /                            @controllers.productcatalog.HomeController.index()
+GET         /                                                  @controllers.productcatalog.HomeController.index()
 
 
 # ADMIN
 # ~~~~~
 
 # Shows the deployed version, artifactId and GIT SHA
-GET         /version                     @controllers.common.VersionController.show()
+GET         /version                                           @controllers.common.VersionController.show()
 # Shows if the application is healthy
 GET         /health                                            @controllers.common.HealthCheckController.show()
 

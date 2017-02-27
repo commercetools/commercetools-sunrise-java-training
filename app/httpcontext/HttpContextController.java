@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
 /**
+ * Access http://localhost:9000/dependencyinjection
+ *
  * Running the code we will see an exception that says "There is no HTTP Context available from here".
  * Find out how to fix it!
  */

@@ -9,6 +9,9 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
+/**
+ * Access http://localhost:9000/dependencyinjection
+ */
 public final class DependencyInjectionController extends SunriseTemplateController implements WithTemplate {
 
     private final ClassA classA;

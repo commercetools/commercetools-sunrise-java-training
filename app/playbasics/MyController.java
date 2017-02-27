@@ -8,6 +8,9 @@ import play.mvc.Result;
 
 import javax.inject.Inject;
 
+/**
+ * Access http://localhost:9000/playbasics
+ */
 public class MyController extends Controller {
 
     private final FormFactory formFactory;
