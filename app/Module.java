@@ -17,16 +17,16 @@ import com.commercetools.sunrise.framework.template.engine.HandlebarsTemplateEng
 import com.commercetools.sunrise.framework.template.engine.TemplateEngine;
 import com.commercetools.sunrise.framework.template.i18n.ConfigurableI18nResolverProvider;
 import com.commercetools.sunrise.framework.template.i18n.I18nResolver;
-import com.commercetools.sunrise.httpauth.HttpAuthentication;
-import com.commercetools.sunrise.httpauth.basic.BasicAuthenticationProvider;
 import com.commercetools.sunrise.myaccount.authentication.signup.SignUpControllerAction;
 import com.commercetools.sunrise.myaccount.authentication.signup.SignUpFormData;
+import com.commercetools.sunrise.productcatalog.home.viewmodels.HomePageContentFactory;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
 import com.commercetools.sunrise.sessions.cart.TruncatedMiniCartViewModelFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Names;
 import com.neovisionaries.i18n.CountryCode;
+import controllers.productcatalog.MyHomePageContentFactory;
 import creditcardfee.CartWithCreditCardFeeViewModelFactory;
 import creditcardfee.CreditCardFeeCartOperationsControllerComponentSupplier;
 import io.sphere.sdk.categories.CategoryTree;
@@ -57,40 +57,18 @@ public class Module extends AbstractModule {
 
     @Override
     protected void configure() {
-        bindingsUserContext();
-        bindingsForCreditCardFeeExample();
-        bindingsForB2bCustomerExample();
-        bindingsControllerComponentSuppliers();
+        defaultBindings();
 
-        bind(SphereClient.class).toProvider(SimpleMetricsSphereClientProvider.class).in(Singleton.class);
-
-        bind(CmsService.class).toProvider(FileBasedCmsServiceProvider.class).in(Singleton.class);
-        bind(TemplateEngine.class).toProvider(HandlebarsTemplateEngineProvider.class).in(Singleton.class);
-        bind(I18nResolver.class).toProvider(ConfigurableI18nResolverProvider.class).in(Singleton.class);
-
-        bind(HttpAuthentication.class).toProvider(BasicAuthenticationProvider.class).in(Singleton.class);
-        bind(CategoryTree.class).annotatedWith(Names.named("new")).toProvider(CategoryTreeInNewProvider.class).in(Singleton.class);
-        bind(FacetedSearchConfigList.class).toProvider(FacetedSearchConfigListProvider.class).in(Singleton.class);
-        bind(MiniCartViewModelFactory.class).to(TruncatedMiniCartViewModelFactory.class);
-    }
-
-    private void bindingsForB2bCustomerExample() {
+        // Bindings for B2B Customer example
         bind(SignUpFormData.class).to(B2BCustomerSignUpFormData.class);
         bind(SignUpControllerAction.class).to(B2BCustomerSignUpControllerAction.class);
-    }
 
-    private void bindingsForCreditCardFeeExample() {
+        // Bindings for Credit Card Fee example
         bind(CartViewModelFactory.class).to(CartWithCreditCardFeeViewModelFactory.class);
-    }
-
-    private void bindingsControllerComponentSuppliers() {
         bind(CartOperationsControllerComponentSupplier.class).to(CreditCardFeeCartOperationsControllerComponentSupplier.class);
-    }
 
-    private void bindingsUserContext() {
-        bind(Locale.class).toProvider(LocaleFromUrlProvider.class).in(RequestScoped.class);
-        bind(CountryCode.class).toProvider(CountryFromSessionProvider.class).in(RequestScoped.class);
-        bind(CurrencyUnit.class).toProvider(CurrencyFromCountryProvider.class).in(RequestScoped.class);
+        // Put your additional bindings here!
+        bind(HomePageContentFactory.class).to(MyHomePageContentFactory.class);
     }
 
     @Provides
@@ -138,5 +116,18 @@ public class Module extends AbstractModule {
         return SphereClientUtils.blockingWait(sphereClient.execute(query), Duration.ofMinutes(1))
                 .head()
                 .orElseThrow(() -> new RuntimeException("Customer group \"B2B\" missing"));
+    }
+
+    private void defaultBindings() {
+        bind(SphereClient.class).toProvider(SimpleMetricsSphereClientProvider.class).in(Singleton.class);
+        bind(Locale.class).toProvider(LocaleFromUrlProvider.class).in(RequestScoped.class);
+        bind(CountryCode.class).toProvider(CountryFromSessionProvider.class).in(RequestScoped.class);
+        bind(CurrencyUnit.class).toProvider(CurrencyFromCountryProvider.class).in(RequestScoped.class);
+        bind(CmsService.class).toProvider(FileBasedCmsServiceProvider.class).in(Singleton.class);
+        bind(TemplateEngine.class).toProvider(HandlebarsTemplateEngineProvider.class).in(Singleton.class);
+        bind(I18nResolver.class).toProvider(ConfigurableI18nResolverProvider.class).in(Singleton.class);
+        bind(CategoryTree.class).annotatedWith(Names.named("new")).toProvider(CategoryTreeInNewProvider.class).in(Singleton.class);
+        bind(FacetedSearchConfigList.class).toProvider(FacetedSearchConfigListProvider.class).in(Singleton.class);
+        bind(MiniCartViewModelFactory.class).to(TruncatedMiniCartViewModelFactory.class);
     }
 }

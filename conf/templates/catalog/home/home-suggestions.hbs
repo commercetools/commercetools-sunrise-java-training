@@ -1,0 +1,18 @@
+<!-- start catalog/home/home-suggestions.hbs -->
+{{#if content.loginUrl}}
+<div class="home-viewall">
+    <a href="{{content.loginUrl}}" class="home-viewall-btn">
+        Log in or register now for a personalized shopping!
+    </a>
+
+    <hr class="home-viewall-hr">
+</div>
+{{/if}}
+
+<h4 class="home-suggestions-title">{{{cms "suggestions.title"}}}</h4>
+<hr class="home-suggestions-hr"/>
+<p class="home-suggestions-description">{{{cms "suggestions.subtitle"}}}</p>
+<div class="row">
+  {{> catalog/suggestions}}
+</div>
+<!-- end catalog/home/home-suggestions.hbs -->

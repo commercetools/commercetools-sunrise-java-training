@@ -1,5 +1,6 @@
 package controllers.productcatalog;
 
+import changetitle.ChangeTitleControllerComponent;
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
@@ -27,7 +28,8 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
         TemplateControllerComponentsSupplier.class,
         PageHeaderControllerComponentSupplier.class,
         ProductRecommendationsControllerComponent.class,
-        LastViewedProductsControllerComponent.class
+        LastViewedProductsControllerComponent.class,
+        ChangeTitleControllerComponent.class
 })
 public final class ProductDetailController extends SunriseProductDetailController {
 
