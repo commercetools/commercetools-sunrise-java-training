@@ -12,8 +12,8 @@ public class MyHomePageContentFactory extends HomePageContentFactory {
     private final AuthenticationReverseRouter authenticationReverseRouter;
 
     @Inject
-    public MyHomePageContentFactory(final PageTitleResolver pageTitleResolver, final AuthenticationReverseRouter
-            authenticationReverseRouter) {
+    public MyHomePageContentFactory(final PageTitleResolver pageTitleResolver,
+                                    final AuthenticationReverseRouter authenticationReverseRouter) {
         super(pageTitleResolver);
         this.authenticationReverseRouter = authenticationReverseRouter;
     }

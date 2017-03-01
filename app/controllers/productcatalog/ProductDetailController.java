@@ -52,7 +52,7 @@ public final class ProductDetailController extends SunriseProductDetailControlle
 
     @Override
     public CompletionStage<Result> handleNotFoundProduct() {
-        return completedFuture(notFound());
+        return completedFuture(notFound("Product not found"));
     }
 
     @Override

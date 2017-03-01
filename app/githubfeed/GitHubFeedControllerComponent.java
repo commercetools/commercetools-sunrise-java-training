@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
 import static githubfeed.GitHubFeedUtils.extractGitHubFeed;
+import static java.util.concurrent.CompletableFuture.completedFuture;
 
 /**
  * In this exercise we are going to see how to implement a {@link ControllerComponent} that is not dependent on CTP data.
