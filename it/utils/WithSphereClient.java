@@ -65,7 +65,7 @@ public abstract class WithSphereClient extends WithApplication {
         return getValueForEnvVar(IT_CTP_CLIENT_SECRET);
     }
 
-    protected final static String getValueForEnvVar(final String key) {
+    protected static String getValueForEnvVar(final String key) {
         return Optional.ofNullable(System.getenv(key))
                 .orElseThrow(() -> new RuntimeException(
                         "Missing environment variable " + key + ", please provide the following environment variables for the integration test:\n" +
