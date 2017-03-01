@@ -1,5 +1,3 @@
-import exercises.b2bcustomer.B2BCustomerSignUpControllerAction;
-import exercises.b2bcustomer.B2BCustomerSignUpFormData;
 import com.commercetools.sunrise.cms.CmsService;
 import com.commercetools.sunrise.common.categorytree.CategoryTreeInNewProvider;
 import com.commercetools.sunrise.common.categorytree.RefreshableCategoryTree;
@@ -19,14 +17,14 @@ import com.commercetools.sunrise.framework.template.i18n.ConfigurableI18nResolve
 import com.commercetools.sunrise.framework.template.i18n.I18nResolver;
 import com.commercetools.sunrise.myaccount.authentication.signup.SignUpControllerAction;
 import com.commercetools.sunrise.myaccount.authentication.signup.SignUpFormData;
-import com.commercetools.sunrise.productcatalog.home.viewmodels.HomePageContentFactory;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
 import com.commercetools.sunrise.sessions.cart.TruncatedMiniCartViewModelFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Names;
 import com.neovisionaries.i18n.CountryCode;
-import controllers.productcatalog.MyHomePageContentFactory;
+import exercises.b2bcustomer.B2BCustomerSignUpControllerAction;
+import exercises.b2bcustomer.B2BCustomerSignUpFormData;
 import exercises.creditcardfee.CartWithCreditCardFeeViewModelFactory;
 import exercises.creditcardfee.CreditCardFeeCartOperationsControllerComponentSupplier;
 import io.sphere.sdk.categories.CategoryTree;
@@ -68,7 +66,6 @@ public class Module extends AbstractModule {
         bind(CartOperationsControllerComponentSupplier.class).to(CreditCardFeeCartOperationsControllerComponentSupplier.class);
 
         // Put your additional bindings here!
-        bind(HomePageContentFactory.class).to(MyHomePageContentFactory.class);
     }
 
     @Provides
