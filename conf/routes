@@ -5,17 +5,17 @@
 # EXERCISES
 # ~~~~
 
-GET         /playbasics/show1                                  @playbasics.MyController.show1()
-GET         /playbasics/show2/:name                            @playbasics.MyController.show2(name: String)
-GET         /playbasics/show2                                  @playbasics.MyController.show2(name: String)
-GET         /playbasics/show3                                  @playbasics.MyController.show3(name: String)
-GET         /playbasics/show4                                  @playbasics.MyController.show4(name: String)
-GET         /playbasics/show5                                  @playbasics.MyController.show5()
-GET         /playbasics/process5                               @playbasics.MyController.process5()
-POST        /playbasics/process5                               @playbasics.MyController.process5()
+GET         /playbasics/show1                                  @exercises.playbasics.MyController.show1()
+GET         /playbasics/show2/:name                            @exercises.playbasics.MyController.show2(name: String)
+GET         /playbasics/show2                                  @exercises.playbasics.MyController.show2(name: String)
+GET         /playbasics/show3                                  @exercises.playbasics.MyController.show3(name: String)
+GET         /playbasics/show4                                  @exercises.playbasics.MyController.show4(name: String)
+GET         /playbasics/show5                                  @exercises.playbasics.MyController.show5()
+GET         /playbasics/process5                               @exercises.playbasics.MyController.process5()
+POST        /playbasics/process5                               @exercises.playbasics.MyController.process5()
 
-GET         /dependencyinjection                               @dependencyinjection.DependencyInjectionController.show
-GET         /httpcontext                                       @httpcontext.HttpContextController.show()
+GET         /dependencyinjection                               @exercises.dependencyinjection.DependencyInjectionController.show
+GET         /httpcontext                                       @exercises.httpcontext.HttpContextController.show()
 
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
