@@ -1,6 +1,6 @@
 package controllers.productcatalog;
 
-import changetitle.ChangeTitleControllerComponent;
+import exercises.changetitle.ChangeTitleControllerComponent;
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
@@ -14,7 +14,7 @@ import com.commercetools.sunrise.productcatalog.productdetail.ProductVariantFind
 import com.commercetools.sunrise.productcatalog.productdetail.SunriseProductDetailController;
 import com.commercetools.sunrise.productcatalog.productdetail.viewmodels.ProductDetailPageContentFactory;
 import io.sphere.sdk.products.ProductProjection;
-import lastviewedproducts.LastViewedProductsControllerComponent;
+import exercises.lastviewedproducts.LastViewedProductsControllerComponent;
 import play.mvc.Result;
 
 import javax.inject.Inject;

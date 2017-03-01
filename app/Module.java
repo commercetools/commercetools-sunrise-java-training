@@ -1,5 +1,5 @@
-import b2bcustomer.B2BCustomerSignUpControllerAction;
-import b2bcustomer.B2BCustomerSignUpFormData;
+import exercises.b2bcustomer.B2BCustomerSignUpControllerAction;
+import exercises.b2bcustomer.B2BCustomerSignUpFormData;
 import com.commercetools.sunrise.cms.CmsService;
 import com.commercetools.sunrise.common.categorytree.CategoryTreeInNewProvider;
 import com.commercetools.sunrise.common.categorytree.RefreshableCategoryTree;
@@ -27,8 +27,8 @@ import com.google.inject.Provides;
 import com.google.inject.name.Names;
 import com.neovisionaries.i18n.CountryCode;
 import controllers.productcatalog.MyHomePageContentFactory;
-import creditcardfee.CartWithCreditCardFeeViewModelFactory;
-import creditcardfee.CreditCardFeeCartOperationsControllerComponentSupplier;
+import exercises.creditcardfee.CartWithCreditCardFeeViewModelFactory;
+import exercises.creditcardfee.CreditCardFeeCartOperationsControllerComponentSupplier;
 import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereClientUtils;

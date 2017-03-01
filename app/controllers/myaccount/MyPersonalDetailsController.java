@@ -1,6 +1,6 @@
 package controllers.myaccount;
 
-import b2bcustomer.B2BCustomerControllerComponent;
+import exercises.b2bcustomer.B2BCustomerControllerComponent;
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;

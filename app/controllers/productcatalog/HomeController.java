@@ -1,7 +1,6 @@
 package controllers.productcatalog;
 
 
-import changetitle.ChangeTitleControllerComponent;
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
@@ -12,7 +11,7 @@ import com.commercetools.sunrise.framework.template.engine.TemplateRenderer;
 import com.commercetools.sunrise.productcatalog.home.HomeRecommendationsControllerComponent;
 import com.commercetools.sunrise.productcatalog.home.SunriseHomeController;
 import com.commercetools.sunrise.productcatalog.home.viewmodels.HomePageContentFactory;
-import githubfeed.GitHubFeedControllerComponent;
+import exercises.githubfeed.GitHubFeedControllerComponent;
 import play.mvc.Result;
 
 import javax.annotation.Nullable;
