@@ -1,7 +1,6 @@
 package exercises.b2bcustomer;
 
 import com.commercetools.sunrise.framework.components.ControllerComponent;
-import com.commercetools.sunrise.framework.hooks.requests.CustomerQueryHook;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.queries.CustomerQuery;
 
@@ -15,10 +14,6 @@ import io.sphere.sdk.customers.queries.CustomerQuery;
  * Step 2: Implement the missing hook
  *   Hook: For every {@link CustomerQuery} to be executed, expand the reference {@code customerGroup}
  */
-public class B2BCustomerControllerComponent implements ControllerComponent, CustomerQueryHook {
+public class B2BCustomerControllerComponent implements ControllerComponent {
 
-    @Override
-    public CustomerQuery onCustomerQuery(final CustomerQuery customerQuery) {
-        return customerQuery.plusExpansionPaths(customer -> customer.customerGroup());
-    }
 }

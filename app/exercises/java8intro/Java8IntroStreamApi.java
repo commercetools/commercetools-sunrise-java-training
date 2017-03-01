@@ -2,9 +2,9 @@ package exercises.java8intro;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static exercises.java8intro.Java8IntroFunctions.countChars;
 import static exercises.java8intro.Java8IntroFunctions.print;
+import static java.util.Arrays.asList;
 
 // https://drive.google.com/file/d/0B6I3hlPXzkVhUlJKLXZoTTZKaDQ/view
 public class Java8IntroStreamApi {
@@ -15,10 +15,6 @@ public class Java8IntroStreamApi {
 
         for (String word : words) {
             System.out.println(word.length());
-        }
-
-        for (String word : words) {
-            print(countChars(word));
         }
 
         words.stream()

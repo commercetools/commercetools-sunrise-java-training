@@ -3,9 +3,6 @@ package exercises.lastviewedproducts;
 import com.commercetools.sunrise.common.pages.PageData;
 import com.commercetools.sunrise.components.ViewModelComponent;
 import com.commercetools.sunrise.framework.components.ControllerComponent;
-import com.commercetools.sunrise.framework.hooks.consumers.PageDataReadyHook;
-import com.commercetools.sunrise.framework.hooks.events.ProductVariantLoadedHook;
-import com.commercetools.sunrise.framework.hooks.events.RequestStartedHook;
 import com.commercetools.sunrise.productcatalog.productoverview.viewmodels.ProductListViewModelFactory;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.products.ProductProjection;
@@ -20,8 +17,8 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 
-import static java.util.concurrent.CompletableFuture.completedFuture;
 import static exercises.lastviewedproducts.LastViewedProductUtils.*;
+import static java.util.concurrent.CompletableFuture.completedFuture;
 
 /**
  * In this exercise we are going to see how to implement a {@link ControllerComponent} that depends on a loaded CTP resource.
@@ -35,7 +32,7 @@ import static exercises.lastviewedproducts.LastViewedProductUtils.*;
  *   Hook 2: To display the last viewed products in the page, first fetch and save them by calling {@link #fetchAndSaveLastViewedProducts()}
  *   Hook 3: And once the {@link PageData} is built and ready, add the last viewed products to it by calling {@link #addLastViewedProductsToPageData(PageData)}
  */
-public class LastViewedProductsControllerComponent implements ControllerComponent, RequestStartedHook, ProductVariantLoadedHook, PageDataReadyHook {
+public class LastViewedProductsControllerComponent implements ControllerComponent {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LastViewedProductsControllerComponent.class);
 
@@ -54,21 +51,6 @@ public class LastViewedProductsControllerComponent implements ControllerComponen
         this.session = session;
         this.priceSelection = priceSelection;
         this.productListViewModelFactory = productListViewModelFactory;
-    }
-
-    @Override
-    public CompletionStage<?> onRequestStarted(final Http.Context httpContext) {
-        return fetchAndSaveLastViewedProducts();
-    }
-
-    @Override
-    public CompletionStage<?> onProductVariantLoaded(final ProductProjection productProjection, final ProductVariant productVariant) {
-        return saveProductToLastViewedList(productVariant);
-    }
-
-    @Override
-    public void onPageDataReady(final PageData pageData) {
-        addLastViewedProductsToPageData(pageData);
     }
 
     /**

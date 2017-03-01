@@ -1,8 +1,6 @@
 package exercises.creditcardfee;
 
 import com.commercetools.sunrise.framework.components.ControllerComponent;
-import com.commercetools.sunrise.framework.hooks.actions.CartUpdatedActionHook;
-import com.commercetools.sunrise.framework.hooks.requests.CartUpdateCommandHook;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.client.SphereClient;
@@ -30,7 +28,7 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
  * Hook 1: On every {@link CartUpdateCommand}, expand the reference {@code paymentInfo.payments}
  * Hook 2: Every time the cart has been updated, update the credit card fee by calling {@link #updateCartWithCreditCardFee(Cart, ExpansionPathContainer)}
  */
-public class CreditCardFeeControllerComponent implements ControllerComponent, CartUpdateCommandHook, CartUpdatedActionHook {
+public class CreditCardFeeControllerComponent implements ControllerComponent {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CreditCardFeeControllerComponent.class);
 
@@ -41,16 +39,6 @@ public class CreditCardFeeControllerComponent implements ControllerComponent, Ca
     public CreditCardFeeControllerComponent(final SphereClient sphereClient, @Named("standard") final TaxCategory taxCategory) {
         this.sphereClient = sphereClient;
         this.taxCategory = taxCategory;
-    }
-
-    @Override
-    public CartUpdateCommand onCartUpdateCommand(final CartUpdateCommand cartUpdateCommand) {
-        return cartUpdateCommand.plusExpansionPaths(cart -> cart.paymentInfo().payments());
-    }
-
-    @Override
-    public CompletionStage<Cart> onCartUpdatedAction(final Cart cart, final ExpansionPathContainer<Cart> expansionPathContainer) {
-        return updateCartWithCreditCardFee(cart, expansionPathContainer);
     }
 
     /**

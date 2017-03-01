@@ -1,6 +1,5 @@
 package controllers.myaccount;
 
-import exercises.b2bcustomer.B2BCustomerControllerComponent;
 import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
@@ -27,8 +26,7 @@ import java.util.concurrent.CompletionStage;
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
         PageHeaderControllerComponentSupplier.class,
-        CustomerOperationsControllerComponentSupplier.class,
-        B2BCustomerControllerComponent.class
+        CustomerOperationsControllerComponentSupplier.class
 })
 public final class MyPersonalDetailsController extends SunriseMyPersonalDetailsController {
 

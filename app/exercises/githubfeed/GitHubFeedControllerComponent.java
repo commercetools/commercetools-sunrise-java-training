@@ -3,8 +3,6 @@ package exercises.githubfeed;
 import com.commercetools.sunrise.common.pages.PageData;
 import com.commercetools.sunrise.components.ViewModelComponent;
 import com.commercetools.sunrise.framework.components.ControllerComponent;
-import com.commercetools.sunrise.framework.hooks.consumers.PageDataReadyHook;
-import com.commercetools.sunrise.framework.hooks.events.RequestStartedHook;
 import io.sphere.sdk.models.Base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +25,7 @@ import static exercises.githubfeed.GitHubFeedUtils.extractGitHubFeed;
  *   Hook 1: When the request starts, fetch the GitHub feed and save it by calling {@link #fetchAndSaveGitHubFeed()}
  *   Hook 2: Once the {@link PageData} is built and ready, add the GitHub feed to it by calling {@link #addGitHubFeedToPageData(PageData)}
  */
-public class GitHubFeedControllerComponent extends Base implements ControllerComponent, RequestStartedHook, PageDataReadyHook {
+public class GitHubFeedControllerComponent extends Base implements ControllerComponent {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GitHubFeedControllerComponent.class);
     private static final String GITHUB_URL = "https://api.github.com/repos/lauraluiz/issue-provider/issues?sort=updated";
@@ -38,16 +36,6 @@ public class GitHubFeedControllerComponent extends Base implements ControllerCom
     @Inject
     public GitHubFeedControllerComponent(final WSAPI wsApi) {
         this.wsApi = wsApi;
-    }
-
-    @Override
-    public CompletionStage<?> onRequestStarted(final Http.Context httpContext) {
-        return fetchAndSaveGitHubFeed();
-    }
-
-    @Override
-    public void onPageDataReady(final PageData pageData) {
-        addGitHubFeedToPageData(pageData);
     }
 
     /**
