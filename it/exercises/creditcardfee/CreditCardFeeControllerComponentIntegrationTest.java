@@ -1,24 +1,18 @@
 package exercises.creditcardfee;
 
-import com.google.inject.AbstractModule;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddPayment;
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.PaymentDraft;
 import io.sphere.sdk.payments.PaymentDraftBuilder;
 import io.sphere.sdk.payments.commands.PaymentCreateCommand;
 import io.sphere.sdk.payments.commands.PaymentDeleteCommand;
-import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
-import play.Application;
-import play.inject.guice.GuiceApplicationBuilder;
-import play.mvc.Http;
 import utils.WithSphereClient;
 
 import javax.money.CurrencyUnit;
@@ -26,25 +20,11 @@ import javax.money.Monetary;
 import java.util.function.Function;
 
 import static com.commercetools.sunrise.it.TestFixtures.withCart;
-import static java.util.Collections.emptyMap;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class CreditCardFeeControllerComponentIntegrationTest extends WithSphereClient {
 
     private static final CurrencyUnit CURRENCY = Monetary.getCurrency("EUR");
-
-    @Override
-    protected Application provideApplication() {
-        return new GuiceApplicationBuilder()
-                .overrides(new AbstractModule() {
-                    @Override
-                    protected void configure() {
-                        bind(SphereClient.class).toInstance(sphereClient);
-                        bind(Http.Session.class).toInstance(new Http.Session(emptyMap()));
-                        bind(PriceSelection.class).toInstance(PriceSelection.of(CURRENCY));
-                    }
-                }).build();
-    }
 
     @Test
     public void checkPaymentsAreExpanded() throws Exception {

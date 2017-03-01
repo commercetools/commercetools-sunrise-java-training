@@ -4,14 +4,15 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import static java.lang.Thread.sleep;
 import static exercises.java8intro.Java8IntroFunctions.countChars;
 import static exercises.java8intro.Java8IntroFunctions.print;
+import static java.lang.Thread.sleep;
 
 // https://drive.google.com/file/d/0B6I3hlPXzkVhUlJKLXZoTTZKaDQ/view
 public class Java8IntroCompletionStage {
 
     public static void main(String[] args) {
+
         // prints "9"
         executeSlowChameleonRequest()
                 .thenApply(countChars)
