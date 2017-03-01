@@ -11,7 +11,7 @@ public class Java8IntroStreamApi {
 
     public static void main(String[] args) {
 
-        final List<String> words = asList("dog", "bird", "chamaleon");
+        final List<String> words = asList("dog", "bird", "chameleon");
 
         for (String word : words) {
             System.out.println(word.length());
