@@ -1,8 +1,8 @@
 package exercises.lastviewedproducts;
 
-import com.commercetools.sunrise.common.pages.PageData;
-import com.commercetools.sunrise.components.ViewModelComponent;
-import com.commercetools.sunrise.framework.components.ControllerComponent;
+import com.commercetools.sunrise.framework.components.controllers.ControllerComponent;
+import com.commercetools.sunrise.framework.components.viewmodels.ViewModelComponent;
+import com.commercetools.sunrise.framework.viewmodels.PageData;
 import com.commercetools.sunrise.productcatalog.productoverview.viewmodels.ProductListViewModelFactory;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.products.ProductProjection;

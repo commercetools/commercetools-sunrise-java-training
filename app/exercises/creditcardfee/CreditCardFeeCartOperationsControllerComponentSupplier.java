@@ -1,6 +1,6 @@
 package exercises.creditcardfee;
 
-import com.commercetools.sunrise.framework.components.CartFieldsUpdaterControllerComponent;
+import com.commercetools.sunrise.framework.components.controllers.CartFieldsUpdaterControllerComponent;
 import com.commercetools.sunrise.sessions.cart.CartInSessionControllerComponent;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
 

@@ -6,11 +6,10 @@ import com.commercetools.sunrise.framework.checkout.confirmation.CheckoutConfirm
 import com.commercetools.sunrise.framework.checkout.confirmation.CheckoutConfirmationFormData;
 import com.commercetools.sunrise.framework.checkout.confirmation.SunriseCheckoutConfirmationController;
 import com.commercetools.sunrise.framework.checkout.confirmation.viewmodels.CheckoutConfirmationPageContentFactory;
+import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
-import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
-import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
-import com.commercetools.sunrise.framework.reverserouters.shoppingcart.CartReverseRouter;
-import com.commercetools.sunrise.framework.reverserouters.shoppingcart.CheckoutReverseRouter;
+import com.commercetools.sunrise.framework.reverserouters.shoppingcart.cart.CartReverseRouter;
+import com.commercetools.sunrise.framework.reverserouters.shoppingcart.checkout.CheckoutReverseRouter;
 import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
 import com.commercetools.sunrise.framework.template.engine.TemplateRenderer;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
@@ -21,7 +20,6 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
-@LogMetrics
 @NoCache
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
@@ -54,11 +52,11 @@ public final class CheckoutConfirmationController extends SunriseCheckoutConfirm
 
     @Override
     public CompletionStage<Result> handleNotFoundCart() {
-        return redirectTo(cartReverseRouter.cartDetailPageCall());
+        return redirectToCall(cartReverseRouter.cartDetailPageCall());
     }
 
     @Override
     public CompletionStage<Result> handleSuccessfulAction(final Order order, final CheckoutConfirmationFormData formData) {
-        return redirectTo(checkoutReverseRouter.checkoutThankYouPageCall());
+        return redirectToCall(checkoutReverseRouter.checkoutThankYouPageCall());
     }
 }

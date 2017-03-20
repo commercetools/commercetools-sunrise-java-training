@@ -1,9 +1,9 @@
 package controllers.productcatalog;
 
-import com.commercetools.sunrise.framework.components.PageHeaderControllerComponentSupplier;
+import com.commercetools.sunrise.framework.components.controllers.PageHeaderControllerComponentSupplier;
+import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
-import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
-import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
+import com.commercetools.sunrise.framework.reverserouters.productcatalog.product.ProductReverseRouter;
 import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
 import com.commercetools.sunrise.framework.template.engine.TemplateRenderer;
 import com.commercetools.sunrise.productcatalog.productdetail.ProductFinder;
@@ -19,7 +19,6 @@ import java.util.concurrent.CompletionStage;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
-@LogMetrics
 @NoCache
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
@@ -28,12 +27,16 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
 })
 public final class ProductDetailController extends SunriseProductDetailController {
 
+    private final ProductReverseRouter productReverseRouter;
+
     @Inject
     public ProductDetailController(final TemplateRenderer templateRenderer,
                                    final ProductFinder productFinder,
                                    final ProductVariantFinder productVariantFinder,
-                                   final ProductDetailPageContentFactory pageContentFactory) {
+                                   final ProductDetailPageContentFactory pageContentFactory,
+                                   final ProductReverseRouter productReverseRouter) {
         super(templateRenderer, productFinder, productVariantFinder, pageContentFactory);
+        this.productReverseRouter = productReverseRouter;
     }
 
     @Override
@@ -48,6 +51,9 @@ public final class ProductDetailController extends SunriseProductDetailControlle
 
     @Override
     public CompletionStage<Result> handleNotFoundProductVariant(final ProductProjection product) {
-        return completedFuture(notFound());
+        return productReverseRouter
+                .productDetailPageCall(product, product.getMasterVariant())
+                .map(this::redirectToCall)
+                .orElseGet(() -> completedFuture(notFound()));
     }
 }

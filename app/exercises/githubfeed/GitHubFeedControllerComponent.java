@@ -1,8 +1,8 @@
 package exercises.githubfeed;
 
-import com.commercetools.sunrise.common.pages.PageData;
-import com.commercetools.sunrise.components.ViewModelComponent;
-import com.commercetools.sunrise.framework.components.ControllerComponent;
+import com.commercetools.sunrise.framework.components.controllers.ControllerComponent;
+import com.commercetools.sunrise.framework.components.viewmodels.ViewModelComponent;
+import com.commercetools.sunrise.framework.viewmodels.PageData;
 import io.sphere.sdk.models.Base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

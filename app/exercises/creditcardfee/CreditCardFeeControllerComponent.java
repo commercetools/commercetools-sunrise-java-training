@@ -1,6 +1,6 @@
 package exercises.creditcardfee;
 
-import com.commercetools.sunrise.framework.components.ControllerComponent;
+import com.commercetools.sunrise.framework.components.controllers.ControllerComponent;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.client.SphereClient;

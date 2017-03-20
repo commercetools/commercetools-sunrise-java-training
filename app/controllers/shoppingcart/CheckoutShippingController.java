@@ -7,11 +7,10 @@ import com.commercetools.sunrise.framework.checkout.shipping.CheckoutShippingFor
 import com.commercetools.sunrise.framework.checkout.shipping.ShippingSettings;
 import com.commercetools.sunrise.framework.checkout.shipping.SunriseCheckoutShippingController;
 import com.commercetools.sunrise.framework.checkout.shipping.viewmodels.CheckoutShippingPageContentFactory;
+import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
-import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
-import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
-import com.commercetools.sunrise.framework.reverserouters.shoppingcart.CartReverseRouter;
-import com.commercetools.sunrise.framework.reverserouters.shoppingcart.CheckoutReverseRouter;
+import com.commercetools.sunrise.framework.reverserouters.shoppingcart.cart.CartReverseRouter;
+import com.commercetools.sunrise.framework.reverserouters.shoppingcart.checkout.CheckoutReverseRouter;
 import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
 import com.commercetools.sunrise.framework.template.engine.TemplateRenderer;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
@@ -22,7 +21,6 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
-@LogMetrics
 @NoCache
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
@@ -56,11 +54,11 @@ public final class CheckoutShippingController extends SunriseCheckoutShippingCon
 
     @Override
     public CompletionStage<Result> handleNotFoundCart() {
-        return redirectTo(cartReverseRouter.cartDetailPageCall());
+        return redirectToCall(cartReverseRouter.cartDetailPageCall());
     }
 
     @Override
     public CompletionStage<Result> handleSuccessfulAction(final Cart updatedCart, final CheckoutShippingFormData formData) {
-        return redirectTo(checkoutReverseRouter.checkoutPaymentPageCall());
+        return redirectToCall(checkoutReverseRouter.checkoutPaymentPageCall());
     }
 }

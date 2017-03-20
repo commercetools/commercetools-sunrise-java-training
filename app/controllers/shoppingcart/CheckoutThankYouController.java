@@ -4,10 +4,9 @@ import com.commercetools.sunrise.framework.checkout.CheckoutStepControllerCompon
 import com.commercetools.sunrise.framework.checkout.thankyou.OrderCreatedFinder;
 import com.commercetools.sunrise.framework.checkout.thankyou.SunriseCheckoutThankYouController;
 import com.commercetools.sunrise.framework.checkout.thankyou.viewmodels.CheckoutThankYouPageContentFactory;
+import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
-import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
-import com.commercetools.sunrise.framework.hooks.RegisteredComponents;
-import com.commercetools.sunrise.framework.reverserouters.productcatalog.HomeReverseRouter;
+import com.commercetools.sunrise.framework.reverserouters.productcatalog.home.HomeReverseRouter;
 import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
 import com.commercetools.sunrise.framework.template.engine.TemplateRenderer;
 import play.mvc.Result;
@@ -15,7 +14,6 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
-@LogMetrics
 @NoCache
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
@@ -41,6 +39,6 @@ public final class CheckoutThankYouController extends SunriseCheckoutThankYouCon
 
     @Override
     public CompletionStage<Result> handleNotFoundOrderCreated() {
-        return redirectTo(homeReverseRouter.homePageCall());
+        return redirectToCall(homeReverseRouter.homePageCall());
     }
 }

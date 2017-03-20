@@ -1,8 +1,8 @@
 package exercises.creditcardfee;
 
-import com.commercetools.sunrise.common.models.addresses.AddressViewModelFactory;
-import com.commercetools.sunrise.common.models.carts.*;
-import com.commercetools.sunrise.common.utils.PriceFormatter;
+import com.commercetools.sunrise.framework.viewmodels.content.addresses.AddressViewModelFactory;
+import com.commercetools.sunrise.framework.viewmodels.content.carts.*;
+import com.commercetools.sunrise.framework.viewmodels.formatters.PriceFormatter;
 import io.sphere.sdk.carts.Cart;
 
 import javax.annotation.Nullable;

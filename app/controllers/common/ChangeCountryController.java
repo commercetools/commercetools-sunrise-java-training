@@ -4,7 +4,7 @@ import com.commercetools.sunrise.common.localization.changecountry.ChangeCountry
 import com.commercetools.sunrise.common.localization.changecountry.ChangeCountryFormData;
 import com.commercetools.sunrise.common.localization.changecountry.SunriseChangeCountryController;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
-import com.commercetools.sunrise.framework.reverserouters.productcatalog.HomeReverseRouter;
+import com.commercetools.sunrise.framework.reverserouters.productcatalog.home.HomeReverseRouter;
 import io.sphere.sdk.client.ClientErrorException;
 import play.data.Form;
 import play.data.FormFactory;
@@ -29,16 +29,16 @@ public final class ChangeCountryController extends SunriseChangeCountryControlle
 
     @Override
     public CompletionStage<Result> handleInvalidForm(final Void input, final Form<? extends ChangeCountryFormData> form) {
-        return redirectTo(homeReverseRouter.homePageCall());
+        return redirectToCall(homeReverseRouter.homePageCall());
     }
 
     @Override
     public CompletionStage<Result> handleClientErrorFailedAction(final Void input, final Form<? extends ChangeCountryFormData> form, final ClientErrorException clientErrorException) {
-        return redirectTo(homeReverseRouter.homePageCall());
+        return redirectToCall(homeReverseRouter.homePageCall());
     }
 
     @Override
     public CompletionStage<Result> handleSuccessfulAction(final Void output, final ChangeCountryFormData formData) {
-        return redirectTo(homeReverseRouter.homePageCall());
+        return redirectToCall(homeReverseRouter.homePageCall());
     }
 }

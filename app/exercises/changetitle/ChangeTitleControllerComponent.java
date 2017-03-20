@@ -1,7 +1,8 @@
 package exercises.changetitle;
 
-import com.commercetools.sunrise.common.pages.PageData;
-import com.commercetools.sunrise.framework.components.ControllerComponent;
+
+import com.commercetools.sunrise.framework.components.controllers.ControllerComponent;
+import com.commercetools.sunrise.framework.viewmodels.PageData;
 
 /**
  * In this exercise we are going to learn how to modify a mutable instance such as {@link PageData} via hooks.

@@ -1,22 +1,26 @@
 import com.commercetools.sunrise.cms.CmsService;
 import com.commercetools.sunrise.common.categorytree.CategoryTreeInNewProvider;
 import com.commercetools.sunrise.common.categorytree.RefreshableCategoryTree;
-import com.commercetools.sunrise.common.models.carts.CartViewModelFactory;
-import com.commercetools.sunrise.common.models.carts.MiniCartViewModelFactory;
-import com.commercetools.sunrise.common.search.facetedsearch.FacetedSearchConfigList;
-import com.commercetools.sunrise.common.search.facetedsearch.FacetedSearchConfigListProvider;
-import com.commercetools.sunrise.contexts.CountryFromSessionProvider;
-import com.commercetools.sunrise.contexts.CurrencyFromCountryProvider;
-import com.commercetools.sunrise.contexts.LocaleFromUrlProvider;
 import com.commercetools.sunrise.framework.controllers.metrics.SimpleMetricsSphereClientProvider;
 import com.commercetools.sunrise.framework.injection.RequestScoped;
+import com.commercetools.sunrise.framework.localization.CountryFromSessionProvider;
+import com.commercetools.sunrise.framework.localization.CurrencyFromCountryProvider;
+import com.commercetools.sunrise.framework.localization.LocaleFromUrlProvider;
 import com.commercetools.sunrise.framework.template.cms.FileBasedCmsServiceProvider;
 import com.commercetools.sunrise.framework.template.engine.HandlebarsTemplateEngineProvider;
 import com.commercetools.sunrise.framework.template.engine.TemplateEngine;
 import com.commercetools.sunrise.framework.template.i18n.ConfigurableI18nResolverProvider;
 import com.commercetools.sunrise.framework.template.i18n.I18nResolver;
+import com.commercetools.sunrise.framework.viewmodels.content.carts.CartViewModelFactory;
+import com.commercetools.sunrise.framework.viewmodels.content.carts.MiniCartViewModelFactory;
+import com.commercetools.sunrise.httpauth.HttpAuthentication;
+import com.commercetools.sunrise.httpauth.basic.BasicAuthenticationProvider;
 import com.commercetools.sunrise.myaccount.authentication.signup.SignUpControllerAction;
 import com.commercetools.sunrise.myaccount.authentication.signup.SignUpFormData;
+import com.commercetools.sunrise.productcatalog.productoverview.search.facetedsearch.categorytree.viewmodels.CategoryTreeFacetViewModelFactory;
+import com.commercetools.sunrise.search.facetedsearch.terms.viewmodels.AlphabeticallySortedTermFacetViewModelFactory;
+import com.commercetools.sunrise.search.facetedsearch.terms.viewmodels.CustomSortedTermFacetViewModelFactory;
+import com.commercetools.sunrise.search.facetedsearch.terms.viewmodels.TermFacetViewModelFactory;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
 import com.commercetools.sunrise.sessions.cart.TruncatedMiniCartViewModelFactory;
 import com.google.inject.AbstractModule;
@@ -51,11 +55,55 @@ import java.util.concurrent.TimeUnit;
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static io.sphere.sdk.queries.QueryExecutionUtils.queryAll;
 
+/**
+ * This class is a Guice module that tells Guice how to bind several
+ * different types. This Guice module is created when the Play
+ * application starts.
+ *
+ * Play will automatically use any class called `Module` that is in
+ * the root package. You can create modules in other locations by
+ * adding `play.modules.enabled` settings to the `application.conf`
+ * configuration file.
+ */
 public class Module extends AbstractModule {
 
     @Override
     protected void configure() {
-        defaultBindings();
+        // Binding for the client to connect commercetools
+        bind(SphereClient.class).toProvider(SimpleMetricsSphereClientProvider.class).in(Singleton.class);
+
+        // Binding for the HTTP Authentication
+        bind(HttpAuthentication.class).toProvider(BasicAuthenticationProvider.class).in(Singleton.class);
+
+        // Binding for all template related, such as the engine, CMS and i18n
+        bind(CmsService.class).toProvider(FileBasedCmsServiceProvider.class).in(Singleton.class);
+        bind(TemplateEngine.class).toProvider(HandlebarsTemplateEngineProvider.class).in(Singleton.class);
+        bind(I18nResolver.class).toProvider(ConfigurableI18nResolverProvider.class).in(Singleton.class);
+
+        // Bindings for all user context related
+        bind(Locale.class).toProvider(LocaleFromUrlProvider.class).in(RequestScoped.class);
+        bind(CountryCode.class).toProvider(CountryFromSessionProvider.class).in(RequestScoped.class);
+        bind(CurrencyUnit.class).toProvider(CurrencyFromCountryProvider.class).in(RequestScoped.class);
+
+        // Bindings for the configured faceted search mappers
+        bind(TermFacetViewModelFactory.class)
+                .annotatedWith(Names.named("alphabeticallySorted"))
+                .to(AlphabeticallySortedTermFacetViewModelFactory.class)
+                .in(RequestScoped.class);
+        bind(TermFacetViewModelFactory.class)
+                .annotatedWith(Names.named("customSorted"))
+                .to(CustomSortedTermFacetViewModelFactory.class)
+                .in(RequestScoped.class);
+        bind(TermFacetViewModelFactory.class)
+                .annotatedWith(Names.named("categoryTree"))
+                .to(CategoryTreeFacetViewModelFactory.class)
+                .in(RequestScoped.class);
+
+        // Binding for the "new" category tree
+        bind(CategoryTree.class).annotatedWith(Names.named("new")).toProvider(CategoryTreeInNewProvider.class).in(Singleton.class);
+
+        // Binding to truncate mini cart to fit it into limited session space
+        bind(MiniCartViewModelFactory.class).to(TruncatedMiniCartViewModelFactory.class);
 
         // Bindings for B2B Customer example
         bind(SignUpFormData.class).to(B2BCustomerSignUpFormData.class);
@@ -65,34 +113,7 @@ public class Module extends AbstractModule {
         bind(CartViewModelFactory.class).to(CartWithCreditCardFeeViewModelFactory.class);
         bind(CartOperationsControllerComponentSupplier.class).to(CreditCardFeeCartOperationsControllerComponentSupplier.class);
 
-        // Put your additional bindings here!
-    }
-
-    @Provides
-    @RequestScoped
-    public DateTimeFormatter dateTimeFormatter(final Locale locale) {
-        return DateTimeFormatter.ofPattern("MMM d, yyyy", locale);
-    }
-
-    @Provides
-    @RequestScoped
-    public PriceSelection providePriceSelection(final CurrencyUnit currency, final CountryCode country) {
-        return PriceSelection.of(currency)
-                .withPriceCountry(country);
-    }
-
-    @Provides
-    @Singleton
-    public CategoryTree provideRefreshableCategoryTree(final SphereClient sphereClient) {
-        return RefreshableCategoryTree.of(sphereClient);
-    }
-
-    @Provides
-    @Singleton
-    private ProductTypeLocalRepository provideProductTypeLocalRepository(final SphereClient sphereClient) {
-        final ProductTypeQuery query = ProductTypeQuery.of();
-        final List<ProductType> productTypes = blockingWait(queryAll(sphereClient, query), 30, TimeUnit.SECONDS);
-        return ProductTypeLocalRepository.of(productTypes);
+        // Provide here your own bindings
     }
 
     @Provides
@@ -115,16 +136,30 @@ public class Module extends AbstractModule {
                 .orElseThrow(() -> new RuntimeException("Customer group \"B2B\" missing"));
     }
 
-    private void defaultBindings() {
-        bind(SphereClient.class).toProvider(SimpleMetricsSphereClientProvider.class).in(Singleton.class);
-        bind(Locale.class).toProvider(LocaleFromUrlProvider.class).in(RequestScoped.class);
-        bind(CountryCode.class).toProvider(CountryFromSessionProvider.class).in(RequestScoped.class);
-        bind(CurrencyUnit.class).toProvider(CurrencyFromCountryProvider.class).in(RequestScoped.class);
-        bind(CmsService.class).toProvider(FileBasedCmsServiceProvider.class).in(Singleton.class);
-        bind(TemplateEngine.class).toProvider(HandlebarsTemplateEngineProvider.class).in(Singleton.class);
-        bind(I18nResolver.class).toProvider(ConfigurableI18nResolverProvider.class).in(Singleton.class);
-        bind(CategoryTree.class).annotatedWith(Names.named("new")).toProvider(CategoryTreeInNewProvider.class).in(Singleton.class);
-        bind(FacetedSearchConfigList.class).toProvider(FacetedSearchConfigListProvider.class).in(Singleton.class);
-        bind(MiniCartViewModelFactory.class).to(TruncatedMiniCartViewModelFactory.class);
+    @Provides
+    @Singleton
+    public CategoryTree provideRefreshableCategoryTree(final SphereClient sphereClient) {
+        return RefreshableCategoryTree.of(sphereClient);
+    }
+
+    @Provides
+    @Singleton
+    private ProductTypeLocalRepository fetchProductTypeLocalRepository(final SphereClient sphereClient) {
+        final ProductTypeQuery query = ProductTypeQuery.of();
+        final List<ProductType> productTypes = blockingWait(queryAll(sphereClient, query), 1, TimeUnit.MINUTES);
+        return ProductTypeLocalRepository.of(productTypes);
+    }
+
+    @Provides
+    @RequestScoped
+    public DateTimeFormatter dateTimeFormatter(final Locale locale) {
+        return DateTimeFormatter.ofPattern("MMM d, yyyy", locale);
+    }
+
+    @Provides
+    @RequestScoped
+    public PriceSelection providePriceSelection(final CurrencyUnit currency, final CountryCode country) {
+        return PriceSelection.of(currency)
+                .withPriceCountry(country);
     }
 }

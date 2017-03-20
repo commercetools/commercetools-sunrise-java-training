@@ -4,7 +4,7 @@ import com.commercetools.sunrise.common.localization.changelanguage.ChangeLangua
 import com.commercetools.sunrise.common.localization.changelanguage.ChangeLanguageFormData;
 import com.commercetools.sunrise.common.localization.changelanguage.SunriseChangeLanguageController;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
-import com.commercetools.sunrise.framework.reverserouters.productcatalog.HomeReverseRouter;
+import com.commercetools.sunrise.framework.reverserouters.productcatalog.home.HomeReverseRouter;
 import io.sphere.sdk.client.ClientErrorException;
 import play.data.Form;
 import play.data.FormFactory;
@@ -29,16 +29,16 @@ public final class ChangeLanguageController extends SunriseChangeLanguageControl
 
     @Override
     public CompletionStage<Result> handleInvalidForm(final Void input, final Form<? extends ChangeLanguageFormData> form) {
-        return redirectTo(homeReverseRouter.homePageCall());
+        return redirectToCall(homeReverseRouter.homePageCall());
     }
 
     @Override
     public CompletionStage<Result> handleClientErrorFailedAction(final Void input, final Form<? extends ChangeLanguageFormData> form, final ClientErrorException clientErrorException) {
-        return redirectTo(homeReverseRouter.homePageCall());
+        return redirectToCall(homeReverseRouter.homePageCall());
     }
 
     @Override
     public CompletionStage<Result> handleSuccessfulAction(final Void output, final ChangeLanguageFormData formData) {
-        return redirectTo(homeReverseRouter.homePageCall(formData.locale().toLanguageTag()));
+        return redirectToCall(homeReverseRouter.homePageCall(formData.locale().toLanguageTag()));
     }
 }

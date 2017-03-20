@@ -1,6 +1,6 @@
 package exercises.b2bcustomer;
 
-import com.commercetools.sunrise.framework.components.ControllerComponent;
+import com.commercetools.sunrise.framework.components.controllers.ControllerComponent;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.queries.CustomerQuery;
 
