@@ -32,8 +32,9 @@
   <logger name="com.github.jknack.handlebars.HelperRegistry" level="ERROR" />
 
   <logger name="exercises.creditcardfee.CreditCardFeeControllerComponent" level="DEBUG" />
-  <logger name="githubstream.GitHubStreamControllerComponent" level="DEBUG" />
+  <logger name="exercises.githubfeed.GitHubFeedControllerComponent" level="DEBUG" />
   <logger name="exercises.lastviewedproducts.LastViewedProductsControllerComponent" level="DEBUG" />
+  <logger name="exercises.extendingjvmsdk.MySphereClient" level="DEBUG" />
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />

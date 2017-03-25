@@ -71,6 +71,7 @@ public class Module extends AbstractModule {
     protected void configure() {
         // Binding for the client to connect commercetools
         bind(SphereClient.class).toProvider(SimpleMetricsSphereClientProvider.class).in(Singleton.class);
+        //bind(SphereClient.class).to(MySphereClient.class).in(Singleton.class);
 
         // Binding for the HTTP Authentication
         bind(HttpAuthentication.class).toProvider(BasicAuthenticationProvider.class).in(Singleton.class);
