@@ -11,8 +11,15 @@ import com.commercetools.sunrise.framework.viewmodels.PageData;
  *
  * Step 1: Register this on your favorite controller (for example {@link controllers.productcatalog.ProductDetailController})
  * Step 2: Implement the missing hook
- *   Hook: When the {@link PageData} is ready for rendering the template, change its title to "My Shop"
+ *   Hook: When the {@link PageData} is ready for rendering the template, change its title to "My Shop" by calling {@link #changePageTitle(PageData)}
+ *
+ * How to check:
+ * - Go to the page where you registered this controller
+ * - Check the browser title reads "My Shop"
  */
 public class ChangeTitleControllerComponent implements ControllerComponent {
 
+    private void changePageTitle(final PageData pageData) {
+        pageData.getHeader().setTitle("My Shop");
+    }
 }
