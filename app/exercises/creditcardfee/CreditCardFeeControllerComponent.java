@@ -27,6 +27,11 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
  *
  * Hook 1: On every {@link CartUpdateCommand}, expand the reference {@code paymentInfo.payments}
  * Hook 2: Every time the cart has been updated, update the credit card fee by calling {@link #updateCartWithCreditCardFee(Cart, ExpansionPathContainer)}
+ *
+ * How to check:
+ * - Start a checkout process and select "Credit card" on the payment step
+ * - After submitting the form, see there is a "Credit card fee" of 3.21 EUR before the subtotal
+ * - Now if you change the payment method to "Prepaid", the fee should be gone
  */
 public class CreditCardFeeControllerComponent implements ControllerComponent {
 
