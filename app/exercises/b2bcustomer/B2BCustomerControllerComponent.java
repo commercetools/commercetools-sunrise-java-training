@@ -13,6 +13,10 @@ import io.sphere.sdk.customers.queries.CustomerQuery;
  * Step 1: Register this component to {@link controllers.myaccount.MyPersonalDetailsController}
  * Step 2: Implement the missing hook
  *   Hook: For every {@link CustomerQuery} to be executed, expand the reference {@code customerGroup}
+ *
+ * How to check:
+ * - Go to sign up page and create a new account, checking "Do you represent a company?"
+ * - On the next page, you should read "Welcome back {your name} (Group: B2B)"
  */
 public class B2BCustomerControllerComponent implements ControllerComponent {
 
