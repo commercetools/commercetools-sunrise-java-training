@@ -30,13 +30,13 @@ public class B2BCustomerSignUpControllerAction extends DefaultSignUpControllerAc
         final CustomerCreateCommand customerCreateCommand = super.buildRequest(formData);
         if (formData instanceof B2BCustomerSignUpFormData) {
             if (((B2BCustomerSignUpFormData) formData).isB2b()) {
-                return commandWithCustomerGroup(customerCreateCommand);
+                return commandWithB2BCustomerGroup(customerCreateCommand);
             }
         }
         return customerCreateCommand;
     }
 
-    private CustomerCreateCommand commandWithCustomerGroup(final CustomerCreateCommand customerCreateCommand) {
+    private CustomerCreateCommand commandWithB2BCustomerGroup(final CustomerCreateCommand customerCreateCommand) {
         final CustomerDraft draft = CustomerDraftBuilder.of(customerCreateCommand.getDraft())
                 .customerGroup(b2bCustomerGroup)
                 .build();
