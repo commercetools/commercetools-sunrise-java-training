@@ -1,4 +1,4 @@
-package exercises.extendingjvmsdk;
+package exercises.extendjvmsdk;
 
 import com.commercetools.sunrise.framework.controllers.SunriseController;
 import io.sphere.sdk.client.SphereClient;
@@ -9,14 +9,14 @@ import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
 /**
- * Access http://localhost:9000/extendingjvmsdk
+ * Access http://localhost:9000/extendjvmsdk
  */
-public class ExtendingJvmSdkController extends SunriseController {
+public class ExtendJvmSdkController extends SunriseController {
 
     private final SphereClient sphereClient;
 
     @Inject
-    public ExtendingJvmSdkController(final SphereClient sphereClient) {
+    public ExtendJvmSdkController(final SphereClient sphereClient) {
         this.sphereClient = sphereClient;
     }
 

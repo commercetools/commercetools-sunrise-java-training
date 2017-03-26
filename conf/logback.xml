@@ -34,7 +34,7 @@
   <logger name="exercises.creditcardfee.CreditCardFeeControllerComponent" level="DEBUG" />
   <logger name="exercises.githubfeed.GitHubFeedControllerComponent" level="DEBUG" />
   <logger name="exercises.lastviewedproducts.LastViewedProductsControllerComponent" level="DEBUG" />
-  <logger name="exercises.extendingjvmsdk.MySphereClient" level="DEBUG" />
+  <logger name="exercises.extendjvmsdk.MySphereClient" level="DEBUG" />
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />

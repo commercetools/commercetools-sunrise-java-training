@@ -1,4 +1,4 @@
-package exercises.extendingjvmsdk;
+package exercises.extendjvmsdk;
 
 import io.sphere.sdk.client.SphereClientConfig;
 import io.sphere.sdk.client.SphereClientDecorator;

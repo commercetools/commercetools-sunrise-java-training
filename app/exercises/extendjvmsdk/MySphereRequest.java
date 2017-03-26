@@ -1,4 +1,4 @@
-package exercises.extendingjvmsdk;
+package exercises.extendjvmsdk;
 
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
