@@ -15,6 +15,7 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
  *
  * Step 1: Register this component to {@link controllers.productcatalog.ProductDetailController},
  *         as it's the only available controller that loads a single product
+ *
  * Step 2: Implement the missing hook
  *   Hook: Whenever a product with variant (we need the SKU!) is loaded, save it in session by calling {@link #saveProductToLastViewedList(ProductVariant)}
  *
