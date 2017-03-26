@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 
 final class LastViewedProductUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LastViewedProductsControllerComponent.class);
+    private static final Logger LOGGER_SAVER = LoggerFactory.getLogger(LastViewedProductsSaverControllerComponent.class);
     private static final String SESSION_KEY = "lastViewedProductsSku";
     private static final int MAX_CAPACITY = 4;
 
@@ -30,9 +30,9 @@ final class LastViewedProductUtils {
         }
         try {
             session.put(SESSION_KEY, Json.mapper().writeValueAsString(skuList));
-            LOGGER.debug("Saved product with SKU {} to session: {}", sku, skuList);
+            LOGGER_SAVER.debug("Saved product with SKU {} to session: {}", sku, skuList);
         } catch (JsonProcessingException e) {
-            LOGGER.error("Could not serialize SKU list {} into JSON", skuList, e);
+            LOGGER_SAVER.error("Could not serialize SKU list {} into JSON", skuList, e);
         }
     }
 

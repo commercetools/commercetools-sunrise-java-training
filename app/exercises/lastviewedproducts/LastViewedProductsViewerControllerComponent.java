@@ -6,7 +6,6 @@ import com.commercetools.sunrise.framework.viewmodels.PageData;
 import com.commercetools.sunrise.productcatalog.productoverview.viewmodels.ProductListViewModelFactory;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import org.slf4j.Logger;
@@ -17,7 +16,8 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 
-import static exercises.lastviewedproducts.LastViewedProductUtils.*;
+import static exercises.lastviewedproducts.LastViewedProductUtils.findLastViewedProductsSkuInSession;
+import static exercises.lastviewedproducts.LastViewedProductUtils.sortProductsBySkuList;
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
 /**
@@ -25,30 +25,33 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
  * Whenever we are visiting a product we are going to save this product to a list in session for future requests.
  * For the current request, we are going to display the last viewed products as it was before this visit.
  *
- * Step 1: Register this component to (at least) {@link controllers.productcatalog.ProductDetailController},
- *         as it's the only available controller that loads a single product
+ * Step 1: Register this component to any controller where you want to display the last viewed products
+ *
  * Step 2: Implement the missing hooks
- *   Hook 1: Whenever a product with variant (we need the SKU!) is loaded, save it in session by calling {@link #saveProductToLastViewedList(ProductVariant)}
- *   Hook 2: To display the last viewed products in the page, first fetch and save them by calling {@link #fetchAndSaveLastViewedProducts()}
- *   Hook 3: And once the {@link PageData} is built and ready, add the last viewed products to it by calling {@link #addLastViewedProductsToPageData(PageData)}
+ *   Hook 1: To display the last viewed products in the page, first fetch and save them by calling {@link #fetchAndSaveLastViewedProducts()},
+ *           notice this can be done right after the HTTP request starts
+ *   Hook 2: Once the {@link PageData} is built and ready, add the last viewed products to it by calling {@link #addLastViewedProductsToPageData(PageData)}
+ *
+ * How to check:
+ * - Visit a couple of different product detail pages
+ * - Go to the page of the chosen controller
+ * - Scroll to the bottom, you should be able to see a "Last Viewed Products" section with those products you visited
  */
-public class LastViewedProductsControllerComponent implements ControllerComponent {
+public class LastViewedProductsViewerControllerComponent implements ControllerComponent {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LastViewedProductsControllerComponent.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LastViewedProductsViewerControllerComponent.class);
 
     private final SphereClient sphereClient;
-    private final Http.Session session;
     private final PriceSelection priceSelection;
     private final ProductListViewModelFactory productListViewModelFactory;
 
     private List<ProductProjection> lastViewedProducts;
 
     @Inject
-    public LastViewedProductsControllerComponent(final SphereClient sphereClient, final Http.Session session,
-                                                 final PriceSelection priceSelection,
-                                                 final ProductListViewModelFactory productListViewModelFactory) {
+    public LastViewedProductsViewerControllerComponent(final SphereClient sphereClient,
+                                                       final PriceSelection priceSelection,
+                                                       final ProductListViewModelFactory productListViewModelFactory) {
         this.sphereClient = sphereClient;
-        this.session = session;
         this.priceSelection = priceSelection;
         this.productListViewModelFactory = productListViewModelFactory;
     }
@@ -58,7 +61,7 @@ public class LastViewedProductsControllerComponent implements ControllerComponen
      * and saves it in {@code lastViewedProducts} class field.
      */
     private CompletionStage<?> fetchAndSaveLastViewedProducts() {
-        final List<String> skuList = findLastViewedProductsSkuInSession(session);
+        final List<String> skuList = findLastViewedProductsSkuInSession(Http.Context.current().session());
         if (!skuList.isEmpty()) {
             final ProductProjectionSearch request = ProductProjectionSearch.ofCurrent()
                     .withQueryFilters(product -> product.allVariants().sku().isIn(skuList))
@@ -71,17 +74,6 @@ public class LastViewedProductsControllerComponent implements ControllerComponen
                         LOGGER.error("Could not fetch last viewed products", throwable);
                         return null;
                     });
-        }
-        return completedFuture(null);
-    }
-
-    /**
-     * Saves the product into the last viewed products list
-     * @param variant product variant to be saved as last viewed
-     */
-    private CompletionStage<?> saveProductToLastViewedList(final ProductVariant variant) {
-        if (variant.getSku() != null) {
-            saveSkuInSession(session, variant.getSku());
         }
         return completedFuture(null);
     }

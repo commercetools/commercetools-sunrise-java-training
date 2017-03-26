@@ -16,7 +16,7 @@ POST        /playbasics/process5                               @exercises.playba
 
 GET         /dependencyinjection                               @exercises.dependencyinjection.DependencyInjectionController.show
 GET         /httpcontext                                       @exercises.httpcontext.HttpContextController.show()
-GET         /extendjvmsdk                                      @exercises.extendjvmsdk.ExtendingJvmSdkController.show()
+GET         /extendjvmsdk                                      @exercises.extendjvmsdk.ExtendJvmSdkController.show()
 
 # Untrail url
 GET         /*path/                                                             @controllers.common.ApplicationController.untrail(path: String)
