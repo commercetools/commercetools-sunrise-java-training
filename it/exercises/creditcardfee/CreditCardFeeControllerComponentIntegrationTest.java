@@ -26,7 +26,7 @@ public class CreditCardFeeControllerComponentIntegrationTest extends WithSphereC
     private static final CurrencyUnit CURRENCY = Monetary.getCurrency("EUR");
 
     @Test
-    public void checkPaymentsAreExpanded() throws Exception {
+    public void checkPaymentsAreAdded() throws Exception {
         final PaymentDraft paymentDraft = PaymentDraftBuilder.of(MoneyImpl.ofCents(540, CURRENCY)).build();
         withPayment(sphereClient, paymentDraft, payment -> {
             final CartDraft cartDraft = CartDraft.of(CURRENCY);
