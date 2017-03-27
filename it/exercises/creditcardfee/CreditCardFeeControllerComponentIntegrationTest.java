@@ -33,6 +33,7 @@ public class CreditCardFeeControllerComponentIntegrationTest extends WithSphereC
             withCart(sphereClient, cartDraft, cart -> {
                 assertThat(cart.getPaymentInfo()).isNull();
                 final Cart cartWithPayment = sphereClient.executeBlocking(CartUpdateCommand.of(cart, AddPayment.of(payment)));
+                assertThat(cartWithPayment.getPaymentInfo()).isNotNull();
                 assertThat(cartWithPayment.getPaymentInfo().getPayments().get(0).getId()).isEqualTo(payment.getId());
                 return cartWithPayment;
             });
