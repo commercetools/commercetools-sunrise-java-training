@@ -5,7 +5,6 @@ import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddPayment;
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.PaymentDraft;
 import io.sphere.sdk.payments.PaymentDraftBuilder;
@@ -28,23 +27,17 @@ public class CreditCardFeeControllerComponentIntegrationTest extends WithSphereC
 
     @Test
     public void checkPaymentsAreExpanded() throws Exception {
-//        final PaymentDraft paymentDraft = PaymentDraftBuilder.of(MoneyImpl.ofCents(540, CURRENCY)).build();
-//        withPayment(sphereClient, paymentDraft, payment -> {
-//            withCart(sphereClient, CartDraft.of(CURRENCY), cart -> {
-//                final CartUpdateCommand baseCommand = CartUpdateCommand.of(cart, AddPayment.of(payment));
-//                final CartUpdateCommand commandAfterComponent = component().onCartUpdateCommand(baseCommand);
-//                final Cart cartWithPayment = sphereClient.executeBlocking(commandAfterComponent);
-//                assertThat(cartWithPayment.getPaymentInfo().getPayments())
-//                        .extracting(Reference::getObj)
-//                        .isNotNull();
-//                return cartWithPayment;
-//            });
-//            return payment;
-//        });
-    }
-
-    private CreditCardFeeControllerComponent component() {
-        return app.injector().instanceOf(CreditCardFeeControllerComponent.class);
+        final PaymentDraft paymentDraft = PaymentDraftBuilder.of(MoneyImpl.ofCents(540, CURRENCY)).build();
+        withPayment(sphereClient, paymentDraft, payment -> {
+            final CartDraft cartDraft = CartDraft.of(CURRENCY);
+            withCart(sphereClient, cartDraft, cart -> {
+                assertThat(cart.getPaymentInfo()).isNull();
+                final Cart cartWithPayment = sphereClient.executeBlocking(CartUpdateCommand.of(cart, AddPayment.of(payment)));
+                assertThat(cartWithPayment.getPaymentInfo().getPayments().get(0).getId()).isEqualTo(payment.getId());
+                return cartWithPayment;
+            });
+            return payment;
+        });
     }
 
     private static void withPayment(final BlockingSphereClient client, final PaymentDraft paymentDraft, final Function<Payment, Payment> test) {
