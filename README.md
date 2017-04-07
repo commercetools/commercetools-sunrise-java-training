@@ -1,4 +1,6 @@
-# commercetools-sunrise-java-training
+# Sunrise Java Training
+
+[![Build Status](https://travis-ci.org/commercetools/commercetools-sunrise-java.svg?branch=master)](https://travis-ci.org/commercetools/commercetools-sunrise-java)
 
 ## Pre-training material & reading
 
