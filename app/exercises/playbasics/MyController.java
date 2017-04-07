@@ -23,7 +23,7 @@ public class MyController extends Controller {
     @Inject
     public MyController(final FormFactory formFactory, final Configuration configuration) {
         this.formFactory = formFactory;
-        this.pageTitle = configuration.getString("playbasics.pageTitle", "");
+        this.pageTitle = configuration.getString("playbasics.pageTitle", "Hello you!");
     }
 
     public Result show1() {
