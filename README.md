@@ -2,6 +2,14 @@
 
 [![Build Status](https://travis-ci.org/commercetools/commercetools-sunrise-java-training.svg?branch=master)](https://travis-ci.org/commercetools/commercetools-sunrise-java-training)
 
+## Preconditions
+
+Same preconditions apply as in [Sunrise Starter Project](https://github.com/commercetools/commercetools-sunrise-java-starter#preconditions).
+
+## Run it
+
+Check how to run it following the documentation in [Sunrise Starter Project](https://github.com/commercetools/commercetools-sunrise-java-starter#run-it-locally).
+
 ## Pre-training material & reading
 
 ### Handlebars
