@@ -11,9 +11,9 @@ import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
 import com.commercetools.sunrise.productcatalog.home.HomeRecommendationsControllerComponent;
 import com.commercetools.sunrise.productcatalog.home.SunriseHomeController;
 import com.commercetools.sunrise.productcatalog.home.viewmodels.HomePageContentFactory;
+import com.commercetools.sunrise.wishlist.MiniWishlistControllerComponent;
 import play.mvc.Result;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
@@ -22,7 +22,8 @@ import java.util.concurrent.CompletionStage;
 @RegisteredComponents({
         TemplateControllerComponentsSupplier.class,
         PageHeaderControllerComponentSupplier.class,
-        HomeRecommendationsControllerComponent.class
+        HomeRecommendationsControllerComponent.class,
+        MiniWishlistControllerComponent.class
 })
 public final class HomeController extends SunriseHomeController {
 
@@ -36,13 +37,11 @@ public final class HomeController extends SunriseHomeController {
         this.homeReverseRouter = homeReverseRouter;
     }
 
-    @Nullable
     @Override
     public String getTemplateName() {
         return "home";
     }
 
-    @Nullable
     @Override
     public String getCmsPageKey() {
         return "home";
