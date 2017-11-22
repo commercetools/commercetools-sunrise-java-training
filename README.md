@@ -8,7 +8,7 @@ Same preconditions apply as in [Sunrise Starter Project](https://github.com/comm
 
 ## Run it
 
-Check how to run it following the documentation in [Sunrise Starter Project](https://github.com/commercetools/commercetools-sunrise-java-starter#run-it-locally).
+Learn how to run it following the documentation in [Sunrise Starter Project](https://github.com/commercetools/commercetools-sunrise-java-starter#run-it-locally).
 
 ## Pre-training material & reading
 
