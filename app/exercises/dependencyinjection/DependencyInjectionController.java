@@ -34,7 +34,6 @@ public final class DependencyInjectionController extends SunriseContentControlle
         return okResultWithPageContent(pageContent);
     }
 
-    @Nullable
     @Override
     public String getTemplateName() {
         return "exercises/dependency-injection";
