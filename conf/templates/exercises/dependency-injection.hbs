@@ -1,11 +1,11 @@
 
 <h1>Dependency Injection</h1>
 
-<h3>During the request we got an instance of InjectedClass via @Inject:</h3>
+<h3>During the request the following instances were injected:</h3>
 
 <ul>
-    <li><strong>ClassA</strong> got instance #{{content.instanceIdInClassA}}</li>
-    <li><strong>ClassB</strong> got instance #{{content.instanceIdInClassB}}</li>
+    <li><strong>ClassA</strong> received <strong>instance #{{content.instanceIdInClassA}}</strong> of InjectedClass</li>
+    <li><strong>ClassB</strong> received <strong>instance #{{content.instanceIdInClassB}}</strong> of InjectedClass</li>
 </ul>
 
 <p>Tip: Same instance number means it was reused, different means it had to be instantiated again</p>
