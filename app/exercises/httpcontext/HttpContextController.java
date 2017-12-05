@@ -4,6 +4,7 @@ import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -27,10 +28,10 @@ public class HttpContextController extends Controller {
     public CompletionStage<Result> show() {
         return sphereClient.execute(ProjectGet.of())
                 .thenApply(Project::getKey)
-                .thenApply(this::okResponseWithProjectKey);
+                .thenApply(this::responseUsingHttpContext);
     }
 
-    private Result okResponseWithProjectKey(final String projectKey) {
-        return ok(request().remoteAddress() + " is accessing project " + projectKey);
+    private Result responseUsingHttpContext(final String projectKey) {
+        return ok(Http.Context.current().request().remoteAddress() + " is accessing project " + projectKey);
     }
 }
