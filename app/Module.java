@@ -203,7 +203,7 @@ public class Module extends AbstractModule {
     @Singleton
     @Named("b2b")
     public CustomerGroup provideCustomerGroup(final SphereClient sphereClient) {
-        final CustomerGroupQuery query = CustomerGroupQuery.of().byName("B2B");
+        final CustomerGroupQuery query = CustomerGroupQuery.of().byName("b2b");
         return SphereClientUtils.blockingWait(sphereClient.execute(query), Duration.ofMinutes(1))
                 .head()
                 .orElseThrow(() -> new RuntimeException("Customer group \"B2B\" missing"));
