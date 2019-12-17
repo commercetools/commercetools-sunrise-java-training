@@ -1,3 +1,7 @@
+> :warning: **This repository is now deprecated and will be decommissioned in 2020.**
+If you would nevertheless like to use it for your own developments you should fork this repository under the given license and continue developing your version, but please be aware that there will be no more updates and no support provided.
+
+
 # Sunrise Java Training
 
 [![Build Status](https://travis-ci.org/commercetools/commercetools-sunrise-java-training.svg?branch=master)](https://travis-ci.org/commercetools/commercetools-sunrise-java-training)
